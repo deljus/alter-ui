@@ -15,6 +15,7 @@ export const API_URLS = {
   SAVE_TASK: `${BASE_URL}api/task/results/`,
   USER_AUTH: `${BASE_URL}api/auth`,
   MAGIC: `${BASE_URL}api/resources/magic`,
+    STRUCTURES: `${BASE_URL}structures`,
 };
 
 export const MODAL = {
@@ -31,6 +32,7 @@ export const URLS = {
   ERROR: '/error/',
   HISTORY: '/history/',
   INFO: '/info/',
+  EDIT: '/edit/',
 };
 
 export const REPEATED_REQUESTS = {

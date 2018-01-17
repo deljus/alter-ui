@@ -7,10 +7,12 @@ import Error from './Error';
 import Thumbnail from './Thumbnail';
 import ModalIncrease from './ModalIncrease';
 import ResultItem from './ResultItem';
+import NotFoundPage from './NotFoundPage';
 
 export {
   DynamicForm,
   MarvinEditor,
+  NotFoundPage,
   PageSteps,
   SearchInput,
   Loader,

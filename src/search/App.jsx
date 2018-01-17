@@ -5,11 +5,11 @@ import { Provider } from 'react-redux';
 import history from '../core/history';
 import {
   IndexPage,
-  NotFoundPage,
   ValidatePage,
   ResultPage,
   HistoryPage,
   InfoPage } from './pages';
+import { NotFoundPage } from '../components';
 import { URLS } from '../config';
 import Main from './Layout';
 

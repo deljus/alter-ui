@@ -4,6 +4,6 @@ import ReactDOM from 'react-dom';
 import App from './dbform/App';
 
 ReactDOM.render(
-  <App />,
+  App,
   document.getElementById('root'),
 );
