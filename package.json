@@ -1,0 +1,49 @@
+{
+  "name": "alter-ui",
+  "version": "0.1.0",
+  "private": true,
+  "dependencies": {
+    "react": "^16.2.0",
+    "react-dom": "^16.2.0",
+    "react-scripts": "1.0.17",
+    "axios": "^0.17.1",
+    "react-bootstrap": "^0.31.5",
+    "antd": "^3.0.3",
+    "react-router": "^4.2.0",
+    "react-router-dom": "^4.2.2",
+    "redux": "^3.7.2",
+    "react-redux": "^5.0.6",
+    "redux-saga": "^0.16.0",
+    "redux-devtools-extension": "^2.13.2",
+    "styled-components": "^2.1.2",
+    "json-server": "^0.12.1",
+    "history": "^4.7.2",
+    "query-string": "^5.0.1",
+    "prop-types": "^15.6.0"
+  },
+  "devDependencies": {
+    "babel-eslint": "^7.2.3",
+    "chai": "^4.1.2",
+    "enzyme": "^3.3.0",
+    "eslint": "^4.6.1",
+    "eslint-config-airbnb": "^15.0.1",
+    "eslint-plugin-babel": "^4.1.1",
+    "eslint-plugin-import": "^2.5.0",
+    "eslint-plugin-jsx-a11y": "^5.1.1",
+    "eslint-plugin-react": "^7.0.1",
+    "jsdom": "^11.5.1",
+    "mocha": "^4.1.0",
+    "react-addons-test-utils": "^15.6.2",
+    "react-app-env": "^1.2.0",
+    "react-scripts": "^1.0.10"
+  },
+  "scripts": {
+    "start-search": "cp src/search/index.js src/index.js && react-scripts start",
+    "start-dbform": "cp src/dbform/index.js src/index.js && react-scripts start",
+    "test-seach": "mocha -w tests/helpers/browser.js tests/*.spec.js",
+    "stast-api-server": "json-server --watch db.json --port 3001",
+    "build": "react-scripts build && npm run build:clean",
+    "build:clean": "mv build/static/js/*.js ../MWUI/static/js/predictor.js && mv build/static/css/*.css ../MWUI/static/css/predictor.css && rm -r build/static",
+    "eject": "react-scripts eject"
+  }
+}
