@@ -1,3 +1,4 @@
+import ready from 'document-ready-promise';
 import { MARVIN_EDITOR_IS_EMPTY } from '../config';
 
 const SETTINGS = {
@@ -29,7 +30,7 @@ export const convertCmlToBase64 = cml => new Promise((resolve) => {
     });
 });
 
-export const convertCmlToBase64Arr = (arrStructures, settings = SETTINGS) => new Promise((resolve) => {
+export const convertCmlToBase64Arr = (arrStructures, settings = SETTINGS) => ready().then(() => new Promise((resolve) => {
   window.MarvinJSUtil.getPackage('#marvinjs')
     .then((marvinName) => {
       marvinName.onReady(() => {
@@ -41,7 +42,7 @@ export const convertCmlToBase64Arr = (arrStructures, settings = SETTINGS) => new
         resolve(c);
       });
     });
-});
+}));
 
 export const importCml = cml => window.MarvinJSUtil.getEditor('#marvinjs')
   .then(sketcher => sketcher.importStructure('mrv', cml));

@@ -54,7 +54,6 @@ class CreatePage extends Component {
     return (
 
       <Row>
-        <PageHeader>DB form</PageHeader>
         <Col md={8}>
           <iframe
             title="marvinjs"

@@ -8,6 +8,7 @@ import Thumbnail from './Thumbnail';
 import ModalIncrease from './ModalIncrease';
 import ResultItem from './ResultItem';
 import NotFoundPage from './NotFoundPage';
+import Tabs from './Tabs';
 
 export {
   DynamicForm,
@@ -20,4 +21,5 @@ export {
   Thumbnail,
   ModalIncrease,
   ResultItem,
+  Tabs,
 };

@@ -20,4 +20,4 @@ class Structures {
   }
 }
 
-export default Structures;
+export { Structures };

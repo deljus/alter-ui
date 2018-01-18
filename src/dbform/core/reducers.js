@@ -12,7 +12,7 @@ export const structures = (state = [], action) => {
       ];
 
     case ADD_STRUCTURES:
-      return action.departments;
+      return action.structures;
 
     case EDIT_STRUCTURE:
       return state.map(department =>
