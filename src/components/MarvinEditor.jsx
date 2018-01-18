@@ -2,9 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import { Button } from 'react-bootstrap';
-import { MARVIN_PATH_IFRAME, MARVIN_EDITOR_IS_EMPTY } from '../config';
-import { exportCml, clearEditor, importCml } from '../core/marvinAPI';
-import { MODAL } from '../config';
+import { MARVIN_PATH_IFRAME } from '../config';
 
 const Modal = styled.div`
   opacity: ${props => (props.isShow ? 1 : 0)};

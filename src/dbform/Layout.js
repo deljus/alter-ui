@@ -1,8 +1,12 @@
 import React from 'react';
+import { DBFormModal } from '../components';
 
 const Main = ({ children }) => (
-  <div className="container">
-    {children}
+  <div>
+    <DBFormModal />
+    <div className="container">
+      {children}
+    </div>
   </div>
 );
 

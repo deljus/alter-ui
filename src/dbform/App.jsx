@@ -8,9 +8,10 @@ import {
   CreatePage,
   StructureListPage,
 } from './pages';
-import { NotFoundPage } from '../components';
+import { DBFormModal } from '../components';
 import { URLS } from '../config';
 import Main from './Layout';
+
 
 import 'antd/lib/tabs/style/css';
 
