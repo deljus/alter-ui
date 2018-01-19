@@ -1,5 +1,4 @@
-import ready from 'document-ready-promise';
-import { MARVIN_EDITOR_IS_EMPTY } from '../config';
+import { MARVIN_EDITOR_IS_EMPTY, MARVIN_ID } from '../config';
 
 const SETTINGS = {
   width: 700,
@@ -8,19 +7,25 @@ const SETTINGS = {
   zoomMode: 'autoshrink',
 };
 
-const getEditor = () => window.MarvinJSUtil.getEditor('#marvinjs');
+const windowsLoad = () => new Promise((resolve) => { window.onload = resolve(window.MarvinJSUtil); });
 
-export const exportCml = () => window.MarvinJSUtil.getEditor('#marvinjs')
+
+const getEditor = editorID => windowsLoad()
+  .then(marvinJSUtil => marvinJSUtil.getEditor(editorID));
+
+const getPackage = editorID => windowsLoad()
+  .then(marvinJSUtil => marvinJSUtil.getPackage(editorID));
+
+export const exportCml = (editorID = MARVIN_ID) => getEditor(editorID)
   .then(sketcher => sketcher.exportStructure('mrv'));
 
-export const clearEditor = () => window.MarvinJSUtil.getEditor('#marvinjs')
+export const clearEditor = (editorID = MARVIN_ID) => getEditor(editorID)
   .then((sketcher) => {
     sketcher.importStructure('mrv', MARVIN_EDITOR_IS_EMPTY);
-  },
-  );
+  });
 
-export const convertCmlToBase64 = cml => new Promise((resolve) => {
-  window.MarvinJSUtil.getPackage('#marvinjs')
+export const convertCmlToBase64 = (cml, editorID = MARVIN_ID) => new Promise((resolve) => {
+  getPackage(editorID)
     .then((marvinName) => {
       marvinName.onReady(() => {
         const c = marvinName.ImageExporter.mrvToDataUrl(cml,
@@ -30,8 +35,8 @@ export const convertCmlToBase64 = cml => new Promise((resolve) => {
     });
 });
 
-export const convertCmlToBase64Arr = (arrStructures, settings = SETTINGS) => ready().then(() => new Promise((resolve) => {
-  window.MarvinJSUtil.getPackage('#marvinjs')
+export const convertCmlToBase64Arr = (arrStructures, settings = SETTINGS, editorID = MARVIN_ID) => new Promise((resolve) => {
+  getPackage(editorID)
     .then((marvinName) => {
       marvinName.onReady(() => {
         const c = arrStructures.map((structure) => {
@@ -42,12 +47,12 @@ export const convertCmlToBase64Arr = (arrStructures, settings = SETTINGS) => rea
         resolve(c);
       });
     });
-}));
+});
 
-export const importCml = cml => window.MarvinJSUtil.getEditor('#marvinjs')
+export const importCml = (cml, editorID = MARVIN_ID) => getEditor(editorID)
   .then(sketcher => sketcher.importStructure('mrv', cml));
 
-export const textToCml = text => getEditor()
+export const textToCml = (text, editorID = MARVIN_ID) => getEditor(editorID)
   .then(sketcher => sketcher.importStructure('auto', text)
     .then(() => sketcher.exportStructure('mrv')),
   );

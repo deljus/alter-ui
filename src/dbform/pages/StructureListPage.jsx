@@ -42,7 +42,7 @@ class StructureListPage extends Component {
             >
               <Collapse bordered={false}>
                 <Panel header="Parameters" key="1">
-                  {item.params.map(param => <div>{param.key} : {param.value}</div>)}
+                  {item.params && item.params.map(param => <div>{param.key} : {param.value}</div>)}
                 </Panel>
               </Collapse>
             </Card>

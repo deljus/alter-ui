@@ -1,19 +1,17 @@
 import React, { Component } from 'react';
-import axios from 'axios';
+import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
 import { Row, Col, PageHeader } from 'react-bootstrap';
 import { Button, message } from 'antd';
 import { DynamicForm } from '../../components';
-import { MARVIN_PATH_IFRAME, MARVIN_EDITOR_IS_EMPTY, API_URLS } from '../../config';
-import { exportCml, clearEditor } from '../../core/marvinAPI';
+import { MARVIN_PATH_IFRAME, MARVIN_EDITOR_IS_EMPTY } from '../../config';
+import { clearEditor, exportCml } from '../../core/marvinAPI';
 
 import 'antd/lib/message/style/css';
 
 class CreatePage extends Component {
   constructor(props) {
     super(props);
-    this.state = {
-      btnLoading: false,
-    };
   }
 
   handleSubmit(e) {
@@ -25,20 +23,9 @@ class CreatePage extends Component {
           value: values[`value-${k}`],
         }));
         this.setState({ btnLoading: true });
-        exportCml()
+        exportCml('#marvinjs_create_page')
           .then((cml) => {
-            if (cml === MARVIN_EDITOR_IS_EMPTY) {
-              throw new Error('Structure is empty');
-            }
-            return axios.post(API_URLS.CREATE_STRUCTUSE, { data: cml, params });
-          })
-          .then(() => {
-            message.success('Add structure');
-            this.setState({ btnLoading: false });
-          })
-          .catch((e) => {
-            this.setState({ btnLoading: false });
-            message.error(e.message);
+            console.log(cml);
           });
       }
     });
@@ -50,14 +37,13 @@ class CreatePage extends Component {
   }
 
   render() {
-    const { btnLoading } = this.state;
     return (
 
       <Row>
         <Col md={8}>
           <iframe
             title="marvinjs"
-            id="marvinjs"
+            id="marvinjs_create_page"
             data-toolbars="reaction"
             src={MARVIN_PATH_IFRAME}
             width="100%"
@@ -81,7 +67,6 @@ class CreatePage extends Component {
             icon="upload"
             size="large"
             onClick={this.handleSubmit.bind(this)}
-            loading={btnLoading}
           >Submit</Button>
         </Col>
       </Row>
@@ -89,4 +74,14 @@ class CreatePage extends Component {
   }
 }
 
-export default CreatePage;
+
+CreatePage.propTypes = {
+  initPage: PropTypes.func.isRequired,
+};
+
+const mapDispatchToProps = dispatch => ({
+  createStructure: (data, params) => dispatch({ type: 'ADD_STRUCTURE_SAGA', data, params }),
+});
+
+
+export default connect(null, mapDispatchToProps)(CreatePage);

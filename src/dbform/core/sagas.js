@@ -18,6 +18,15 @@ function* initStructureListPage(action) {
   }
 }
 
+function* addNewStructure(action) {
+  try {
+    yield call(Structures.add, { data: action.data, params: action.params });
+    yield message.success('Add structure');
+  } catch (e) {
+    message.error(e.message);
+  }
+}
+
 function* deleteStructureInList(action) {
   try {
     yield call(Structures.delete(action.id));
@@ -30,5 +39,6 @@ function* deleteStructureInList(action) {
 
 export function* sagas() {
   yield takeEvery('INIT_STRUCTURE_LIST_PAGE', initStructureListPage);
+  yield takeEvery('ADD_STRUCTURE_SAGA', addNewStructure);
   yield takeEvery('DELETE_STRUCTURE', deleteStructureInList);
 }

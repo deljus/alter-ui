@@ -21,7 +21,7 @@ export default (
   <Provider store={store}>
     <Router history={history}>
       <Main>
-        <Tabs defaultActiveKey="1">
+        <Tabs defaultActiveKey="2">
           <TabPane tab={<span><Icon type="file-add" />Create</span>} key="1">
             <CreatePage />
           </TabPane>
