@@ -5,7 +5,7 @@ import { Row, Col, PageHeader } from 'react-bootstrap';
 import { Button, message } from 'antd';
 import DynamicForm from './DynamicForm';
 import { MARVIN_PATH_IFRAME, MARVIN_EDITOR_IS_EMPTY, API_URLS } from '../config';
-import { exportCml, clearEditor } from '../core/marvinAPI';
+import { exportCml, clearEditor, importCml } from '../core/marvinAPI';
 
 import 'antd/lib/message/style/css';
 
@@ -50,6 +50,15 @@ class DBFormModal extends Component {
     };
   }
 
+  init(structures, id) {
+      console.log(structures.filter(struct => struct.id === id));
+
+      const structure = structures.filter(struct => struct.id === id)[0];
+
+      importCml(structure.data);
+
+      this.form.add();
+  }
   handleSubmit(e) {
     e.preventDefault();
     this.form.validateFields((err, values) => {
@@ -64,16 +73,9 @@ class DBFormModal extends Component {
             if (cml === MARVIN_EDITOR_IS_EMPTY) {
               throw new Error('Structure is empty');
             }
-            return axios.post(API_URLS.CREATE_STRUCTUSE, { data: cml, params });
+            this.props.onOk(cml, params);
           })
-          .then(() => {
-            message.success('Add structure');
-            this.setState({ btnLoading: false });
-          })
-          .catch((e) => {
-            this.setState({ btnLoading: false });
-            message.error(e.message);
-          });
+          .catch(e => message.error(e.message));
       }
     });
   }
@@ -85,14 +87,18 @@ class DBFormModal extends Component {
 
   render() {
     const { btnLoading } = this.state;
+    const { onCancel, visible, id, structures } = this.props;
+
+    visible && this.init(structures, id);
+
     return (
-      <Modal isShow={0}>
+      <Modal isShow={visible}>
         <Content>
           <div className="modal-header">
             <button
               type="button"
               className="close"
-              // onClick={onCancel}
+              onClick={onCancel}
             >
                     &times;
             </button>

@@ -1,9 +1,9 @@
 import React from 'react';
-import { DBFormModal } from '../components';
+import { DBFormModalView } from './compWraps';
 
 const Main = ({ children }) => (
   <div>
-    <DBFormModal />
+    <DBFormModalView />
     <div className="container">
       {children}
     </div>

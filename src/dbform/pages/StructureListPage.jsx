@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
+import { showModal } from '../core/actions'
 
 import 'antd/lib/icon/style/css';
 import 'antd/lib/list/style/css';
@@ -68,7 +69,7 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = dispatch => ({
   initPage: () => dispatch({ type: 'INIT_STRUCTURE_LIST_PAGE' }),
-  editStructure: id => null,
+  editStructure: id => dispatch(showModal(true, id)),
   deleteStructure: id => dispatch({ type: 'DELETE_STRUCTURE', id }),
 });
 

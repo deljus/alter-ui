@@ -25,15 +25,19 @@ class CreatePage extends Component {
         this.setState({ btnLoading: true });
         exportCml('#marvinjs_create_page')
           .then((cml) => {
-            console.log(cml);
-          });
+            if (cml === MARVIN_EDITOR_IS_EMPTY) {
+              throw new Error('Structure is empty');
+            }
+            this.props.createStructure(cml, params);
+          })
+          .catch(e => message.error(e.message));
       }
     });
   }
 
   handlersReset() {
     this.form.resetFields();
-    clearEditor().catch(e => message.error(e.message));
+    clearEditor('#marvinjs_create_page').catch(e => message.error(e.message));
   }
 
   render() {

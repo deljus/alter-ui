@@ -1,14 +1,14 @@
 import { combineReducers } from 'redux';
-import { ADD_STRUCTURE, ADD_STRUCTURES, EDIT_STRUCTURE, DELETE_STRUCTURE } from './constants';
+import { ADD_STRUCTURE, ADD_STRUCTURES, EDIT_STRUCTURE, DELETE_STRUCTURE, TRIGGER_MODAL } from './constants';
 
 export const structures = (state = [], action) => {
   switch (action.type) {
     case ADD_STRUCTURE:
       return [
-        {
-          ...action.department,
-        },
         ...state,
+        {
+          ...action.structure,
+        },
       ];
 
     case ADD_STRUCTURES:
@@ -31,7 +31,19 @@ export const structures = (state = [], action) => {
   }
 };
 
+const modal = (state = { visible: false }, action) => {
+  switch (action.type) {
+    case TRIGGER_MODAL:
+      return {
+        ...action,
+      };
+    default:
+      return state;
+  }
+};
+
 
 export default combineReducers({
-    structures
+  structures,
+    modal,
 });

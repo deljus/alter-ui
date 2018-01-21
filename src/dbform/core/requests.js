@@ -7,8 +7,8 @@ class Structures {
     return axios.get(API_URLS.STRUCTURES);
   }
 
-  static add(name) {
-    return axios.post(API_URLS.STRUCTURES, { name });
+  static add(data) {
+    return axios.post(API_URLS.STRUCTURES, { ...data });
   }
 
   static delete(id) {

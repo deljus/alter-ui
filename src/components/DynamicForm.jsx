@@ -23,12 +23,15 @@ class DynamicFieldSet extends React.Component {
       uuid++;
       const { form } = this.props;
       const keys = form.getFieldValue('keys');
+
       const nextKeys = keys.concat(uuid);
 
       form.setFieldsValue({
         keys: nextKeys,
       });
     };
+
+
 
     render() {
       const { getFieldDecorator, getFieldValue } = this.props.form;
