@@ -5,7 +5,7 @@ export const addStructures = structures => ({
 });
 
 export const addStructure = structure => ({
-    type: ADD_STRUCTURE, structure,
+  type: ADD_STRUCTURE, structure,
 });
 
 export const deleteStructure = id => ({
@@ -14,4 +14,8 @@ export const deleteStructure = id => ({
 
 export const showModal = (visible, id) => ({
   type: TRIGGER_MODAL, visible, id,
-})
+});
+
+export const editStructure = structure => ({
+  type: EDIT_STRUCTURE, structure,
+});

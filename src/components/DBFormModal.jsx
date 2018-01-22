@@ -51,21 +51,28 @@ class DBFormModal extends Component {
   }
 
   init(structures, id) {
-      console.log(structures.filter(struct => struct.id === id));
+    console.log(structures.filter(struct => struct.id === id));
 
-      const structure = structures.filter(struct => struct.id === id)[0];
+    const structure = structures.filter(struct => struct.id === id)[0];
 
-      importCml(structure.data);
+    importCml(structure.data);
 
-      this.form.add();
+    this.form.setFieldsValue({
+      keys: structure.params.map((struct, id) => ({ id, ...struct })),
+    });
+
+    console.log(structure.params.map((struct, id) => ({ id, ...struct })));
   }
   handleSubmit(e) {
+    const { id } = this.props;
     e.preventDefault();
     this.form.validateFields((err, values) => {
       if (!err) {
+        console.log(values);
+
         const params = values.keys.map(k => ({
-          key: values[`key-${k}`],
-          value: values[`value-${k}`],
+          key: values[`key-${k.id}`],
+          value: values[`value-${k.id}`],
         }));
         this.setState({ btnLoading: true });
         exportCml()
@@ -73,7 +80,7 @@ class DBFormModal extends Component {
             if (cml === MARVIN_EDITOR_IS_EMPTY) {
               throw new Error('Structure is empty');
             }
-            this.props.onOk(cml, params);
+            this.props.onOk(id, cml, params);
           })
           .catch(e => message.error(e.message));
       }
@@ -123,9 +130,9 @@ class DBFormModal extends Component {
               <Col md={12}>
                 <Button
                   size="large"
-                  onClick={this.handlersReset.bind(this)}
+                  onClick={onCancel}
                 >
-                        Reset
+                        Cancel
                 </Button>
                 <Button
                   className="pull-right"
@@ -133,8 +140,7 @@ class DBFormModal extends Component {
                   icon="upload"
                   size="large"
                   onClick={this.handleSubmit.bind(this)}
-                  loading={btnLoading}
-                >Submit</Button>
+                >Edit</Button>
               </Col>
             </Row>
           </Body>

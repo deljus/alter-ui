@@ -10,7 +10,7 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = dispatch => ({
-  onOk: () => dispatch({ type: 'MARVIN_MODAL_DISCARD' }),
+  onOk: (id, data, params) => dispatch({ type: 'MARVIN_MODAL_DISCARD', id, data, params }),
   onCancel: () => dispatch(showModal(false)),
 });
 

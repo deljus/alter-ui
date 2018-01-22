@@ -7,6 +7,7 @@ import history from '../core/history';
 import {
   CreatePage,
   StructureListPage,
+  SettingsPage,
 } from './pages';
 import { DBFormModal } from '../components';
 import { URLS } from '../config';
@@ -29,7 +30,7 @@ export default (
             <StructureListPage />
           </TabPane>
           <TabPane tab={<span><Icon type="setting" />Settings</span>} key="3">
-              Tab 2
+            <SettingsPage />
           </TabPane>
         </Tabs>
         {/* <Switch>

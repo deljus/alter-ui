@@ -14,11 +14,11 @@ export const structures = (state = [], action) => {
     case ADD_STRUCTURES:
       return action.structures;
 
-    case EDIT_STRUCTURE:
-      return state.map(department =>
-        (department.id === action.id ?
-          { ...department, ...action.department } :
-          department),
+      case EDIT_STRUCTURE:
+      return state.map(structure =>
+        (structure.id === action.structure.id ?
+          { ...action.structure } :
+          structure),
       );
 
     case DELETE_STRUCTURE:
@@ -45,5 +45,5 @@ const modal = (state = { visible: false }, action) => {
 
 export default combineReducers({
   structures,
-    modal,
+  modal,
 });

@@ -19,8 +19,8 @@ class CreatePage extends Component {
     this.form.validateFields((err, values) => {
       if (!err) {
         const params = values.keys.map(k => ({
-          key: values[`key-${k}`],
-          value: values[`value-${k}`],
+          key: values[`key-${k.id}`],
+          value: values[`value-${k.id}`],
         }));
         this.setState({ btnLoading: true });
         exportCml('#marvinjs_create_page')

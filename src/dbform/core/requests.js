@@ -15,8 +15,8 @@ class Structures {
     return axios.delete(`${API_URLS.STRUCTURES}/${id}`);
   }
 
-  static edit(id, name) {
-    return axios.put(`${API_URLS.STRUCTURES}/${id}`, { name });
+  static edit(id, data, params) {
+    return axios.put(`${API_URLS.STRUCTURES}/${id}`, { data, params });
   }
 }
 
