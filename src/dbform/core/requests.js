@@ -20,4 +20,10 @@ class Structures {
   }
 }
 
-export { Structures };
+class Settings {
+  static getAll() {
+    return axios.get(API_URLS.SETTINGS);
+  }
+}
+
+export { Structures, Settings };

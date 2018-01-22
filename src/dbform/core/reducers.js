@@ -1,5 +1,5 @@
 import { combineReducers } from 'redux';
-import { ADD_STRUCTURE, ADD_STRUCTURES, EDIT_STRUCTURE, DELETE_STRUCTURE, TRIGGER_MODAL } from './constants';
+import { ADD_STRUCTURE, ADD_STRUCTURES, EDIT_STRUCTURE, DELETE_STRUCTURE, TRIGGER_MODAL, ADD_SETTINGS } from './constants';
 
 export const structures = (state = [], action) => {
   switch (action.type) {
@@ -14,7 +14,7 @@ export const structures = (state = [], action) => {
     case ADD_STRUCTURES:
       return action.structures;
 
-      case EDIT_STRUCTURE:
+    case EDIT_STRUCTURE:
       return state.map(structure =>
         (structure.id === action.structure.id ?
           { ...action.structure } :
@@ -42,8 +42,19 @@ const modal = (state = { visible: false }, action) => {
   }
 };
 
+export const settings = (state = null, action) => {
+  switch (action.type) {
+    case ADD_SETTINGS:
+      return action.settings;
+
+
+    default:
+      return state;
+  }
+};
 
 export default combineReducers({
   structures,
   modal,
+  settings,
 });

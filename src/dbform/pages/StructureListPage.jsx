@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import { showModal } from '../core/actions'
+import { showModal } from '../core/actions';
 
 import 'antd/lib/icon/style/css';
 import 'antd/lib/list/style/css';
@@ -14,15 +14,12 @@ import { List, Icon, Collapse, Card, Popconfirm } from 'antd';
 const Panel = Collapse.Panel;
 
 class StructureListPage extends Component {
-  componentDidMount() {
-    this.props.initPage();
-  }
-
   render() {
-    const { structures, editStructure, deleteStructure } = this.props;
+    const { structures, editStructure, deleteStructure, settings } = this.props;
+    const gridSettings = settings && settings.grid;
     return (
       <List
-        grid={{ gutter: 16, xs: 1, sm: 2, md: 3, lg: 3, xl: 3 }}
+        grid={{ ...gridSettings }}
         dataSource={structures}
         renderItem={item => (
           <List.Item>
@@ -65,10 +62,10 @@ StructureListPage.propTypes = {
 
 const mapStateToProps = state => ({
   structures: state.structures,
+  settings: state.settings,
 });
 
 const mapDispatchToProps = dispatch => ({
-  initPage: () => dispatch({ type: 'INIT_STRUCTURE_LIST_PAGE' }),
   editStructure: id => dispatch(showModal(true, id)),
   deleteStructure: id => dispatch({ type: 'DELETE_STRUCTURE', id }),
 });

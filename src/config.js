@@ -17,6 +17,7 @@ export const API_URLS = {
   USER_AUTH: `${BASE_URL}api/auth`,
   MAGIC: `${BASE_URL}api/resources/magic`,
   STRUCTURES: `${BASE_URL}structures`,
+    SETTINGS: `${BASE_URL}settings`,
 };
 
 export const MODAL = {
