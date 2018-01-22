@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
+import { Pagination } from 'antd';
 import { showModal } from '../core/actions';
 
 import 'antd/lib/icon/style/css';
@@ -14,42 +15,56 @@ import { List, Icon, Collapse, Card, Popconfirm } from 'antd';
 const Panel = Collapse.Panel;
 
 class StructureListPage extends Component {
-  render() {
-    const { structures, editStructure, deleteStructure, settings } = this.props;
-    const gridSettings = settings && settings.grid;
-    return (
-      <List
-        grid={{ ...gridSettings }}
-        dataSource={structures}
-        renderItem={item => (
-          <List.Item>
-            <Card
-              style={{ width: 300 }}
-              cover={<img alt="example" src={item.base64} />}
-              actions={
-                [<Icon type="edit" onClick={() => editStructure(item.id)} />,
-                  <Popconfirm
-                    placement="topLeft"
-                    title="Are you sure delete this structure?"
-                    onConfirm={() => deleteStructure(item.id)}
-                    okText="Yes"
-                    cancelText="No"
-                  >
-                    <Icon type="delete" />
-                  </Popconfirm>]}
-            >
-              <Collapse bordered={false}>
-                <Panel header="Parameters" key="1">
-                  {item.params && item.params.map(param => <div>{param.key} : {param.value}</div>)}
-                </Panel>
-              </Collapse>
-            </Card>
-          </List.Item>
-        )}
-      />
+    state = {
+      current: 1,
+      pageSize: 10,
+    };
+    onShowSizeChange(current, pageSize) {
+      this.setState({ current, pageSize });
+    }
+    changePage(pageNumber) {
+      this.setState({ current: pageNumber });
+    }
+    render() {
+      const { structures, editStructure, deleteStructure, settings } = this.props;
+      const { current, pageSize } = this.state;
+      const gridSettings = settings && settings.grid;
+      return (
+        <div>
+          <Pagination showSizeChanger onChange={this.changePage.bind(this)} onShowSizeChange={this.onShowSizeChange.bind(this)} defaultCurrent={current} total={structures.length} />
+          <List
+            grid={{ ...gridSettings }}
+            dataSource={structures.slice(current * pageSize, current * pageSize + pageSize)}
+            renderItem={item => (
+              <List.Item>
+                <Card
+                  style={{ width: '100%' }}
+                  cover={<img alt="example" src={item.base64} />}
+                  actions={
+                    [<Icon type="edit" onClick={() => editStructure(item.id)} />,
+                      <Popconfirm
+                        placement="topLeft"
+                        title="Are you sure delete this structure?"
+                        onConfirm={() => deleteStructure(item.id)}
+                        okText="Yes"
+                        cancelText="No"
+                      >
+                        <Icon type="delete" />
+                      </Popconfirm>]}
+                >
+                  <Collapse bordered={false}>
+                    <Panel header="Parameters" key="1">
+                      {item.params && item.params.map(param => <div>{param.key} : {param.value}</div>)}
+                    </Panel>
+                  </Collapse>
+                </Card>
+              </List.Item>
+            )}
+          />
+        </div>
 
-    );
-  }
+      );
+    }
 }
 
 StructureListPage.propTypes = {

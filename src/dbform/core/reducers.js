@@ -11,7 +11,7 @@ export const structures = (state = [], action) => {
         },
       ];
 
-    case ADD_STRUCTURES:
+      case ADD_STRUCTURES:
       return action.structures;
 
     case EDIT_STRUCTURE:
