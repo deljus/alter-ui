@@ -31,10 +31,17 @@ class StructureListPage extends Component {
       const gridSettings = settings && settings.grid;
       return (
         <div>
-          <Pagination showSizeChanger onChange={this.changePage.bind(this)} onShowSizeChange={this.onShowSizeChange.bind(this)} defaultCurrent={current} total={structures.length} />
+          <Pagination
+            showSizeChanger
+            onChange={this.changePage.bind(this)}
+            onShowSizeChange={this.onShowSizeChange.bind(this)}
+            defaultCurrent={current}
+            total={structures.length}
+            style={{ marginBottom: '20px' }}
+          />
           <List
             grid={{ ...gridSettings }}
-            dataSource={structures.slice(current * pageSize, current * pageSize + pageSize)}
+            dataSource={structures.slice((current * pageSize) - pageSize, current * pageSize)}
             renderItem={item => (
               <List.Item>
                 <Card
