@@ -174,6 +174,46 @@
         }
       ],
       "id": 32
+    },
+    {
+      "data": "<cml><MDocument><MChemicalStruct><molecule molID=\"m1\"><atomArray><atom id=\"a1\" elementType=\"C\" x2=\"-1.8750933333325848\" y2=\"4.790093321012586\"/><atom id=\"a2\" elementType=\"C\" x2=\"-3.2086399893308792\" y2=\"4.020093327172587\"/><atom id=\"a3\" elementType=\"C\" x2=\"-3.2086399893308792\" y2=\"2.479906672827413\"/><atom id=\"a4\" elementType=\"C\" x2=\"-1.8750933333325848\" y2=\"1.709906678987413\"/><atom id=\"a5\" elementType=\"C\" x2=\"-0.5413600106691203\" y2=\"2.479906672827413\"/><atom id=\"a6\" elementType=\"C\" x2=\"-0.5413600106691203\" y2=\"4.020093327172587\"/></atomArray><bondArray><bond atomRefs2=\"a1 a2\" order=\"2\" id=\"b1\"/><bond atomRefs2=\"a2 a3\" order=\"1\" id=\"b2\"/><bond atomRefs2=\"a3 a4\" order=\"2\" id=\"b3\"/><bond atomRefs2=\"a4 a5\" order=\"1\" id=\"b4\"/><bond atomRefs2=\"a5 a6\" order=\"2\" id=\"b5\"/><bond atomRefs2=\"a6 a1\" order=\"1\" id=\"b6\"/></bondArray></molecule></MChemicalStruct></MDocument></cml>",
+      "params": [
+        {
+          "key": "sac",
+          "value": "ascasc"
+        },
+        {
+          "key": "sac",
+          "value": "ascasc"
+        }
+      ],
+      "id": 33
+    },
+    {
+      "data": "<cml><MDocument><MChemicalStruct><molecule molID=\"m1\"><atomArray><atom id=\"a1\" elementType=\"C\" x2=\"-1.8750933333325848\" y2=\"4.790093321012586\"/><atom id=\"a2\" elementType=\"C\" x2=\"-3.2086399893308792\" y2=\"4.020093327172587\"/><atom id=\"a3\" elementType=\"C\" x2=\"-3.2086399893308792\" y2=\"2.479906672827413\"/><atom id=\"a4\" elementType=\"C\" x2=\"-1.8750933333325848\" y2=\"1.709906678987413\"/><atom id=\"a5\" elementType=\"C\" x2=\"-0.5413600106691203\" y2=\"2.479906672827413\"/><atom id=\"a6\" elementType=\"C\" x2=\"-0.5413600106691203\" y2=\"4.020093327172587\"/><atom id=\"a7\" elementType=\"C\" x2=\"-1.8750933333325845\" y2=\"0.16990667898741307\"/><atom id=\"a8\" elementType=\"C\" x2=\"-3.2088266559960514\" y2=\"-0.6000933148525869\"/><atom id=\"a9\" elementType=\"C\" x2=\"-3.2088266559960514\" y2=\"-2.1402799691977608\"/><atom id=\"a10\" elementType=\"C\" x2=\"-1.8750933333325845\" y2=\"-2.910093296372587\"/><atom id=\"a11\" elementType=\"C\" x2=\"-0.5413600106691179\" y2=\"-2.1402799691977608\"/><atom id=\"a12\" elementType=\"C\" x2=\"-0.5413600106691179\" y2=\"-0.6000933148525869\"/><atom id=\"a13\" elementType=\"C\" x2=\"0.7923191111589172\" y2=\"0.16990668514741536\"/><atom id=\"a14\" elementType=\"C\" x2=\"2.1259086632412885\" y2=\"-0.6000190130953249\"/><atom id=\"a15\" elementType=\"C\" x2=\"3.4597727690498203\" y2=\"0.17003389252778023\"/><atom id=\"a16\" elementType=\"C\" x2=\"3.4598856618735656\" y2=\"1.7099191679600256\"/><atom id=\"a17\" elementType=\"C\" x2=\"2.1262027813575965\" y2=\"2.480006527105176\"/><atom id=\"a18\" elementType=\"C\" x2=\"0.7923386755490649\" y2=\"1.7099536214820708\"/></atomArray><bondArray><bond atomRefs2=\"a1 a2\" order=\"2\" id=\"b1\"/><bond atomRefs2=\"a2 a3\" order=\"1\" id=\"b2\"/><bond atomRefs2=\"a3 a4\" order=\"2\" id=\"b3\"/><bond atomRefs2=\"a4 a5\" order=\"1\" id=\"b4\"/><bond atomRefs2=\"a5 a6\" order=\"2\" id=\"b5\"/><bond atomRefs2=\"a6 a1\" order=\"1\" id=\"b6\"/><bond atomRefs2=\"a7 a8\" order=\"1\" id=\"b7\"/><bond atomRefs2=\"a7 a12\" order=\"1\" id=\"b8\"/><bond atomRefs2=\"a8 a9\" order=\"1\" id=\"b9\"/><bond atomRefs2=\"a9 a10\" order=\"1\" id=\"b10\"/><bond atomRefs2=\"a10 a11\" order=\"1\" id=\"b11\"/><bond atomRefs2=\"a11 a12\" order=\"1\" id=\"b12\"/><bond atomRefs2=\"a4 a7\" order=\"1\" id=\"b13\"/><bond atomRefs2=\"a13 a14\" order=\"2\" id=\"b14\"/><bond atomRefs2=\"a14 a15\" order=\"1\" id=\"b15\"/><bond atomRefs2=\"a15 a16\" order=\"2\" id=\"b16\"/><bond atomRefs2=\"a16 a17\" order=\"1\" id=\"b17\"/><bond atomRefs2=\"a17 a18\" order=\"2\" id=\"b18\"/><bond atomRefs2=\"a18 a13\" order=\"1\" id=\"b19\"/><bond atomRefs2=\"a12 a13\" order=\"1\" id=\"b20\"/></bondArray></molecule></MChemicalStruct></MDocument></cml>",
+      "params": [
+        {
+          "key": "sac",
+          "value": "ascasc"
+        },
+        {
+          "key": "sac",
+          "value": "ascasc"
+        },
+        {
+          "key": "ascasc",
+          "value": "ascascasc"
+        },
+        {
+          "key": "ascascas",
+          "value": "ascsac"
+        },
+        {
+          "key": "sacasc",
+          "value": "asc"
+        }
+      ],
+      "id": 34
     }
   ],
   "settings": {

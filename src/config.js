@@ -1,6 +1,6 @@
 export const MARVIN_PATH_IFRAME = '/static/marvinjs/editorws.html';
 export const MARVIN_EDITOR_IS_EMPTY = '<cml><MDocument></MDocument></cml>';
-export const MARVIN_ID = "#marvinjs";
+export const MARVIN_ID = '#marvinjs';
 
 const BASE_URL = process.env.NODE_ENV === 'production' ? 'http://cimm.kpfu.ru/' : 'http://localhost/';
 
@@ -17,7 +17,7 @@ export const API_URLS = {
   USER_AUTH: `${BASE_URL}api/auth`,
   MAGIC: `${BASE_URL}api/resources/magic`,
   STRUCTURES: `${BASE_URL}structures`,
-    SETTINGS: `${BASE_URL}settings`,
+  SETTINGS: `${BASE_URL}settings`,
 };
 
 export const MODAL = {
