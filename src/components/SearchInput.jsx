@@ -2,8 +2,8 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import { Button, message } from 'antd';
-import { textToCml } from '../core/marvinAPI';
-import history from '../core/history';
+import { textToCml } from '../base/marvinAPI';
+import history from '../base/history';
 import 'antd/lib/button/style/css';
 import 'antd/lib/message/style/css';
 

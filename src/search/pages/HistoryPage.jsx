@@ -2,9 +2,9 @@ import React from 'react';
 import { connect } from 'react-redux';
 import styled from 'styled-components';
 import { Button as BaseButton, Tooltip } from 'antd';
-import history from '../../core/history';
+import history from '../../base/history';
 import { URLS } from '../../config';
-import { stringifyUrl } from '../../core/parseUrl';
+import { stringifyUrl } from '../../base/parseUrl';
 
 import 'antd/lib/button/style/css';
 import 'antd/lib/tooltip/style/css';

@@ -6,10 +6,9 @@ import {
   StructureListPage,
   SettingsPage,
 } from './pages';
-import { DBFormModalView } from './compWraps';
+import { DBFormModalView, LoaderView, ErrorView } from './compWraps';
 
 import 'antd/lib/tabs/style/css';
-import { settings } from './core/reducers';
 
 const TabPane = Tabs.TabPane;
 
@@ -18,14 +17,14 @@ class Main extends Component {
     this.props.initPages();
   }
 
-  tabSettings = () => ({ ...settings });
-
   render() {
     const { settings } = this.props;
     const tabs = settings && settings.tabs;
     return (
       <div>
+        <LoaderView />
         <DBFormModalView />
+        <ErrorView />
         <div className="container">
           <Tabs
             defaultActiveKey="2"

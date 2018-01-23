@@ -1,14 +1,14 @@
 import { delay } from 'redux-saga';
 import { takeEvery, put, call } from 'redux-saga/effects';
 import { startRequest, succsessRequest, errorRequest, addStructure, addHistory, addResult, modal, editStructure } from './actions';
-import Request from '../../core/requests';
-import history from '../../core/history';
+import Request from '../../base/requests';
+import history from '../../base/history';
 import { URLS, MODAL } from '../../config';
-import { getUrlParams, stringifyUrl } from '../../core/parseUrl';
-import repeatedRequests from '../../core/repeatedRequests';
-import Serialize from '../../core/magic';
+import { getUrlParams, stringifyUrl } from '../../base/parseUrl';
+import repeatedRequests from '../../base/repeatedRequests';
+import Serialize from '../../base/magic';
 import { message } from 'antd';
-import { convertCmlToBase64, clearEditor, exportCml, importCml, convertCmlToBase64Arr } from '../../core/marvinAPI';
+import { convertCmlToBase64, clearEditor, exportCml, importCml, convertCmlToBase64Arr } from '../../base/marvinAPI';
 
 import 'antd/lib/message/style/css';
 

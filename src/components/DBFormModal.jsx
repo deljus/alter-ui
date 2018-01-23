@@ -5,7 +5,7 @@ import { Row, Col, PageHeader } from 'react-bootstrap';
 import { Button, message } from 'antd';
 import DynamicForm from './DynamicForm';
 import { MARVIN_PATH_IFRAME, MARVIN_EDITOR_IS_EMPTY, API_URLS } from '../config';
-import { exportCml, clearEditor, importCml } from '../core/marvinAPI';
+import { exportCml, clearEditor, importCml } from '../base/marvinAPI';
 
 import 'antd/lib/message/style/css';
 

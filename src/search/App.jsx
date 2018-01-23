@@ -2,7 +2,7 @@ import React from 'react';
 import { Route, Switch, Router } from 'react-router';
 import { Provider } from 'react-redux';
 import store from './core/store';
-import history from '../core/history';
+import history from '../base/history';
 import {
   IndexPage,
   ValidatePage,

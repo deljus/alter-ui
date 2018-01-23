@@ -2,7 +2,7 @@ import React from 'react';
 import { Router } from 'react-router';
 import store from './core/store';
 import { Provider } from 'react-redux';
-import history from '../core/history';
+import history from '../base/history';
 import Main from './Layout';
 
 export default (

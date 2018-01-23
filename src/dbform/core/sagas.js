@@ -2,21 +2,24 @@ import { takeEvery, call, put } from 'redux-saga/effects';
 import { Structures, Settings } from './requests';
 import { addStructures, deleteStructure, addStructure, editStructure, showModal, addSettings } from './actions';
 import { message } from 'antd';
+import { startRequest, succsessRequest, errorRequest } from '../../base/actions';
 
-import { convertCmlToBase64, convertCmlToBase64Arr } from '../../core/marvinAPI';
+import { convertCmlToBase64, convertCmlToBase64Arr } from '../../base/marvinAPI';
 
 import 'antd/lib/message/style/css';
 
 
 function* initStructureListPage(action) {
   try {
+    yield put(startRequest());
     const responseStructures = yield call(Structures.getAll);
     const structures = yield call(convertCmlToBase64Arr, responseStructures.data);
     yield put(addStructures(structures));
     const responseSettings = yield call(Settings.getAll);
     yield put(addSettings(responseSettings.data));
+    yield put(succsessRequest());
   } catch (e) {
-    console.log(e.message);
+    yield put(errorRequest(e.message, action));
   }
 }
 
@@ -35,8 +38,9 @@ function* deleteStructureInList(action) {
   try {
     yield call(Structures.delete, action.id);
     yield put(deleteStructure, action.id);
+    yield message.success('Delete structure');
   } catch (e) {
-    console.log(e.message);
+    yield message.error(e.message);
   }
 }
 
