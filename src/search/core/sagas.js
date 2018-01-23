@@ -1,6 +1,7 @@
 import { delay } from 'redux-saga';
 import { takeEvery, put, call } from 'redux-saga/effects';
-import { startRequest, succsessRequest, errorRequest, addStructure, addHistory, addResult, modal, editStructure } from './actions';
+import { addStructure, addHistory, addResult, editStructure } from './actions';
+import { startRequest, succsessRequest, errorRequest, modal} from '../../base/actions';
 import Request from '../../base/requests';
 import history from '../../base/history';
 import { URLS, MODAL } from '../../config';

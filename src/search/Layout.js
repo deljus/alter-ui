@@ -1,5 +1,5 @@
 import React from 'react';
-import { MarvinEditorView, PageStepsView, LoaderView, ErrorView } from './compWrapper';
+import { MarvinEditorView, PageStepsView, LoaderView, ErrorView } from '../base/wrapper';
 
 const Main = ({ children }) => (
   <div className="container">

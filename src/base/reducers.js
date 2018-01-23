@@ -1,4 +1,4 @@
-import { REQUEST } from './constants';
+import { REQUEST, TRIGGER } from './constants';
 
 const requestState = {
   loading: false,
@@ -38,4 +38,17 @@ const request = (state = requestState, action) => {
   }
 };
 
-export { request };
+const modal = (state = { visible: false }, action) => {
+  switch (action.type) {
+    case TRIGGER:
+      return {
+        visible: action.bool,
+        typeAction: action.typeAction,
+        cml: action.cml,
+      };
+    default:
+      return state;
+  }
+};
+
+export { request, modal };

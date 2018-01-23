@@ -1,24 +1,12 @@
 import { combineReducers } from 'redux';
-import { HISTORY, RESULT, STRUCTURE, TRIGGER, MODELS, REQUEST } from './constants';
+import { HISTORY, RESULT, STRUCTURE, TRIGGER, REQUEST } from './constants';
+import { request, modal } from '../../base/reducers';
 
 const histories = (state = [], action) => {
   switch (action.type) {
     case HISTORY.ADD:
       state.push(action.arr);
       return state;
-    default:
-      return state;
-  }
-};
-
-const modal = (state = { visible: false }, action) => {
-  switch (action.type) {
-    case TRIGGER:
-      return {
-        visible: action.bool,
-        typeAction: action.typeAction,
-        cml: action.cml,
-      };
     default:
       return state;
   }
@@ -52,22 +40,6 @@ const requestState = {
   error: false,
   errorText: '',
   lastActions: '',
-};
-
-const request = (state = requestState, action) => {
-  switch (action.type) {
-    case REQUEST.START_REQUEST:
-      return { loading: true, error: false, errorText: '', lastActions: '' };
-
-    case REQUEST.SUCCESS_REQUEST:
-      return { loading: false, error: false, errorText: '', lastActions: '' };
-
-    case REQUEST.ERROR_REQUEST:
-      return { loading: false, error: true, errorText: action.errText, lastActions: action.lastActions };
-
-    default:
-      return state;
-  }
 };
 
 

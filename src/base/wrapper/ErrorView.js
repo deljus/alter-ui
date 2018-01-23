@@ -1,6 +1,6 @@
 import { connect } from 'react-redux';
-import { Error } from '../../components';
-import { succsessRequest } from '../core/actions';
+import { Error } from '../../components/index';
+import { succsessRequest } from '../actions';
 
 const mapStateToProps = state => ({
   visible: state.request.error,

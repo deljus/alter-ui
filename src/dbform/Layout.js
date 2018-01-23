@@ -6,7 +6,8 @@ import {
   StructureListPage,
   SettingsPage,
 } from './pages';
-import { DBFormModalView, LoaderView, ErrorView } from './compWraps';
+import { DBFormModalView } from './compWraps';
+import {LoaderView, ErrorView } from '../base/wrapper';
 
 import 'antd/lib/tabs/style/css';
 

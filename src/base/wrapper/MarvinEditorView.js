@@ -1,5 +1,5 @@
 import { connect } from 'react-redux';
-import { modal as modalAction } from '../core/actions';
+import { modal as modalAction } from '../actions';
 import { MarvinEditor } from '../../components';
 
 const mapStateToProps = state => ({

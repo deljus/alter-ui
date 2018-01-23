@@ -1,4 +1,4 @@
-import { HISTORY, RESULT, STRUCTURE, TRIGGER, REQUEST } from './constants';
+import { HISTORY, RESULT, STRUCTURE } from './constants';
 
 export const addStructure = arr => ({
   type: STRUCTURE.ADD_STRUCTURE, arr,
@@ -17,24 +17,6 @@ export const addResult = arr => ({
   type: RESULT.ADD, arr,
 });
 
-export const modal = (bool, typeAction) => ({
-  type: TRIGGER, bool, typeAction,
-});
-
 export const addHistory = arr => ({
   type: HISTORY.ADD, arr,
-});
-
-// Request actions
-
-export const startRequest = () => ({
-  type: REQUEST.START_REQUEST,
-});
-
-export const succsessRequest = () => ({
-  type: REQUEST.SUCCESS_REQUEST,
-});
-
-export const errorRequest = (errText, lastActions) => ({
-  type: REQUEST.ERROR_REQUEST, errText, lastActions,
 });
