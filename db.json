@@ -214,6 +214,11 @@
         }
       ],
       "id": 34
+    },
+    {
+      "data": "<cml><MDocument><MChemicalStruct><molecule molID=\"m1\"><atomArray><atom id=\"a1\" elementType=\"C\" x2=\"1.4582400000007483\" y2=\"1.831759987679253\"/><atom id=\"a2\" elementType=\"C\" x2=\"0.1246933440024538\" y2=\"1.061759993839254\"/><atom id=\"a3\" elementType=\"C\" x2=\"0.1246933440024538\" y2=\"-0.47842666050592\"/><atom id=\"a4\" elementType=\"C\" x2=\"1.4582400000007483\" y2=\"-1.24842665434592\"/><atom id=\"a5\" elementType=\"C\" x2=\"2.7919733226642127\" y2=\"-0.47842666050592\"/><atom id=\"a6\" elementType=\"C\" x2=\"2.7919733226642127\" y2=\"1.061759993839254\"/></atomArray><bondArray><bond atomRefs2=\"a1 a2\" order=\"2\" id=\"b1\"/><bond atomRefs2=\"a2 a3\" order=\"1\" id=\"b2\"/><bond atomRefs2=\"a3 a4\" order=\"2\" id=\"b3\"/><bond atomRefs2=\"a4 a5\" order=\"1\" id=\"b4\"/><bond atomRefs2=\"a5 a6\" order=\"2\" id=\"b5\"/><bond atomRefs2=\"a6 a1\" order=\"1\" id=\"b6\"/></bondArray></molecule></MChemicalStruct></MDocument></cml>",
+      "params": [],
+      "id": 35
     }
   ],
   "settings": {
