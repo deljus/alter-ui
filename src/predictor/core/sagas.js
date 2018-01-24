@@ -33,6 +33,25 @@ function* createStructure() {
   }
 }
 
+function* editStructureIndex(action) {
+  try {
+    const cml = yield call(exportCml);
+    yield put(modal(false));
+    const base64 = yield call(convertCmlToBase64, cml);
+    yield put(editStructure({ id: action.id, data: cml, base64 }));
+  } catch (e) {
+    yield call(message.error, e.message);
+  }
+}
+
+function* createTaskIndex(action) {
+  try {
+    const response = yield call(Request.createModellingTask, { data: action.structure });
+  } catch (e) {
+    yield call(message.error, e.message);
+  }
+}
+
 
 export function* sagas() {
   // yield takeEvery('CREATE_TASK', createTask);
@@ -41,7 +60,8 @@ export function* sagas() {
   // yield takeEvery('INIT_RESULT_PAGE', resultPage);
   yield takeEvery('DRAW_STRUCTURE', drawStructure);
   yield takeEvery('CREATE_TASK_SEARCH', createStructure);
-  // yield takeEvery('EDIT_STRUCTURE_1', editStructureR);
+  yield takeEvery('EDIT_STRUCTURE_INDEX', editStructureIndex);
+  yield takeEvery('CREATE_TASK_INDEX', createTaskIndex);
   // yield takeEvery('EDIT_TASK_SEARCH', editTaskStructure);
   // yield takeEvery('REVALIDATE_TASK', revalidateTask);
 }

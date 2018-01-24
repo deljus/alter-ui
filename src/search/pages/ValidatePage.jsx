@@ -6,7 +6,6 @@ import { Select } from 'antd';
 import { Thumbnail } from '../../components';
 import { modal, addSelectModel } from '../core/actions';
 import { MODAL, URLS } from '../../config';
-import 'antd/lib/select/style/css';
 
 const Option = Select.Option;
 

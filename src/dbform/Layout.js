@@ -8,8 +8,7 @@ import {
 } from './pages';
 import { DBFormModalView } from './compWraps';
 import {LoaderView, ErrorView } from '../base/wrapper';
-
-import 'antd/lib/tabs/style/css';
+import 'antd/dist/antd.css';
 
 const TabPane = Tabs.TabPane;
 

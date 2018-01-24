@@ -4,8 +4,6 @@ import PropTypes from 'prop-types';
 import { Tabs, Select } from 'antd';
 import { List, Icon, Collapse, Card, Popconfirm } from 'antd';
 
-import 'antd/lib/select/style/css';
-
 const Panel = Collapse.Panel;
 const Option = Select.Option;
 class SettingsPage extends Component {

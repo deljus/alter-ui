@@ -4,13 +4,6 @@ import PropTypes from 'prop-types';
 import { Pagination, Select, Col } from 'antd';
 import { showModal } from '../core/actions';
 
-import 'antd/lib/icon/style/css';
-import 'antd/lib/list/style/css';
-import 'antd/lib/collapse/style/css';
-import 'antd/lib/card/style/css';
-import 'antd/lib/popconfirm/style/css';
-import 'antd/lib/select/style/css';
-
 import { List, Icon, Collapse, Card, Popconfirm } from 'antd';
 
 const Panel = Collapse.Panel;

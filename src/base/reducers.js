@@ -44,7 +44,7 @@ const modal = (state = { visible: false }, action) => {
       return {
         visible: action.bool,
         typeAction: action.typeAction,
-        cml: action.cml,
+        id: action.id,
       };
     default:
       return state;

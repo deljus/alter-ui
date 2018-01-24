@@ -4,9 +4,6 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { Pagination, BackTop } from 'antd';
 import { ResultItem, ModalIncrease } from '../../components';
-import 'antd/lib/pagination/style/css';
-import 'antd/lib/back-top/style/css';
-
 
 class ResultPage extends Component {
   constructor(props) {

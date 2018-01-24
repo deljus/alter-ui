@@ -1,7 +1,9 @@
 import React from 'react';
-import styled from 'styled-components';
 import { connect } from 'react-redux';
-import { Button, Upload, Icon, List, Collapse, Card, Popconfirm  } from 'antd';
+import { Button, Upload, Icon, List, Collapse, Card, Popconfirm, Row, Col } from 'antd';
+import { deleteStructure } from '../core/actions';
+import { modal } from '../../base/actions';
+
 
 const Panel = Collapse.Panel;
 
@@ -13,20 +15,24 @@ const uploadProps = {
   },
 };
 
-const IndexPage = ({structure, editStructure, deleteStructure, drawStructure}) => (
+const IndexPage = ({ structure, editStructure, deleteStructure, drawStructure, createTask }) => (
   <div>
-    <div>
-      <Upload {...uploadProps}>
-        <Button icon="upload">
+    <Row style={{ marginBottom: '20px' }}>
+      <Col span={8}>
+        <Upload {...uploadProps}>
+          <Button icon="upload">
                 Upload file
-        </Button>
-      </Upload>
-        <Button type="dashed" onClick={() => drawStructure()} icon="plus">Add structure</Button>
-      <Button type="primary" onClick={() => null} icon="right">Validate</Button>
-    </div>
+          </Button>
+        </Upload>
+      </Col>
+      <Col span={8} offset={8} style={{ textAlign: 'right' }}>
+        <Button type="dashed" onClick={() => drawStructure()} icon="plus" style={{ marginRight: '8px' }}>Add structure</Button>
+        <Button type="primary" onClick={() => createTask(structure)} icon="right" disabled={!structure.length}>Validate</Button>
+      </Col>
+    </Row>
     <div>
       <List
-        grid={{ gutter: 16, xs: 1, sm: 2, md: 4, lg: 4, xl: 6, xxl: 3 }}
+        grid={{ gutter: 16, xs: 1, sm: 2, md: 3, lg: 3, xl: 3 }}
         dataSource={structure}
         renderItem={item => (
           <List.Item>
@@ -44,8 +50,7 @@ const IndexPage = ({structure, editStructure, deleteStructure, drawStructure}) =
                   >
                     <Icon type="delete" />
                   </Popconfirm>]}
-            >
-            </Card>
+            />
           </List.Item>
         )}
       />
@@ -54,11 +59,14 @@ const IndexPage = ({structure, editStructure, deleteStructure, drawStructure}) =
 );
 
 const mapStateToProps = state => ({
-    structure: state.structure,
+  structure: state.structure,
 });
 
 const mapDispatchToProps = dispatch => ({
-    drawStructure: () => dispatch({ type: 'DRAW_STRUCTURE' }),
+  drawStructure: () => dispatch({ type: 'DRAW_STRUCTURE' }),
+  deleteStructure: id => dispatch(deleteStructure(id)),
+  editStructure: id => dispatch(modal(true, 'EDIT_STRUCTURE_INDEX', id)),
+  createTask: structure => dispatch({ type: 'CREATE_TASK_INDEX', structure }),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(IndexPage);

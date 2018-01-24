@@ -34,10 +34,14 @@ const structure = (state = [], action) => {
         },
         ...state,
       ];
-    case STRUCTURE.ADD_SELECTED_MODEL:
-      return { ...state, selectModel: action.model };
+    case STRUCTURE.DELETE_STRUCTURE:
+      return state.filter(structure => structure.id !== action.id);
     case STRUCTURE.EDIT_STRUCTURE:
-      return { ...state, cml: action.cml, base64: action.base64, revalidateStructure: true };
+      return state.map(structure =>
+        (structure.id === action.arr.id ?
+          { ...action.arr } :
+          structure),
+      );
     default:
       return state;
   }

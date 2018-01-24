@@ -6,9 +6,6 @@ import history from '../../base/history';
 import { URLS } from '../../config';
 import { stringifyUrl } from '../../base/parseUrl';
 
-import 'antd/lib/button/style/css';
-import 'antd/lib/tooltip/style/css';
-
 const Rigth = styled.div`
   position: absolute;
   top: 10px;

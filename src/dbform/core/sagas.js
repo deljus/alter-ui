@@ -1,12 +1,9 @@
 import { takeEvery, call, put } from 'redux-saga/effects';
+import { message } from 'antd';
 import { Structures, Settings } from './requests';
 import { addStructures, deleteStructure, addStructure, editStructure, showModal, addSettings } from './actions';
-import { message } from 'antd';
 import { startRequest, succsessRequest, errorRequest } from '../../base/actions';
-
 import { convertCmlToBase64, convertCmlToBase64Arr } from '../../base/marvinAPI';
-
-import 'antd/lib/message/style/css';
 
 
 function* initStructureListPage(action) {

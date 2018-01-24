@@ -1,5 +1,5 @@
-import { delay } from 'redux-saga';
 import { takeEvery, put, call } from 'redux-saga/effects';
+import { message } from 'antd';
 import { addStructure, addHistory, addResult, editStructure } from './actions';
 import { startRequest, succsessRequest, errorRequest, modal} from '../../base/actions';
 import Request from '../../base/requests';
@@ -8,10 +8,7 @@ import { URLS, MODAL } from '../../config';
 import { getUrlParams, stringifyUrl } from '../../base/parseUrl';
 import repeatedRequests from '../../base/repeatedRequests';
 import Serialize from '../../base/magic';
-import { message } from 'antd';
 import { convertCmlToBase64, clearEditor, exportCml, importCml, convertCmlToBase64Arr } from '../../base/marvinAPI';
-
-import 'antd/lib/message/style/css';
 
 
 function* createTask(action) {

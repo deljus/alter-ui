@@ -12,6 +12,6 @@ export const errorRequest = (errText, lastActions) => ({
   type: REQUEST.ERROR_REQUEST, errText, lastActions,
 });
 
-export const modal = (bool, typeAction) => ({
-  type: TRIGGER, bool, typeAction,
+export const modal = (bool, typeAction, id) => ({
+  type: TRIGGER, bool, typeAction, id,
 });

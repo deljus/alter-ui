@@ -6,7 +6,7 @@ const { Header, Footer, Sider, Content } = Layout;
 
 const Main = ({ children }) => (
   <Layout>
-    <Content style={{ padding: 24, background: '#fff', minHeight: 280 }}>
+    <Content style={{ paddingTop: 24, paddingLeft: 100, paddingRight: 100, background: '#fff', minHeight: 280 }}>
       <PageStepsView />
       <MarvinEditorView />
       <LoaderView />

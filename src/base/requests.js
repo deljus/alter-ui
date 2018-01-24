@@ -7,6 +7,10 @@ class Request {
     return axios.post(API_URLS.CREATE_TASK_SEARCH, data, { withCredentials: true });
   }
 
+  static createModellingTask(data) {
+    return axios.post(API_URLS.CREATE_TASK_PREDICTOR, data, { withCredentials: true });
+  }
+
   static getSearchTask(task) {
     return axios.get(API_URLS.PREPARE_TASK + task, { withCredentials: true });
   }

@@ -5,8 +5,6 @@ import PropTypes from 'prop-types';
 import { Pagination, BackTop } from 'antd';
 import { ResultItem, ModalIncrease } from '../../components';
 import { SearchInputView } from '../compWrapper';
-import 'antd/lib/pagination/style/css';
-import 'antd/lib/back-top/style/css';
 
 const Wrapper = styled.div`
     padding-bottom: 20px;
