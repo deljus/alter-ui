@@ -1,6 +1,6 @@
 import { delay } from 'redux-saga';
 import { takeEvery, put, call } from 'redux-saga/effects';
-import { addStructure, addHistory, addResult, editStructure } from './actions';
+import { addStructure, addStructures, addHistory, addResult, editStructure } from './actions';
 import { startRequest, succsessRequest, errorRequest, modal } from '../../base/actions';
 import Request from '../../base/requests';
 import history from '../../base/history';
@@ -46,16 +46,34 @@ function* editStructureIndex(action) {
 
 function* createTaskIndex(action) {
   try {
-    const response = yield call(Request.createModellingTask, { data: action.structure });
+    yield put(startRequest());
+    const response = yield call(Request.createModellingTask, action.structure);
+    yield put(succsessRequest());
+    yield call(history.push, stringifyUrl(URLS.VALIDATE, { task: response.data.task }));
   } catch (e) {
-    yield call(message.error, e.message);
+    yield put(errorRequest(e.message, action));
   }
 }
 
+function* validateTask(action) {
+  try {
+    yield put(startRequest());
+    const urlParams = yield getUrlParams();
+    const task = yield call(repeatedRequests, Request.getSearchTask, urlParams.task);
+    const models = yield call(Request.getModels);
+    const magic = yield call(Request.getMagic);
+    const structureOfTypes = Serialize.models(task.data, models.data, magic.data);
+    const structure = yield call(convertCmlToBase64Arr, structureOfTypes);
+    yield put(addStructures(structure));
+    yield put(succsessRequest());
+  } catch (e) {
+    yield put(errorRequest(e.message, action));
+  }
+}
 
 export function* sagas() {
   // yield takeEvery('CREATE_TASK', createTask);
-  // yield takeEvery('INIT_VALIDATE_PAGE', validateTask);
+  yield takeEvery('INIT_VALIDATE_PAGE', validateTask);
   // yield takeEvery('CREATE_RESULT_TASK', createResultTask);
   // yield takeEvery('INIT_RESULT_PAGE', resultPage);
   yield takeEvery('DRAW_STRUCTURE', drawStructure);

@@ -34,6 +34,8 @@ const structure = (state = [], action) => {
         },
         ...state,
       ];
+    case STRUCTURE.ADD_STRUCTURES:
+      return action.arr;
     case STRUCTURE.DELETE_STRUCTURE:
       return state.filter(structure => structure.id !== action.id);
     case STRUCTURE.EDIT_STRUCTURE:

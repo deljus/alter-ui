@@ -29,7 +29,7 @@ function* validateTask(action) {
     const task = yield call(repeatedRequests, Request.getSearchTask, urlParams.task);
     const models = yield call(Request.getModels);
     const magic = yield call(Request.getMagic);
-    const structure = Serialize.models(task.data, models.data, magic.data);
+    const structure = Serialize.models(task.data, models.data, magic.data)[0];
     const base64 = yield call(convertCmlToBase64, structure.cml);
     structure.base64 = base64;
     yield put(addStructure(structure));

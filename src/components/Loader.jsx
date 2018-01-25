@@ -1,6 +1,7 @@
 import React from 'react';
 import styled, { keyframes } from 'styled-components';
 import PropTypes from 'prop-types';
+import { Spin, Icon } from 'antd';
 
 const animation = keyframes`
   0% { transform: rotate(0deg); }
@@ -35,10 +36,9 @@ const Wheel = styled.div`
     animation: ${animation} 800ms infinite linear;
 `;
 
-
 const Loader = ({ loading }) => loading && (
   <LoaderContain>
-    <Wheel />
+    <Spin size="large" tip="Loading..." />
   </LoaderContain>
 );
 

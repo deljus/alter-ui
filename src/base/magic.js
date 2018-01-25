@@ -12,11 +12,12 @@ class Serialize {
     return task.structures.map((structure) => {
       const modelSorted = this.modelsOfTypes(structure.type, models, magic);
       return {
+        ...structure,
         cml: structure.data,
         models: modelSorted,
         selectModel: modelSorted[0].model,
       };
-    })[0];
+    });
   }
 }
 

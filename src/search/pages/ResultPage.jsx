@@ -46,9 +46,7 @@ class ResultPage extends Component {
         <Wrapper>
           <SearchInputView />
         </Wrapper>
-         {/*<RightWrap>*/}
-         {/*<Pagination defaultCurrent={1} total={50} />*/}
-         {/*</RightWrap>*/}
+
         <ResultWrapped>
           {results && results.map((result, count) =>
             (<ResultItem

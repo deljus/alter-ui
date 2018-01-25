@@ -9,7 +9,7 @@ const Main = ({ children }) => (
     <Content style={{ paddingTop: 24, paddingLeft: 100, paddingRight: 100, background: '#fff', minHeight: 280 }}>
       <PageStepsView />
       <MarvinEditorView />
-      <LoaderView />
+        <LoaderView />
       <ErrorView />
       {children}
     </Content>

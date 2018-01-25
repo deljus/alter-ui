@@ -12,6 +12,10 @@ export const editStructure = arr => ({
   type: STRUCTURE.EDIT_STRUCTURE, arr,
 });
 
+export const addStructures = arr => ({
+    type: STRUCTURE.ADD_STRUCTURES, arr,
+});
+
 export const addSelectModel = model => ({
   type: STRUCTURE.ADD_SELECTED_MODEL, model,
 });

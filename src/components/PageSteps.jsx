@@ -15,7 +15,7 @@ const PageSteps = () => {
 
   Object.keys(URLS).forEach(
     (key, value) => {
-      if (URLS[key] === window.location.pathname) currentPage = value;
+      if (window.location.hash.search(URLS[key])) currentPage = key;
     },
   );
 
