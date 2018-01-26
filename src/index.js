@@ -1,9 +1,7 @@
-import React from 'react';
 import ReactDOM from 'react-dom';
 /* eslint-disable */
-import App from './ir-parse/App';
-
+import App from './search/App';
 ReactDOM.render(
-    <App/>,
+    App,
     document.getElementById('root'),
 );

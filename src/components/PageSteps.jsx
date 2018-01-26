@@ -3,19 +3,20 @@ import Steps from 'antd/lib/steps';
 import 'antd/lib/steps/style/css';
 import styled from 'styled-components';
 import { URLS } from '../config';
+import { getUrlPath } from '../base/parseUrl';
 
 const Step = Steps.Step;
 
 const WrapperSteps = styled.div`
-    padding-bottom: 50px;
+    padding: 50px 0;
 `;
 
 const PageSteps = () => {
   let currentPage = 0;
-
+  const urlPath = getUrlPath();
   Object.keys(URLS).forEach(
     (key, value) => {
-      if (window.location.hash.search(URLS[key])) currentPage = key;
+      if (urlPath === URLS[key]) currentPage = value;
     },
   );
 
