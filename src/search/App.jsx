@@ -12,7 +12,7 @@ import {
 import { NotFoundPage } from '../components';
 import { URLS } from '../config';
 import Main from './Layout';
-import 'antd/dist/antd.css';
+import 'antd/dist/antd.min.css';
 
 export default (
   <Provider store={store}>

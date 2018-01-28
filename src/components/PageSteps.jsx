@@ -1,15 +1,9 @@
 import React from 'react';
-import Steps from 'antd/lib/steps';
-import 'antd/lib/steps/style/css';
-import styled from 'styled-components';
+import { Row, Steps } from 'antd';
 import { URLS } from '../config';
 import { getUrlPath } from '../base/parseUrl';
 
 const Step = Steps.Step;
-
-const WrapperSteps = styled.div`
-    padding: 50px 0;
-`;
 
 const PageSteps = () => {
   let currentPage = 0;
@@ -20,13 +14,15 @@ const PageSteps = () => {
     },
   );
 
-  return (<WrapperSteps>
-    <Steps current={currentPage}>
-      <Step title="Start" description="Choosing a structure for searching" />
-      <Step title="Validate" description="The choice of model and the correctness of the structure" />
-      <Step title="Result" description="Search results" />
-    </Steps>
-  </WrapperSteps>);
+  return (
+    <Row style={{ padding: '100px 0' }}>
+      <Steps current={currentPage}>
+        <Step title="Start" description="Choosing a structure for searching" />
+        <Step title="Validate" description="The choice of model and the correctness of the structure" />
+        <Step title="Result" description="Search results" />
+      </Steps>
+    </Row>
+  );
 };
 
 export default PageSteps;

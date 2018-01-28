@@ -1,25 +1,12 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import styled from 'styled-components';
-import { Select } from 'antd';
+import { Select, Button, Row, Col } from 'antd';
 import { Thumbnail } from '../../components';
 import { modal, addSelectModel } from '../core/actions';
 import { MODAL, URLS } from '../../config';
 
 const Option = Select.Option;
-
-const ButtonBack = styled.button`
-    float: left;
-`;
-
-const ButtonContinue = styled.button`
-    float: right;
-`;
-
-const Live = styled.div`
-  padding-bottom: 20px;
-`;
 
 class ValidatePage extends Component {
   constructor(props) {
@@ -33,49 +20,55 @@ class ValidatePage extends Component {
   render() {
     const { structure, openEditModal, changeSelectedModel, history, onRevalidate, onContinue, request } = this.props;
     return !request.loading && !request.error && structure && (
-      <div className="row">
-        <div className="col-md-8">
-          <Thumbnail
-            cml={structure.cml}
-            base64={structure.base64}
-            revalidate={structure.revalidateStructure}
-            onClickImage={openEditModal}
-          />
-        </div>
-        <div className="col-md-4">
-          <Select defaultValue={structure.selectModel} style={{ width: '100%' }} onChange={changeSelectedModel}>
-            { structure.models.map(m => <Option key={m.model} value={m.model}>{m.name}</Option>)}
-          </Select>
-          <div>
-            { structure.models.filter(m => m.model === structure.selectModel)[0].description }
-          </div>
-        </div>
-        <Live className="col-md-12">
+      <div>
+        <Row>
+          <Col span={14} style={{ padding: 10 }}>
+            <Thumbnail
+              cml={structure.cml}
+              base64={structure.base64}
+              revalidate={structure.revalidateStructure}
+              onClickImage={openEditModal}
+            />
+          </Col>
+          <Col span={10} style={{ padding: 10 }}>
+            <b>Selected model:</b>
+            <Select defaultValue={structure.selectModel} style={{ width: '100%', paddingBottom: 10 }} onChange={changeSelectedModel}>
+              { structure.models.map(m => <Option key={m.model} value={m.model}>{m.name}</Option>)}
+            </Select>
+            <b>Description:</b>
+            <div>
+              { structure.models.filter(m => m.model === structure.selectModel)[0].description }
+            </div>
+          </Col>
+        </Row>
+        <Row>
           <hr />
-        </Live>
-        <Live className="col-md-12">
-          <ButtonBack
-            className="btn btn-default"
-            onClick={() => history.push(URLS.INDEX)}
-          >
-            <span className="glyphicon glyphicon-chevron-left" />&nbsp;
-            Back</ButtonBack>
-          { structure.revalidateStructure ?
-            <ButtonContinue
-              className="btn btn-danger"
-              onClick={() => onRevalidate(structure.cml)}
-            >
-                  Revalidate&nbsp;
-              <span className="glyphicon glyphicon-refresh" />
-            </ButtonContinue> :
-            <ButtonContinue
-              className="btn btn-primary"
-              onClick={() => onContinue(structure)}
-            >
-                  Сontinue&nbsp;
-              <span className="glyphicon glyphicon-chevron-right" />
-            </ButtonContinue>}
-        </Live>
+        </Row>
+        <Row>
+          <Col span={8}>
+            <Button
+              onClick={() => history.push(URLS.INDEX)}
+              icon="left"
+            >Back</Button>
+          </Col>
+          <Col span={8} offset={8} style={{ textAlign: 'right' }}>
+            { structure.revalidateStructure ?
+              <Button
+                icon="sync"
+                type="danger"
+                onClick={() => onRevalidate(structure.cml)}
+              >
+                  Revalidate
+              </Button> :
+              <Button
+                type="primary"
+                icon="right"
+                onClick={() => onContinue(structure)}
+              >
+                  Сontinue
+              </Button>}
+          </Col>
+        </Row>
       </div>
     );
   }

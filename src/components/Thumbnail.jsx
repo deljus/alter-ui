@@ -8,7 +8,7 @@ import 'antd/lib/alert/style/css';
 
 const Rigth = styled.div`
   position: absolute;
-  top: 10px;
+  top: 25px;
   right: 25px;
 `;
 

@@ -55,6 +55,11 @@ const Error = styled.span`
   color: red;
 `;
 
+message.config({
+    top: 100,
+    duration: 2,
+});
+
 export { getInputStyle, SearchInputWrapper, SubmitBtn, Error };
 
 const SearchInput = ({ drawStructure, onSearchFormSubmit, buttonURL }) => {
