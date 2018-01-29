@@ -258,8 +258,7 @@
   "settings": {
     "tabs": {
       "tabPosition": "top",
-      "tabSize": "large",
-      "tabType": "list"
+      "tabSize": "large"
     },
     "grid": {
       "gutter": 16,

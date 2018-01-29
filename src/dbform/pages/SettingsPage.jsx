@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { Form, DatePicker, TimePicker, Button, Select } from 'antd';
+import { Form, DatePicker, TimePicker, Button, Select, Slider } from 'antd';
 import PropTypes from 'prop-types';
 
 const FormItem = Form.Item;
@@ -8,18 +8,17 @@ const MonthPicker = DatePicker.MonthPicker;
 const RangePicker = DatePicker.RangePicker;
 const { Option } = Select;
 
-const SelectSettings = (props) => {
-  const { items, defaultValue } = props;
-  console.log(props)
-  return (
-    <Select {...defaultValue}>
-      { items.map((item, i) => <Option key={item + i} value={item}>{item}</Option>) }
-    </Select>
-  );
-};
+const SelectSettings = ({ items, dafault }) => (
+  <Select defaultValue={dafault}>
+    { items && items.map((item, i) => <Option key={item + i} value={item} >{item}</Option>) }
+  </Select>
+);
+
+const SliderSettings = ({}) => ;
 
 const itemsConfig = {
   tabPosition: ['top', 'bottom', 'left', 'right'],
+  tabSize: ['large', 'default', 'small'],
 };
 
 class SettingsForm extends Component {
@@ -58,12 +57,12 @@ class SettingsForm extends Component {
           sm: { span: 4 },
         },
         wrapperCol: {
-          xs: { span: 24 },
-          sm: { span: 16 },
+          xs: { span: 12 },
+          sm: { span: 12 },
         },
       };
       const config = {
-        rules: [{ type: 'object' }],
+        rules: [{ type: 'string' }],
       };
       return (
         <Form onSubmit={this.handleSubmit}>
@@ -72,8 +71,8 @@ class SettingsForm extends Component {
             {...formItemLayout}
             label="Position"
           >
-            {getFieldDecorator('tabPosition', config, { initialValue: settings.tabs.tabPosition, items: itemsConfig.tabPosition })(
-              <SelectSettings />,
+            {getFieldDecorator('tabPosition', config)(
+              <SelectSettings items={itemsConfig.tabPosition} dafault={settings.tabs.tabPosition} />,
             )}
           </FormItem>
           <FormItem
@@ -81,7 +80,7 @@ class SettingsForm extends Component {
             label="Size"
           >
             {getFieldDecorator('tabSize', config)(
-              <DatePicker showTime format="YYYY-MM-DD HH:mm:ss" />,
+              <SelectSettings items={itemsConfig.tabSize} dafault={settings.tabs.tabSize} />,
             )}
           </FormItem>
           <h4>List grid:</h4>
@@ -90,7 +89,7 @@ class SettingsForm extends Component {
             label="gutter"
           >
             {getFieldDecorator('month-picker', config)(
-              <MonthPicker />,
+              <Slider />,
             )}
           </FormItem>
           <FormItem
