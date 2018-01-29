@@ -8,9 +8,6 @@ import { MARVIN_PATH_IFRAME, MARVIN_EDITOR_IS_EMPTY } from '../../config';
 import { clearEditor, exportCml } from '../../base/marvinAPI';
 
 class CreatePage extends Component {
-  constructor(props) {
-    super(props);
-  }
 
   handleSubmit(e) {
     e.preventDefault();

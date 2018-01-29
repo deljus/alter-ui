@@ -2,7 +2,7 @@ export const MARVIN_PATH_IFRAME = '/static/marvinjs/editorws.html';
 export const MARVIN_EDITOR_IS_EMPTY = '<cml><MDocument></MDocument></cml>';
 export const MARVIN_ID = '#marvinjs';
 
-const BASE_URL = process.env.NODE_ENV === 'production' ? 'http://cimm.kpfu.ru/' : 'http://localhost/';
+const BASE_URL = process.env.NODE_ENV === 'production' ? 'http://cimm.kpfu.ru/' : 'http://localhost:3001/';
 
 export const API_URLS = {
   CREATE_TASK_PREDICTOR: `${BASE_URL}api/task/create/0`,

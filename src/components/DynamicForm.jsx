@@ -1,5 +1,5 @@
 import React from 'react';
-import { Form, Input, Icon, Button, Row, Col } from 'antd';
+import { Form, Input, Icon, Button, Slider, InputNumber, Row, Col } from 'antd';
 import 'antd/lib/form/style/css';
 import 'antd/lib/button/style/css';
 import 'antd/lib/input/style/css';
@@ -8,6 +8,15 @@ const FormItem = Form.Item;
 
 const uuid = 0;
 class DynamicFieldSet extends React.Component {
+    state = {
+      inputValue: 1,
+    }
+    onChange = (value) => {
+      this.setState({
+        inputValue: value,
+      });
+    }
+
     remove = (k) => {
       const { form } = this.props;
       const keys = form.getFieldValue('keys');
@@ -87,6 +96,23 @@ class DynamicFieldSet extends React.Component {
       ));
       return (
         <Form>
+          <Row>
+            <Col xs={16} md={16} sm={16}>
+              <b>Temperature: </b>
+            </Col>
+            <Col xs={8} md={8} sm={8}>
+              <InputNumber
+                min={1}
+                max={20}
+                style={{ marginLeft: 16 }}
+                value={this.state.inputValue}
+                onChange={this.onChange}
+              />
+            </Col>
+            <Col xs={24} md={24} sm={24}>
+              <Slider min={1} max={20} onChange={this.onChange} value={this.state.inputValue} />
+            </Col>
+          </Row>
           {formItems}
           <FormItem>
             <Button type="dashed" onClick={this.add} style={{ width: '100%' }}>

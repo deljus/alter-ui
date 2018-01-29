@@ -1,12 +1,19 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import { Pagination, Select, Col } from 'antd';
+import { List, Icon, Collapse, Card as BaseCard, Popconfirm, Pagination, Select } from 'antd';
+import styled from 'styled-components';
 import { showModal } from '../core/actions';
 
-import { List, Icon, Collapse, Card, Popconfirm } from 'antd';
+const Card = styled(BaseCard)`
+    .ant-card-body {
+        padding: 0;
+        margin: 0;
+    }
+`;
 
 const Panel = Collapse.Panel;
+
 const Option = Select.Option;
 
 class StructureListPage extends Component {
@@ -31,7 +38,7 @@ class StructureListPage extends Component {
       const structuresSorted = structures.sort((a, b) => (sorted === 'increase' ? a.id - b.id : b.id - a.id));
 
       const gridSettings = settings && settings.grid;
-      return (
+      return structures && settings && (
         <div>
           <div style={{ marginBottom: '20px' }}>
             <span>Sorting:</span>
@@ -72,9 +79,13 @@ class StructureListPage extends Component {
                         <Icon type="delete" />
                       </Popconfirm>]}
                 >
-                  <Collapse bordered={false}>
-                    <Panel header="Parameters" key="1">
-                      {item.params && item.params.map(param => <div>{param.key} : {param.value}</div>)}
+                  <div style={{ lineHeight: 2, paddingLeft: 40 }} >Temperature: K</div>
+                  <div style={{ lineHeight: 2, paddingLeft: 40 }} >Pressure: atm</div>
+                  <Collapse bordered={false} style={{ height: 50, padding: 0, margin: 0 }}>
+                    <Panel header="Parameters" key="1" style={{ position: 'absolute', width: '100%', background: 'white', zIndex: 100, border: '1px solid gray' }}>
+                      <div>
+                        {item.params && item.params.map(param => <div>{param.key} : {param.value}</div>)}
+                      </div>
                     </Panel>
                   </Collapse>
                 </Card>

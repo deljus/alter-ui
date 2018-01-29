@@ -1,20 +1,6 @@
 {
   "structures": [
     {
-      "data": "<cml><MDocument><MChemicalStruct><molecule molID=\"m1\"><atomArray><atom id=\"a1\" elementType=\"C\" x2=\"-4.958333333333333\" y2=\"1.4983333210133334\"/><atom id=\"a2\" elementType=\"C\" x2=\"-6.2920666559968\" y2=\"0.7283333271733334\"/><atom id=\"a3\" elementType=\"C\" x2=\"-6.2920666559968\" y2=\"-0.8118533271718402\"/><atom id=\"a4\" elementType=\"C\" x2=\"-4.958333333333333\" y2=\"-1.5816666543466669\"/><atom id=\"a5\" elementType=\"C\" x2=\"-3.624600010669866\" y2=\"-0.8118533271718402\"/><atom id=\"a6\" elementType=\"C\" x2=\"-3.624600010669866\" y2=\"0.7283333271733334\"/><atom id=\"a7\" elementType=\"C\" x2=\"-12.416666666666666\" y2=\"1.3316666543466664\"/><atom id=\"a8\" elementType=\"C\" x2=\"-13.750399989330132\" y2=\"0.5616666605066665\"/><atom id=\"a9\" elementType=\"C\" x2=\"-13.750399989330132\" y2=\"-0.9785199938385072\"/><atom id=\"a10\" elementType=\"C\" x2=\"-12.416666666666666\" y2=\"-1.7483333210133338\"/><atom id=\"a11\" elementType=\"C\" x2=\"-11.0829333440032\" y2=\"-0.9785199938385072\"/><atom id=\"a12\" elementType=\"C\" x2=\"-11.0829333440032\" y2=\"0.5616666605066665\"/><atom id=\"a13\" elementType=\"C\" x2=\"-8.895833333333334\" y2=\"0.45666665434666687\"/><atom id=\"a14\" elementType=\"C\" x2=\"-10.2295666559968\" y2=\"-0.3133333394933331\"/><atom id=\"a15\" elementType=\"C\" x2=\"-10.2295666559968\" y2=\"-1.8535199938385067\"/><atom id=\"a16\" elementType=\"C\" x2=\"-8.895833333333334\" y2=\"-2.6233333210133334\"/><atom id=\"a17\" elementType=\"C\" x2=\"-7.562100010669867\" y2=\"-1.8535199938385067\"/><atom id=\"a18\" elementType=\"C\" x2=\"-7.562100010669867\" y2=\"-0.3133333394933331\"/><atom id=\"a19\" elementType=\"C\" x2=\"-12.687593333332586\" y2=\"-2.605740012320746\"/><atom id=\"a20\" elementType=\"C\" x2=\"-14.02113998933088\" y2=\"-3.375740006160745\"/><atom id=\"a21\" elementType=\"C\" x2=\"-14.02113998933088\" y2=\"-4.915926660505919\"/><atom id=\"a22\" elementType=\"C\" x2=\"-12.687593333332586\" y2=\"-5.685926654345919\"/><atom id=\"a23\" elementType=\"C\" x2=\"-11.353860010669122\" y2=\"-4.915926660505919\"/><atom id=\"a24\" elementType=\"C\" x2=\"-11.353860010669122\" y2=\"-3.375740006160745\"/></atomArray><bondArray><bond atomRefs2=\"a1 a2\" order=\"1\" id=\"b1\"/><bond atomRefs2=\"a1 a6\" order=\"1\" id=\"b2\"/><bond atomRefs2=\"a2 a3\" order=\"1\" id=\"b3\"/><bond atomRefs2=\"a3 a4\" order=\"1\" id=\"b4\"/><bond atomRefs2=\"a4 a5\" order=\"1\" id=\"b5\"/><bond atomRefs2=\"a5 a6\" order=\"1\" id=\"b6\"/><bond atomRefs2=\"a7 a8\" order=\"1\" id=\"b7\"/><bond atomRefs2=\"a7 a12\" order=\"1\" id=\"b8\"/><bond atomRefs2=\"a8 a9\" order=\"1\" id=\"b9\"/><bond atomRefs2=\"a9 a10\" order=\"1\" id=\"b10\"/><bond atomRefs2=\"a10 a11\" order=\"1\" id=\"b11\"/><bond atomRefs2=\"a11 a12\" order=\"1\" id=\"b12\"/><bond atomRefs2=\"a13 a14\" order=\"1\" id=\"b13\"/><bond atomRefs2=\"a13 a18\" order=\"1\" id=\"b14\"/><bond atomRefs2=\"a14 a15\" order=\"1\" id=\"b15\"/><bond atomRefs2=\"a15 a16\" order=\"1\" id=\"b16\"/><bond atomRefs2=\"a16 a17\" order=\"1\" id=\"b17\"/><bond atomRefs2=\"a17 a18\" order=\"1\" id=\"b18\"/><bond atomRefs2=\"a19 a20\" order=\"2\" id=\"b19\"/><bond atomRefs2=\"a20 a21\" order=\"1\" id=\"b20\"/><bond atomRefs2=\"a21 a22\" order=\"2\" id=\"b21\"/><bond atomRefs2=\"a22 a23\" order=\"1\" id=\"b22\"/><bond atomRefs2=\"a23 a24\" order=\"2\" id=\"b23\"/><bond atomRefs2=\"a24 a19\" order=\"1\" id=\"b24\"/></bondArray></molecule></MChemicalStruct></MDocument></cml>",
-      "params": [
-        {
-          "key": "ewfwef",
-          "value": "wefwef"
-        },
-        {
-          "key": "wefwef",
-          "value": "ssssssssss"
-        }
-      ],
-      "id": 9
-    },
-    {
       "data": "<cml><MDocument><MChemicalStruct><molecule molID=\"m1\"><atomArray><atom id=\"a1\" elementType=\"C\" x2=\"-4.958333333333333\" y2=\"1.4983333210133334\"/><atom id=\"a2\" elementType=\"C\" x2=\"-6.2920666559968\" y2=\"0.7283333271733334\"/><atom id=\"a3\" elementType=\"C\" x2=\"-6.2920666559968\" y2=\"-0.8118533271718402\"/><atom id=\"a4\" elementType=\"C\" x2=\"-4.958333333333333\" y2=\"-1.5816666543466669\"/><atom id=\"a5\" elementType=\"C\" x2=\"-3.624600010669866\" y2=\"-0.8118533271718402\"/><atom id=\"a6\" elementType=\"C\" x2=\"-3.624600010669866\" y2=\"0.7283333271733334\"/><atom id=\"a7\" elementType=\"C\" x2=\"-2.290920888841832\" y2=\"1.4983333271733348\"/><atom id=\"a8\" elementType=\"C\" x2=\"-0.9572146719307963\" y2=\"0.7282863847929468\"/><atom id=\"a9\" elementType=\"C\" x2=\"0.37662609730188557\" y2=\"1.4983797119655353\"/><atom id=\"a10\" elementType=\"C\" x2=\"0.3764373334753719\" y2=\"3.038333314853338\"/><atom id=\"a11\" elementType=\"C\" x2=\"-0.9571072253615838\" y2=\"3.808473590566313\"/><atom id=\"a12\" elementType=\"C\" x2=\"-2.2909479945942657\" y2=\"3.0383802633937247\"/><atom id=\"a13\" elementType=\"C\" x2=\"-4.958333333333333\" y2=\"3.038333321013333\"/><atom id=\"a14\" elementType=\"C\" x2=\"-3.624763343587461\" y2=\"3.8082929022168055\"/><atom id=\"a15\" elementType=\"C\" x2=\"-3.624716669210823\" y2=\"5.348479555854761\"/><atom id=\"a16\" elementType=\"C\" x2=\"-4.958239990236872\" y2=\"6.118519961624154\"/><atom id=\"a17\" elementType=\"C\" x2=\"-6.291996646647828\" y2=\"5.348560386077494\"/><atom id=\"a18\" elementType=\"C\" x2=\"-6.292043321024466\" y2=\"3.8083737324395397\"/><atom id=\"a19\" elementType=\"C\" x2=\"-12.707813612680042\" y2=\"2.766853307984663\"/><atom id=\"a20\" elementType=\"C\" x2=\"-14.041360268678336\" y2=\"1.9968533141446638\"/><atom id=\"a21\" elementType=\"C\" x2=\"-14.041360268678336\" y2=\"0.45666665979948995\"/><atom id=\"a22\" elementType=\"C\" x2=\"-12.707813612680042\" y2=\"-0.31333333404051\"/><atom id=\"a23\" elementType=\"C\" x2=\"-11.374080290016577\" y2=\"0.45666665979948995\"/><atom id=\"a24\" elementType=\"C\" x2=\"-11.374080290016577\" y2=\"1.9968533141446638\"/></atomArray><bondArray><bond atomRefs2=\"a1 a2\" order=\"1\" id=\"b1\"/><bond atomRefs2=\"a1 a6\" order=\"1\" id=\"b2\"/><bond atomRefs2=\"a2 a3\" order=\"1\" id=\"b3\"/><bond atomRefs2=\"a3 a4\" order=\"1\" id=\"b4\"/><bond atomRefs2=\"a4 a5\" order=\"1\" id=\"b5\"/><bond atomRefs2=\"a5 a6\" order=\"1\" id=\"b6\"/><bond atomRefs2=\"a7 a8\" order=\"1\" id=\"b7\"/><bond atomRefs2=\"a7 a12\" order=\"1\" id=\"b8\"/><bond atomRefs2=\"a8 a9\" order=\"1\" id=\"b9\"/><bond atomRefs2=\"a9 a10\" order=\"1\" id=\"b10\"/><bond atomRefs2=\"a10 a11\" order=\"1\" id=\"b11\"/><bond atomRefs2=\"a11 a12\" order=\"1\" id=\"b12\"/><bond atomRefs2=\"a6 a7\" order=\"1\" id=\"b13\"/><bond atomRefs2=\"a13 a14\" order=\"2\" id=\"b14\"/><bond atomRefs2=\"a14 a15\" order=\"1\" id=\"b15\"/><bond atomRefs2=\"a15 a16\" order=\"2\" id=\"b16\"/><bond atomRefs2=\"a16 a17\" order=\"1\" id=\"b17\"/><bond atomRefs2=\"a17 a18\" order=\"2\" id=\"b18\"/><bond atomRefs2=\"a18 a13\" order=\"1\" id=\"b19\"/><bond atomRefs2=\"a1 a13\" order=\"1\" id=\"b20\"/><bond atomRefs2=\"a19 a20\" order=\"2\" id=\"b21\"/><bond atomRefs2=\"a20 a21\" order=\"1\" id=\"b22\"/><bond atomRefs2=\"a21 a22\" order=\"2\" id=\"b23\"/><bond atomRefs2=\"a22 a23\" order=\"1\" id=\"b24\"/><bond atomRefs2=\"a23 a24\" order=\"2\" id=\"b25\"/><bond atomRefs2=\"a24 a19\" order=\"1\" id=\"b26\"/></bondArray></molecule></MChemicalStruct></MDocument></cml>",
       "params": [
         {
@@ -219,6 +205,54 @@
       "data": "<cml><MDocument><MChemicalStruct><molecule molID=\"m1\"><atomArray><atom id=\"a1\" elementType=\"C\" x2=\"1.4582400000007483\" y2=\"1.831759987679253\"/><atom id=\"a2\" elementType=\"C\" x2=\"0.1246933440024538\" y2=\"1.061759993839254\"/><atom id=\"a3\" elementType=\"C\" x2=\"0.1246933440024538\" y2=\"-0.47842666050592\"/><atom id=\"a4\" elementType=\"C\" x2=\"1.4582400000007483\" y2=\"-1.24842665434592\"/><atom id=\"a5\" elementType=\"C\" x2=\"2.7919733226642127\" y2=\"-0.47842666050592\"/><atom id=\"a6\" elementType=\"C\" x2=\"2.7919733226642127\" y2=\"1.061759993839254\"/></atomArray><bondArray><bond atomRefs2=\"a1 a2\" order=\"2\" id=\"b1\"/><bond atomRefs2=\"a2 a3\" order=\"1\" id=\"b2\"/><bond atomRefs2=\"a3 a4\" order=\"2\" id=\"b3\"/><bond atomRefs2=\"a4 a5\" order=\"1\" id=\"b4\"/><bond atomRefs2=\"a5 a6\" order=\"2\" id=\"b5\"/><bond atomRefs2=\"a6 a1\" order=\"1\" id=\"b6\"/></bondArray></molecule></MChemicalStruct></MDocument></cml>",
       "params": [],
       "id": 35
+    },
+    {
+      "data": "<cml><MDocument><MChemicalStruct><molecule molID=\"m1\"><atomArray><atom id=\"a1\" elementType=\"C\" x2=\"1.1665733333340822\" y2=\"2.748426654345919\"/><atom id=\"a2\" elementType=\"C\" x2=\"-0.16697332266421228\" y2=\"1.97842666050592\"/><atom id=\"a3\" elementType=\"C\" x2=\"-0.16697332266421228\" y2=\"0.4382400061607461\"/><atom id=\"a4\" elementType=\"C\" x2=\"1.1665733333340822\" y2=\"-0.33175998767925385\"/><atom id=\"a5\" elementType=\"C\" x2=\"2.5003066559975466\" y2=\"0.4382400061607461\"/><atom id=\"a6\" elementType=\"C\" x2=\"2.5003066559975466\" y2=\"1.97842666050592\"/></atomArray><bondArray><bond atomRefs2=\"a1 a2\" order=\"2\" id=\"b1\"/><bond atomRefs2=\"a2 a3\" order=\"1\" id=\"b2\"/><bond atomRefs2=\"a3 a4\" order=\"2\" id=\"b3\"/><bond atomRefs2=\"a4 a5\" order=\"1\" id=\"b4\"/><bond atomRefs2=\"a5 a6\" order=\"2\" id=\"b5\"/><bond atomRefs2=\"a6 a1\" order=\"1\" id=\"b6\"/></bondArray></molecule></MChemicalStruct></MDocument></cml>",
+      "params": [
+        {
+          "key": "dfvdfvdfv",
+          "value": "dfvdfvdfv"
+        },
+        {
+          "key": "dfvdfvdfv",
+          "value": "dfvdfvdfv"
+        },
+        {
+          "key": "dfvdfvdfv",
+          "value": "dfvdfvdfv"
+        },
+        {
+          "key": "dfvdfvdfv",
+          "value": "dfvdfvdfv"
+        },
+        {
+          "key": "dfvdfvdfv",
+          "value": "dfvdfvdfv"
+        },
+        {
+          "key": "dfvdfvdfv",
+          "value": "dfvdfvdfv"
+        }
+      ],
+      "id": 36
+    },
+    {
+      "data": "<cml><MDocument><MChemicalStruct><molecule molID=\"m1\"><atomArray><atom id=\"a1\" elementType=\"C\" x2=\"1.0416666666666672\" y2=\"-0.5850000123200001\"/><atom id=\"a2\" elementType=\"C\" x2=\"-0.2920666559967997\" y2=\"-1.35500000616\"/><atom id=\"a3\" elementType=\"C\" x2=\"-0.2920666559967997\" y2=\"-2.895186660505174\"/><atom id=\"a4\" elementType=\"C\" x2=\"1.0416666666666672\" y2=\"-3.6649999876800003\"/><atom id=\"a5\" elementType=\"C\" x2=\"2.375399989330134\" y2=\"-2.895186660505174\"/><atom id=\"a6\" elementType=\"C\" x2=\"2.375399989330134\" y2=\"-1.35500000616\"/></atomArray><bondArray><bond atomRefs2=\"a1 a2\" order=\"1\" id=\"b1\"/><bond atomRefs2=\"a1 a6\" order=\"1\" id=\"b2\"/><bond atomRefs2=\"a2 a3\" order=\"1\" id=\"b3\"/><bond atomRefs2=\"a3 a4\" order=\"1\" id=\"b4\"/><bond atomRefs2=\"a4 a5\" order=\"1\" id=\"b5\"/><bond atomRefs2=\"a5 a6\" order=\"1\" id=\"b6\"/></bondArray></molecule></MChemicalStruct></MDocument></cml>",
+      "params": [
+        {
+          "key": "dfbdfbdfbdfbdfbdfbdfbdfbdfbdfbdfbdfbdfbdfbdfb",
+          "value": "dfbdfbdfbdfbdfbbbbbbbbbbbbbbbbbbbbb"
+        },
+        {
+          "key": "dfbdfbdfbdfbdfbdfbdfbdfbdfbdfbdfbdfbdfbdfbdfb",
+          "value": "dfbdfbdfbdfbdfbbbbbbbbbbbbbbbbbbbbb"
+        },
+        {
+          "key": "dfbdfbdfbdfbdfbdfbdfbdfbdfbdfbdfbdfbdfbdfbdfb",
+          "value": "dfbdfbdfbdfbdfbbbbbbbbbbbbbbbbbbbbb"
+        }
+      ],
+      "id": 37
     }
   ],
   "settings": {

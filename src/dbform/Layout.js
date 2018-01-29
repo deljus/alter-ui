@@ -1,16 +1,17 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { Tabs, Icon } from 'antd';
+import { Tabs, Icon, Layout } from 'antd';
 import {
   CreatePage,
   StructureListPage,
   SettingsPage,
 } from './pages';
 import { DBFormModalView } from './compWraps';
-import {LoaderView, ErrorView } from '../base/wrapper';
+import { LoaderView, ErrorView } from '../base/wrapper';
 import 'antd/dist/antd.css';
 
 const TabPane = Tabs.TabPane;
+const { Header, Content, Footer } = Layout;
 
 class Main extends Component {
   componentDidMount() {
@@ -21,11 +22,11 @@ class Main extends Component {
     const { settings } = this.props;
     const tabs = settings && settings.tabs;
     return (
-      <div>
+      <Layout style={{ minHeight: '100vh', background: 'white' }} className="container">
         <LoaderView />
         <DBFormModalView />
         <ErrorView />
-        <div className="container">
+        <Content style={{ paddingTop: 75 }}>
           <Tabs
             defaultActiveKey="2"
             {...tabs}
@@ -40,8 +41,9 @@ class Main extends Component {
               <SettingsPage />
             </TabPane>
           </Tabs>
-        </div>
-      </div>
+        </Content>
+        <Footer style={{ background: 'white' }}>© Kazan Chemoinformatics and Molecular Modeling Laboratory 2018</Footer>
+      </Layout>
     );
   }
 }
