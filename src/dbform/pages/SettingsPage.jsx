@@ -2,11 +2,30 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Form, DatePicker, TimePicker, Button, Select, Slider } from 'antd';
 import PropTypes from 'prop-types';
+import { addSettings } from '../core/actions';
 
 const FormItem = Form.Item;
 const MonthPicker = DatePicker.MonthPicker;
 const RangePicker = DatePicker.RangePicker;
 const { Option } = Select;
+
+
+const marks = {
+  0: '0',
+  2: '2',
+  4: '4',
+  6: '6',
+  8: '8',
+  10: '10',
+  12: '12',
+  14: '14',
+  16: '16',
+  18: '18',
+  20: '20',
+  22: '22',
+  24: '24',
+};
+
 
 const SelectSettings = ({ items, dafault }) => (
   <Select defaultValue={dafault}>
@@ -14,7 +33,7 @@ const SelectSettings = ({ items, dafault }) => (
   </Select>
 );
 
-const SliderSettings = ({}) => ;
+const SliderSettings = ({ defaults }) => (<Slider max={24} step={1} defaultValue={defaults} />);
 
 const itemsConfig = {
   tabPosition: ['top', 'bottom', 'left', 'right'],
@@ -30,22 +49,7 @@ class SettingsForm extends Component {
           return;
         }
 
-        // Should format date value before submit.
-        const rangeValue = fieldsValue['range-picker'];
-        const rangeTimeValue = fieldsValue['range-time-picker'];
-        const values = {
-          ...fieldsValue,
-          'date-picker': fieldsValue['date-picker'].format('YYYY-MM-DD'),
-          'date-time-picker': fieldsValue['date-time-picker'].format('YYYY-MM-DD HH:mm:ss'),
-          'month-picker': fieldsValue['month-picker'].format('YYYY-MM'),
-          'range-picker': [rangeValue[0].format('YYYY-MM-DD'), rangeValue[1].format('YYYY-MM-DD')],
-          'range-time-picker': [
-            rangeTimeValue[0].format('YYYY-MM-DD HH:mm:ss'),
-            rangeTimeValue[1].format('YYYY-MM-DD HH:mm:ss'),
-          ],
-          'time-picker': fieldsValue['time-picker'].format('HH:mm:ss'),
-        };
-        console.log('Received values of form: ', values);
+        this.props.setSettings(this.props.form.getFieldsValue());
       });
     }
     render() {
@@ -71,16 +75,21 @@ class SettingsForm extends Component {
             {...formItemLayout}
             label="Position"
           >
-            {getFieldDecorator('tabPosition', config)(
-              <SelectSettings items={itemsConfig.tabPosition} dafault={settings.tabs.tabPosition} />,
+            {getFieldDecorator('tabs.tabPosition', { initialValue: settings.tabs.tabPosition })(
+              <Select>
+                { itemsConfig.tabPosition.map((item, i) => <Option key={item + i} value={item} >{item}</Option>) }
+              </Select>,
+
             )}
           </FormItem>
           <FormItem
             {...formItemLayout}
             label="Size"
           >
-            {getFieldDecorator('tabSize', config)(
-              <SelectSettings items={itemsConfig.tabSize} dafault={settings.tabs.tabSize} />,
+            {getFieldDecorator('tabs.size', { initialValue: settings.tabs.size })(
+              <Select>
+                { itemsConfig.tabSize.map((item, i) => <Option key={item + i} value={item} >{item}</Option>) }
+              </Select>,
             )}
           </FormItem>
           <h4>List grid:</h4>
@@ -88,48 +97,48 @@ class SettingsForm extends Component {
             {...formItemLayout}
             label="gutter"
           >
-            {getFieldDecorator('month-picker', config)(
-              <Slider />,
+            {getFieldDecorator('grid.gutter', { initialValue: settings.grid.gutter })(
+              <Slider max={24} step={1} marks={marks} />,
             )}
           </FormItem>
           <FormItem
             {...formItemLayout}
             label="xs"
           >
-            {getFieldDecorator('range-picker', config)(
-              <RangePicker />,
+            {getFieldDecorator('grid.xs', { initialValue: settings.grid.xs })(
+              <Slider max={24} step={1} marks={marks} />,
             )}
           </FormItem>
           <FormItem
             {...formItemLayout}
             label="sm"
           >
-            {getFieldDecorator('range-time-picker', config)(
-              <RangePicker showTime format="YYYY-MM-DD HH:mm:ss" />,
+            {getFieldDecorator('grid.sm', { initialValue: settings.grid.sm })(
+              <Slider max={24} step={1} marks={marks} />,
             )}
           </FormItem>
           <FormItem
             {...formItemLayout}
             label="md"
           >
-            {getFieldDecorator('time-picker', config)(
-              <TimePicker />,
+            {getFieldDecorator('grid.md', { initialValue: settings.grid.md })(
+              <Slider max={24} step={1} marks={marks} />,
             )}
           </FormItem>
           <FormItem
             {...formItemLayout}
             label="lg"
           >
-            {getFieldDecorator('time-picker', config)(
-              <TimePicker />,
+            {getFieldDecorator('grid.lg', { initialValue: settings.grid.md })(
+              <Slider max={24} step={1} marks={marks} />,
             )}
           </FormItem>
           <FormItem
             {...formItemLayout}
             label="xl"
           >
-            {getFieldDecorator('time-picker', config)(
-              <TimePicker />,
+            {getFieldDecorator('grid.xl', { initialValue: settings.grid.md })(
+              <Slider max={24} step={1} marks={marks} />,
             )}
           </FormItem>
           <FormItem
@@ -158,7 +167,7 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = dispatch => ({
-
+    setSettings: values => dispatch(addSettings(values))
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(SettingsPage);

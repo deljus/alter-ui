@@ -258,7 +258,7 @@
   "settings": {
     "tabs": {
       "tabPosition": "top",
-      "tabSize": "large"
+      "size": "large"
     },
     "grid": {
       "gutter": 16,
@@ -267,10 +267,6 @@
       "md": 3,
       "lg": 3,
       "xl": 3
-    },
-    "pagination": {
-      "itemCount": 10
-    },
-    "sorting": "INCREMENT"
+    }
   }
 }
