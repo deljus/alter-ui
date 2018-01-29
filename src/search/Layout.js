@@ -13,7 +13,7 @@ const Main = ({ children }) => (
       <ErrorView />
       {children}
     </Content>
-    <Footer>© Kazan Chemoinformatics and Molecular Modeling Laboratory 2018</Footer>
+    <Footer style={{ background: 'white' }}>© Kazan Chemoinformatics and Molecular Modeling Laboratory 2018</Footer>
   </Layout>
 );
 

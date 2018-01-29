@@ -12,7 +12,18 @@ import {
 import { NotFoundPage } from '../components';
 import { URLS } from '../config';
 import Main from './Layout';
-import 'antd/dist/antd.min.css';
+
+/* Antd styles */
+import 'antd/lib/button/style/index.css';
+import 'antd/lib/steps/style/index.css';
+import 'antd/lib/message/style/index.css';
+import 'antd/lib/modal/style/index.css';
+import 'antd/lib/select/style/index.css';
+import 'antd/lib/tabs/style/index.css';
+import 'antd/lib/back-top/style/index.css';
+import 'antd/lib/tooltip/style/index.css';
+import 'antd/lib/layout/style/index.css';
+
 
 export default (
   <Provider store={store}>

@@ -35,14 +35,6 @@ const structure = (state = null, action) => {
   }
 };
 
-const requestState = {
-  loading: false,
-  error: false,
-  errorText: '',
-  lastActions: '',
-};
-
-
 export default combineReducers({
   modal,
   request,

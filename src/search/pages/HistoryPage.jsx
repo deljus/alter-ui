@@ -61,7 +61,6 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = dispatch => ({
-  showValidate: hist => dispatch({ type: 'CREATE_TASK', cml: hist.cml }),
   showValidate: validateTaskId => history.push(stringifyUrl(URLS.VALIDATE, { task: validateTaskId })),
   showResults: resultTaskId => history.push(stringifyUrl(URLS.RESULT, { task: resultTaskId })),
 });

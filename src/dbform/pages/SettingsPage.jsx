@@ -26,7 +26,7 @@ class SettingsPage extends Component {
 
     changeTabType = (tabType) => {
       this.setState({ tabType });
-    }
+    };
 
     render() {
       return (

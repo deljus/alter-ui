@@ -4,8 +4,6 @@ import styled from 'styled-components';
 import { Button, message } from 'antd';
 import { textToCml } from '../base/marvinAPI';
 import history from '../base/history';
-import 'antd/lib/button/style/css';
-import 'antd/lib/message/style/css';
 
 const ButtonWrap = styled.div`
   padding-top: 10px;
@@ -56,8 +54,8 @@ const Error = styled.span`
 `;
 
 message.config({
-    top: 100,
-    duration: 2,
+  top: 100,
+  duration: 2,
 });
 
 export { getInputStyle, SearchInputWrapper, SubmitBtn, Error };
