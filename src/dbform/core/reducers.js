@@ -46,7 +46,7 @@ const modal = (state = { visible: false }, action) => {
 export const settings = (state = null, action) => {
   switch (action.type) {
     case ADD_SETTINGS:
-      return action.settings;
+      return { ...action.settings };
     default:
       return state;
   }

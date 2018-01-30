@@ -51,7 +51,7 @@ class CreatePage extends Component {
           />
         </Col>
         <Col md={4}>
-          <DynamicForm ref={(form) => { this.form = form; }} />
+          <DynamicForm ref={(form) => { this.form = form; }} settings={this.props.settings} />
         </Col>
         <Col md={12}>
           <Button

@@ -46,9 +46,10 @@ class DynamicFieldSet extends React.Component {
 
     render() {
       const { getFieldDecorator, getFieldValue } = this.props.form;
-
+      const { settings } = this.props;
       getFieldDecorator('keys', { initialValue: [] });
       const keys = getFieldValue('keys');
+      const temperature = getFieldValue('temperature');
       const formItems = keys.map(k => (
         <FormItem
           required={false}
@@ -96,23 +97,25 @@ class DynamicFieldSet extends React.Component {
       ));
       return (
         <Form>
-          <Row>
-            <Col xs={16} md={16} sm={16}>
-              <b>Temperature: </b>
-            </Col>
-            <Col xs={8} md={8} sm={8}>
-              <InputNumber
-                min={1}
-                max={20}
-                style={{ marginLeft: 16 }}
-                value={this.state.inputValue}
-                onChange={this.onChange}
-              />
-            </Col>
-            <Col xs={24} md={24} sm={24}>
-              <Slider min={1} max={20} onChange={this.onChange} value={this.state.inputValue} />
-            </Col>
-          </Row>
+          <FormItem
+            label="Temperature: "
+          >
+            {Object.keys(settings.condition).map(
+              key =>
+                (<FormItem
+                  {...formItemLayout}
+                  label={key}
+                >
+                  {getFieldDecorator(`condition.${key}.value`, { initialValue: settings.condition[key].value })(
+                    <Slider
+                      min={settings.condition[key].min}
+                      max={settings.condition[key].max}
+                      step={settings.condition[key].step}
+                    />,
+                  )}
+                </FormItem>),
+            )}
+          </FormItem>
           {formItems}
           <FormItem>
             <Button type="dashed" onClick={this.add} style={{ width: '100%' }}>
