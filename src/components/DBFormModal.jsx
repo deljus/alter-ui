@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import styled from 'styled-components';
 import axios from 'axios';
+import PropTypes from 'prop-types';
 import { Row, Col, PageHeader } from 'react-bootstrap';
 import { Button, message } from 'antd';
 import DynamicForm from './DynamicForm';
@@ -124,7 +125,7 @@ class DBFormModal extends Component {
                 />
               </Col>
               <Col md={4}>
-                <DynamicForm ref={(form) => { this.form = form; }} />
+                <DynamicForm ref={(form) => { this.form = form; }} condition={this.props.condition} />
               </Col>
 
               <Col md={12}>
@@ -149,5 +150,13 @@ class DBFormModal extends Component {
     );
   }
 }
+
+DBFormModal.propTypes = {
+  condition: PropTypes.object,
+};
+
+DBFormModal.defaultProps = {
+  condition: {},
+};
 
 export default DBFormModal;

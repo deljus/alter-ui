@@ -1,17 +1,18 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { Tabs, Icon, Layout } from 'antd';
+import { Tabs, Icon, Layout, Select } from 'antd';
 import {
   CreatePage,
   StructureListPage,
   SettingsPage,
-} from './pages';
+} from './components';
 import { DBFormModalView } from './compWraps';
 import { LoaderView, ErrorView } from '../base/wrapper';
 import 'antd/dist/antd.css';
 
 const TabPane = Tabs.TabPane;
 const { Header, Content, Footer } = Layout;
+const Option = Select.Option;
 
 class Main extends Component {
   componentDidMount() {
@@ -21,6 +22,7 @@ class Main extends Component {
   render() {
     const { settings } = this.props;
     const tabs = settings && settings.tabs;
+
     return (
       <Layout style={{ minHeight: '100vh', background: 'white' }} className="container">
         <LoaderView />
@@ -30,6 +32,9 @@ class Main extends Component {
           <Tabs
             defaultActiveKey="2"
             {...tabs}
+            tabBarExtraContent={<Select style={{ width: 200 }} >
+              <Option value="dscsdc">vsdsdv</Option>
+            </Select>}
           >
             <TabPane tab={<span><Icon type="file-add" />Create</span>} key="1">
               <CreatePage />

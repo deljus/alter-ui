@@ -7,6 +7,7 @@ const mapStateToProps = state => ({
   visible: state.modal.visible,
   id: state.modal.id,
   structures: state.structures,
+  condition: (state.settings && state.settings.condition) || {},
 });
 
 const mapDispatchToProps = dispatch => ({

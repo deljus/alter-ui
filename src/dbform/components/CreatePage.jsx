@@ -8,7 +8,6 @@ import { MARVIN_PATH_IFRAME, MARVIN_EDITOR_IS_EMPTY } from '../../config';
 import { clearEditor, exportCml } from '../../base/marvinAPI';
 
 class CreatePage extends Component {
-
   handleSubmit(e) {
     e.preventDefault();
     this.form.validateFields((err, values) => {
@@ -36,6 +35,9 @@ class CreatePage extends Component {
   }
 
   render() {
+
+      const { condition } = this.props;
+
     return (
 
       <Row>
@@ -51,7 +53,7 @@ class CreatePage extends Component {
           />
         </Col>
         <Col md={4}>
-          <DynamicForm ref={(form) => { this.form = form; }} settings={this.props.settings} />
+          <DynamicForm ref={(form) => { this.form = form; }} condition={condition} />
         </Col>
         <Col md={12}>
           <Button
@@ -78,9 +80,14 @@ CreatePage.propTypes = {
   initPage: PropTypes.func.isRequired,
 };
 
+const mapStateToProps = state => ({
+  condition: state.settings.condition,
+});
+
+
 const mapDispatchToProps = dispatch => ({
   createStructure: (data, params) => dispatch({ type: 'ADD_STRUCTURE_SAGA', data, params }),
 });
 
 
-export default connect(null, mapDispatchToProps)(CreatePage);
+export default connect(mapStateToProps, mapDispatchToProps)(CreatePage);

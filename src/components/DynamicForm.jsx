@@ -1,5 +1,6 @@
 import React from 'react';
 import { Form, Input, Icon, Button, Slider, InputNumber, Row, Col } from 'antd';
+import PropTypes from 'prop-types';
 import 'antd/lib/form/style/css';
 import 'antd/lib/button/style/css';
 import 'antd/lib/input/style/css';
@@ -46,7 +47,7 @@ class DynamicFieldSet extends React.Component {
 
     render() {
       const { getFieldDecorator, getFieldValue } = this.props.form;
-      const { settings } = this.props;
+      const { condition } = this.props;
       getFieldDecorator('keys', { initialValue: [] });
       const keys = getFieldValue('keys');
       const temperature = getFieldValue('temperature');
@@ -97,25 +98,20 @@ class DynamicFieldSet extends React.Component {
       ));
       return (
         <Form>
-          <FormItem
-            label="Temperature: "
-          >
-            {Object.keys(settings.condition).map(
-              key =>
-                (<FormItem
-                  {...formItemLayout}
-                  label={key}
-                >
-                  {getFieldDecorator(`condition.${key}.value`, { initialValue: settings.condition[key].value })(
-                    <Slider
-                      min={settings.condition[key].min}
-                      max={settings.condition[key].max}
-                      step={settings.condition[key].step}
-                    />,
-                  )}
-                </FormItem>),
-            )}
-          </FormItem>
+          {Object.keys(condition).map(
+            key =>
+              (<FormItem
+                label={key}
+              >
+                {getFieldDecorator(`condition.${key}.value`, { initialValue: condition[key].value })(
+                  <Slider
+                    min={condition[key].min}
+                    max={condition[key].max}
+                    step={condition[key].step}
+                  />,
+                )}
+              </FormItem>),
+          )}
           {formItems}
           <FormItem>
             <Button type="dashed" onClick={this.add} style={{ width: '100%' }}>
@@ -126,6 +122,15 @@ class DynamicFieldSet extends React.Component {
       );
     }
 }
+
+DynamicFieldSet.propTypes = {
+  condition: PropTypes.object,
+};
+
+DynamicFieldSet.defaultProps = {
+  condition: {},
+};
+
 
 const WrappedDynamicFieldSet = Form.create()(DynamicFieldSet);
 

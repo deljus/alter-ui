@@ -82,7 +82,7 @@ class StructureListPage extends Component {
                   <div style={{ lineHeight: 2, paddingLeft: 40 }} >Temperature: K</div>
                   <div style={{ lineHeight: 2, paddingLeft: 40 }} >Pressure: atm</div>
                   <Collapse bordered={false} style={{ height: 50, padding: 0, margin: 0 }}>
-                    <Panel header="Parameters" key="1" style={{ position: 'absolute', width: '100%', background: 'white', zIndex: 100, border: '1px solid gray' }}>
+                    <Panel header="Parameters" key="1" style={{ position: 'absolute', width: '100%', background: 'white', zIndex: 1, border: '1px solid gray' }}>
                       <div>
                         {item.params && item.params.map(param => <div>{param.key} : {param.value}</div>)}
                       </div>
