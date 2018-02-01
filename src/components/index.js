@@ -2,7 +2,7 @@ import DynamicForm from './DynamicForm';
 import MarvinEditor from './MarvinEditor';
 import PageSteps from './PageSteps';
 import SearchInput from './SearchInput';
-//import SearchInput from './SearchInput2';
+import MainLayout from './MainLayout';
 import Loader from './Loader';
 import Error from './Error';
 import Thumbnail from './Thumbnail';
@@ -25,4 +25,5 @@ export {
   ResultItem,
   DBFormModal,
   Whirligig,
+  MainLayout,
 };

@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { Tabs, Icon, Layout, Select } from 'antd';
+import { Tabs, Icon, Select } from 'antd';
 import {
   CreatePage,
   StructureListPage,
@@ -8,10 +8,10 @@ import {
 } from './components';
 import { DBFormModalView } from './compWraps';
 import { LoaderView, ErrorView } from '../base/wrapper';
+import { MainLayout } from '../components';
 import 'antd/dist/antd.css';
 
 const TabPane = Tabs.TabPane;
-const { Header, Content, Footer } = Layout;
 const Option = Select.Option;
 
 class Main extends Component {
@@ -24,31 +24,28 @@ class Main extends Component {
     const tabs = settings && settings.tabs;
 
     return (
-      <Layout style={{ minHeight: '100vh', background: 'white' }} className="container">
+      <MainLayout style={{ paddingTop: 75 }}>
         <LoaderView />
         <DBFormModalView />
         <ErrorView />
-        <Content style={{ paddingTop: 75 }}>
-          <Tabs
-            defaultActiveKey="2"
-            {...tabs}
-            tabBarExtraContent={<Select style={{ width: 200 }} >
-              <Option value="dscsdc">vsdsdv</Option>
-            </Select>}
-          >
-            <TabPane tab={<span><Icon type="file-add" />Create</span>} key="1">
-              <CreatePage />
-            </TabPane>
-            <TabPane tab={<span><Icon type="database" />List</span>} key="2">
-              <StructureListPage />
-            </TabPane>
-            <TabPane tab={<span><Icon type="setting" />Settings</span>} key="3">
-              <SettingsPage />
-            </TabPane>
-          </Tabs>
-        </Content>
-        <Footer style={{ background: 'white' }}>© Kazan Chemoinformatics and Molecular Modeling Laboratory 2018</Footer>
-      </Layout>
+        <Tabs
+          defaultActiveKey="2"
+          {...tabs}
+          tabBarExtraContent={<Select style={{ width: 200 }} >
+            <Option value="dscsdc">vsdsdv</Option>
+          </Select>}
+        >
+          <TabPane tab={<span><Icon type="file-add" />Create</span>} key="1">
+            <CreatePage />
+          </TabPane>
+          <TabPane tab={<span><Icon type="database" />List</span>} key="2">
+            <StructureListPage />
+          </TabPane>
+          <TabPane tab={<span><Icon type="setting" />Settings</span>} key="3">
+            <SettingsPage />
+          </TabPane>
+        </Tabs>
+      </MainLayout>
     );
   }
 }
