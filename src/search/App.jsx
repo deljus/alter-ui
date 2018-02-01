@@ -23,6 +23,8 @@ import 'antd/lib/tabs/style/index.css';
 import 'antd/lib/back-top/style/index.css';
 import 'antd/lib/tooltip/style/index.css';
 import 'antd/lib/layout/style/index.css';
+import 'antd/lib/spin/style/index.css';
+import 'antd/lib/alert/style/css';
 
 
 export default (

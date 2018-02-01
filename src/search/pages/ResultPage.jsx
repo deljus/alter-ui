@@ -42,7 +42,6 @@ class ResultPage extends Component {
 
     return results && (
       <div>
-        <ModalIncrease ref={(e) => { this.modal = e; }} />
         <Wrapper>
           <SearchInputView />
         </Wrapper>

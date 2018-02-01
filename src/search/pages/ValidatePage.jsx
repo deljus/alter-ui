@@ -21,8 +21,8 @@ class ValidatePage extends Component {
     const { structure, openEditModal, changeSelectedModel, history, onRevalidate, onContinue, request } = this.props;
     return !request.loading && !request.error && structure && (
       <div>
-        <Row>
-          <Col span={14} style={{ padding: 10 }}>
+        <Row gutter={10} sm={24} xs={24}>
+          <Col lg={14}>
             <Thumbnail
               cml={structure.cml}
               base64={structure.base64}
@@ -30,7 +30,7 @@ class ValidatePage extends Component {
               onClickImage={openEditModal}
             />
           </Col>
-          <Col span={10} style={{ padding: 10 }}>
+          <Col lg={10} sm={24} xs={24}>
             <b>Selected model:</b>
             <Select defaultValue={structure.selectModel} style={{ width: '100%', paddingBottom: 10 }} onChange={changeSelectedModel}>
               { structure.models.map(m => <Option key={m.model} value={m.model}>{m.name}</Option>)}
