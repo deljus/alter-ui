@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import { Button, Upload, Icon, List, Collapse, Card, Popconfirm, Row, Col, Checkbox } from 'antd';
-import { Thumbnail } from '../../components';
+import { ConditionList } from '../../components';
 import { modal, addSelectModel } from '../core/actions';
 import { MODAL, URLS } from '../../config';
 
@@ -17,27 +17,33 @@ class ValidatePage extends Component {
     this.props.initPage();
   }
 
+  resultClick() {
+    console.log(this.form);
+  }
+
   render() {
     const { resultTask, editStructure, deleteStructure, structure, checkStructure, history } = this.props;
+    this.form = [];
     return (
       <div>
-        <Row style={{ marginBottom: '20px' }}>
+        <Row style={{ paddingBottom: 38 }}>
           <Col span={8}>
             <Button icon="left" onClick={() => history.push(URLS.INDEX)}>
                   Back
             </Button>
           </Col>
           <Col span={8} offset={8} style={{ textAlign: 'right' }}>
-            <Button type="primary" onClick={() => resultTask(structure)} icon="right" disabled={!structure.length}>Show result(s)</Button>
+            <Button type="primary" onClick={this.resultClick.bind(this)} icon="right" disabled={!structure.length}>Show result(s)</Button>
           </Col>
         </Row>
-        <div>
-          <List
-            grid={{ gutter: 16, xs: 1, sm: 2, md: 3, lg: 2, xl: 2 }}
-            dataSource={structure}
-            renderItem={item => (
-              <List.Item>
-                <Card
+
+        <List
+          grid={{ gutter: 16, column: 1 }}
+          dataSource={structure}
+          renderItem={item => (
+            <List.Item>
+              <Row gutter={20}>
+                <Col lg={12} sm={24} xs={24}><Card
                   style={{ width: '100%' }}
                   cover={<img alt="example" src={item.base64} />}
                   actions={
@@ -53,10 +59,18 @@ class ValidatePage extends Component {
                         <Icon type="delete" />
                       </Popconfirm>]}
                 />
-              </List.Item>
-            )}
-          />
-        </div>
+                </Col>
+                <Col lg={12} sm={24} xs={24}>
+                  <ConditionList
+                    {...item}
+                    ref={(e) => { this.form.push(e); }}
+                  />
+                </Col>
+              </Row>
+            </List.Item>
+          )}
+        />
+
       </div>
     );
   }

@@ -11,6 +11,7 @@ import ResultItem from './ResultItem';
 import NotFoundPage from './NotFoundPage';
 import DBFormModal from './DBFormModal';
 import Whirligig from './Whirligig';
+import ConditionList from './ConditionList';
 
 export {
   DynamicForm,
@@ -26,4 +27,5 @@ export {
   DBFormModal,
   Whirligig,
   MainLayout,
+  ConditionList,
 };

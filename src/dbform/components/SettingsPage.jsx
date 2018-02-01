@@ -1,13 +1,11 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { Form, DatePicker, TimePicker, Button, Select, Slider } from 'antd';
+import { Form, Button, Select, Slider } from 'antd';
 import PropTypes from 'prop-types';
 import { addSettings } from '../core/actions';
 import { merge } from '../../base/functions';
 
 const FormItem = Form.Item;
-const MonthPicker = DatePicker.MonthPicker;
-const RangePicker = DatePicker.RangePicker;
 const { Option } = Select;
 
 const itemsConfig = {

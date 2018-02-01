@@ -61,10 +61,12 @@ function* validateTask(action) {
     const urlParams = yield getUrlParams();
     const task = yield call(repeatedRequests, Request.getSearchTask, urlParams.task);
     const models = yield call(Request.getModels);
+    const additives = yield call(Request.getAdditives);
     const magic = yield call(Request.getMagic);
     const structureOfTypes = Serialize.models(task.data, models.data, magic.data);
-    const structure = yield call(convertCmlToBase64Arr, structureOfTypes);
-    yield put(addStructures(structure));
+    const structureAndBase64 = yield call(convertCmlToBase64Arr, structureOfTypes);
+    const structures = structureAndBase64.map(str => ({ ...str, additives: additives.data }));
+    yield put(addStructures(structures));
     yield put(succsessRequest());
   } catch (e) {
     yield put(errorRequest(e.message, action));
