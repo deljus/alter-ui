@@ -52,24 +52,19 @@ class DBFormModal extends Component {
   }
 
   init(structures, id) {
-    console.log(structures.filter(struct => struct.id === id));
-
     const structure = structures.filter(struct => struct.id === id)[0];
-
     importCml(structure.data);
-
     this.form.setFieldsValue({
       keys: structure.params.map((struct, id) => ({ id, ...struct })),
+      condition: structure.condition,
     });
-
-    console.log(structure.params.map((struct, id) => ({ id, ...struct })));
   }
+
   handleSubmit(e) {
     const { id } = this.props;
     e.preventDefault();
     this.form.validateFields((err, values) => {
       if (!err) {
-        console.log(values);
 
         const params = values.keys.map(k => ({
           key: values[`key-${k.id}`],
@@ -81,7 +76,7 @@ class DBFormModal extends Component {
             if (cml === MARVIN_EDITOR_IS_EMPTY) {
               throw new Error('Structure is empty');
             }
-            this.props.onOk(id, cml, params);
+            this.props.onOk(id, cml, params, values.condition);
           })
           .catch(e => message.error(e.message));
       }

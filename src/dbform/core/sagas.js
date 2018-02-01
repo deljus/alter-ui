@@ -22,7 +22,8 @@ function* initStructureListPage(action) {
 
 function* addNewStructure(action) {
   try {
-    const response = yield call(Structures.add, { data: action.data, params: action.params });
+    const { data, params, condition } = action;
+    const response = yield call(Structures.add, { data, params, condition });
     const base64 = yield call(convertCmlToBase64, response.data.data);
     yield put(addStructure({ base64, ...response.data }));
     yield message.success('Add structure');
@@ -43,7 +44,8 @@ function* deleteStructureInList(action) {
 
 function* modalDiscard(action) {
   try {
-    const response = yield call(Structures.edit, action.id, action.data, action.params);
+    const { data, params, condition } = action;
+    const response = yield call(Structures.edit, action.id, data, params, condition);
     const base64 = yield call(convertCmlToBase64, response.data.data);
     yield put(editStructure({ base64, ...response.data }));
     yield put(showModal(false));

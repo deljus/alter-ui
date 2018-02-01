@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Component } from 'react';
 import { Form, Input, Icon, Button, Slider, InputNumber, Row, Col } from 'antd';
 import PropTypes from 'prop-types';
 import 'antd/lib/form/style/css';
@@ -7,16 +7,36 @@ import 'antd/lib/input/style/css';
 
 const FormItem = Form.Item;
 
+class IntegerStep extends Component {
+  render() {
+    const { props } = this.props;
+    return (
+      <Row>
+        <Col span={18}>
+          <Slider {...props} onChange={this.props.onChange1} />
+        </Col>
+        <Col span={6}>
+          <InputNumber
+            {...props}
+            onChange={this.props.onChange1}
+          />
+        </Col>
+      </Row>
+    );
+  }
+}
+
+
 const uuid = 0;
 class DynamicFieldSet extends React.Component {
     state = {
       inputValue: 1,
-    }
+    };
     onChange = (value) => {
       this.setState({
         inputValue: value,
       });
-    }
+    };
 
     remove = (k) => {
       const { form } = this.props;
@@ -44,13 +64,11 @@ class DynamicFieldSet extends React.Component {
       });
     };
 
-
     render() {
       const { getFieldDecorator, getFieldValue } = this.props.form;
       const { condition } = this.props;
-      getFieldDecorator('keys', { initialValue: [] });
+      getFieldDecorator('keys', { initialValue: [{ id: 0, key: '', value: '' }] });
       const keys = getFieldValue('keys');
-      const temperature = getFieldValue('temperature');
       const formItems = keys.map(k => (
         <FormItem
           required={false}
@@ -96,22 +114,28 @@ class DynamicFieldSet extends React.Component {
           </Row>
         </FormItem>
       ));
+
+      const cond = Object.keys(condition).map(
+        key =>
+          (<FormItem
+            label={key}
+            key={key}
+          >
+            {getFieldDecorator(`condition.${key}`, {
+              initialValue: condition[key].value,
+            })(
+              <Slider
+                min={condition[key].min}
+                max={condition[key].max}
+                step={condition[key].step}
+              />,
+            )}
+          </FormItem>),
+      );
+
       return (
         <Form>
-          {Object.keys(condition).map(
-            key =>
-              (<FormItem
-                label={key}
-              >
-                {getFieldDecorator(`condition.${key}.value`, { initialValue: condition[key].value })(
-                  <Slider
-                    min={condition[key].min}
-                    max={condition[key].max}
-                    step={condition[key].step}
-                  />,
-                )}
-              </FormItem>),
-          )}
+          {cond}
           {formItems}
           <FormItem>
             <Button type="dashed" onClick={this.add} style={{ width: '100%' }}>

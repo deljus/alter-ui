@@ -16,13 +16,12 @@ class CreatePage extends Component {
           key: values[`key-${k.id}`],
           value: values[`value-${k.id}`],
         }));
-        this.setState({ btnLoading: true });
         exportCml('#marvinjs_create_page')
           .then((cml) => {
             if (cml === MARVIN_EDITOR_IS_EMPTY) {
               throw new Error('Structure is empty');
             }
-            this.props.createStructure(cml, params);
+            this.props.createStructure(cml, params, values.condition);
           })
           .catch(e => message.error(e.message));
       }
@@ -75,18 +74,13 @@ class CreatePage extends Component {
   }
 }
 
-
-CreatePage.propTypes = {
-  initPage: PropTypes.func.isRequired,
-};
-
 const mapStateToProps = state => ({
   condition: state.settings.condition,
 });
 
 
 const mapDispatchToProps = dispatch => ({
-  createStructure: (data, params) => dispatch({ type: 'ADD_STRUCTURE_SAGA', data, params }),
+  createStructure: (data, params, condition) => dispatch({ type: 'ADD_STRUCTURE_SAGA', data, params, condition }),
 });
 
 

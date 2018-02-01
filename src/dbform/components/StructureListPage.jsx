@@ -20,7 +20,7 @@ class StructureListPage extends Component {
     state = {
       current: 1,
       pageSize: 10,
-      sorted: 'increase',
+      sorted: 'decrease',
     };
     onShowSizeChange(current, pageSize) {
       this.setState({ current, pageSize });
@@ -63,7 +63,9 @@ class StructureListPage extends Component {
             grid={{ ...gridSettings }}
             dataSource={structuresSorted.slice((current * pageSize) - pageSize, current * pageSize)}
             renderItem={item => (
-              <List.Item>
+              <List.Item
+                key={item.id}
+              >
                 <Card
                   style={{ width: '100%' }}
                   cover={<img alt="example" src={item.base64} />}
@@ -79,12 +81,12 @@ class StructureListPage extends Component {
                         <Icon type="delete" />
                       </Popconfirm>]}
                 >
-                  <div style={{ lineHeight: 2, paddingLeft: 40 }} >Temperature: K</div>
-                  <div style={{ lineHeight: 2, paddingLeft: 40 }} >Pressure: atm</div>
+                  <div style={{ lineHeight: 2, paddingLeft: 40 }} >Temperature: { item.condition && item.condition.temperature } K</div>
+                  <div style={{ lineHeight: 2, paddingLeft: 40 }} >Pressure: { item.condition && item.condition.pressure } atm</div>
                   <Collapse bordered={false} style={{ height: 50, padding: 0, margin: 0 }}>
                     <Panel header="Parameters" key="1" style={{ position: 'absolute', width: '100%', background: 'white', zIndex: 1, border: '1px solid gray' }}>
                       <div>
-                        {item.params && item.params.map(param => <div>{param.key} : {param.value}</div>)}
+                        {item.params && item.params.map((param, i) => <div key={i}>{param.key} : {param.value}</div>)}
                       </div>
                     </Panel>
                   </Collapse>
@@ -99,7 +101,6 @@ class StructureListPage extends Component {
 }
 
 StructureListPage.propTypes = {
-  initPage: PropTypes.func.isRequired,
   editStructure: PropTypes.func.isRequired,
   deleteStructure: PropTypes.func.isRequired,
   structures: PropTypes.array,
