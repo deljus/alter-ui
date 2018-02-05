@@ -1,11 +1,9 @@
 import React, { Component } from 'react';
 import styled from 'styled-components';
-import axios from 'axios';
 import PropTypes from 'prop-types';
-import { Row, Col, PageHeader } from 'react-bootstrap';
-import { Button, message } from 'antd';
+import { Button, message, Row, Col } from 'antd';
 import DynamicForm from './DynamicForm';
-import { MARVIN_PATH_IFRAME, MARVIN_EDITOR_IS_EMPTY, API_URLS } from '../config';
+import { MARVIN_PATH_IFRAME, MARVIN_EDITOR_IS_EMPTY } from '../config';
 import { exportCml, clearEditor, importCml } from '../base/marvinAPI';
 
 import 'antd/lib/message/style/css';

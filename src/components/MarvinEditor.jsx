@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
-import { Button } from 'react-bootstrap';
+import { Button } from 'antd';
 import { MARVIN_PATH_IFRAME } from '../config';
 
 const Modal = styled.div`

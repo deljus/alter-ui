@@ -1,8 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import { Row, Col, PageHeader } from 'react-bootstrap';
-import { Button, message } from 'antd';
+import { Button, message, Row, Col } from 'antd';
 import { DynamicForm } from '../../components';
 import { MARVIN_PATH_IFRAME, MARVIN_EDITOR_IS_EMPTY } from '../../config';
 import { clearEditor, exportCml } from '../../base/marvinAPI';

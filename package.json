@@ -7,7 +7,6 @@
     "react-dom": "^16.2.0",
     "react-scripts": "1.0.17",
     "axios": "^0.17.1",
-    "react-bootstrap": "^0.31.5",
     "antd": "^3.0.3",
     "react-router": "^4.2.0",
     "react-router-dom": "^4.2.2",
@@ -20,9 +19,7 @@
     "history": "^4.7.2",
     "query-string": "^5.0.1",
     "prop-types": "^15.6.0",
-    "document-ready-promise": "^3.0.1",
-    "recharts": "^1.0.0-beta.9",
-    "react-file-reader": "^1.1.3"
+    "recharts": "^1.0.0-beta.9"
   },
   "devDependencies": {
     "babel-eslint": "^7.2.3",
@@ -47,7 +44,6 @@
     "start-search": "cp src/search/index.js src/index.js && react-scripts start",
     "start-dbform": "cp src/dbform/index.js src/index.js && react-scripts start",
     "start-predictor": "cp src/predictor/index.js src/index.js && react-scripts start",
-    "start-ir-parse": "cp src/ir-parse/index.js src/index.js && react-scripts start",
     "tests": "jest",
     "start-api-server": "json-server --watch db.json --port 3001",
     "build": "react-scripts build",
