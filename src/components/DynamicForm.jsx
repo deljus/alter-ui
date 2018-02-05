@@ -1,9 +1,7 @@
 import React, { Component } from 'react';
 import { Form, Input, Icon, Button, Slider, InputNumber, Row, Col } from 'antd';
 import PropTypes from 'prop-types';
-import 'antd/lib/form/style/css';
-import 'antd/lib/button/style/css';
-import 'antd/lib/input/style/css';
+import sliderConfig from './formItemConfigs';
 
 const FormItem = Form.Item;
 
@@ -125,6 +123,7 @@ class DynamicFieldSet extends React.Component {
               initialValue: condition[key].value,
             })(
               <Slider
+                  {...sliderConfig[key]}
                 min={condition[key].min}
                 max={condition[key].max}
                 step={condition[key].step}

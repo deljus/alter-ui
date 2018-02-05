@@ -38,8 +38,8 @@ class CreatePage extends Component {
 
     return (
 
-      <Row>
-        <Col md={8}>
+      <Row gutter={30}>
+        <Col md={14}>
           <iframe
             title="marvinjs"
             id="marvinjs_create_page"
@@ -50,10 +50,10 @@ class CreatePage extends Component {
             style={{ border: '1px dashed #d9d9d9', padding: '10px' }}
           />
         </Col>
-        <Col md={4}>
+        <Col md={10}>
           <DynamicForm ref={(form) => { this.form = form; }} condition={condition} />
         </Col>
-        <Col md={12}>
+        <Col md={24}>
           <Button
             size="large"
             onClick={this.handlersReset.bind(this)}

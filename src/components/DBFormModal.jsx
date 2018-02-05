@@ -9,11 +9,12 @@ import { exportCml, clearEditor, importCml } from '../base/marvinAPI';
 const Modal = styled.div`
   opacity: ${props => (props.isShow ? 1 : 0)};
   position: fixed;
+  overflow: auto;
   top: 0;
   right: 0;
   bottom: 0;
   left: 0;
-  z-index: ${props => (props.isShow ? 100 : -1)};
+  z-index: ${props => (props.isShow ? 100500 : -1)};
 
   outline: 0;
   background: rgba(0,0,0,0.4);
@@ -85,6 +86,7 @@ class DBFormModal extends Component {
     const { onCancel, visible, id, structures } = this.props;
 
     visible && this.init(structures, id);
+    window.document.body.style.overflow = visible ? 'hidden' : 'auto';
 
     return (
       <Modal isShow={visible}>
@@ -99,8 +101,8 @@ class DBFormModal extends Component {
             </button>
           </div>
           <Body>
-            <Row>
-              <Col md={8}>
+            <Row gutter={30} >
+              <Col md={14}>
                 <iframe
                   title="marvinjs"
                   id="marvinjs"
@@ -111,11 +113,11 @@ class DBFormModal extends Component {
                   style={{ border: '1px dashed #d9d9d9', padding: '10px' }}
                 />
               </Col>
-              <Col md={4}>
+              <Col md={10}>
                 <DynamicForm ref={(form) => { this.form = form; }} condition={this.props.condition} />
               </Col>
 
-              <Col md={12}>
+              <Col md={24}>
                 <Button
                   size="large"
                   onClick={onCancel}

@@ -4,6 +4,7 @@ import { Form, Button, Select, Slider } from 'antd';
 import PropTypes from 'prop-types';
 import { addSettings } from '../core/actions';
 import { merge } from '../../base/functions';
+import sliderConfig from '../../components/formItemConfigs';
 
 const FormItem = Form.Item;
 const { Option } = Select;
@@ -73,7 +74,7 @@ class SettingsForm extends Component {
                 label={key}
               >
                 {getFieldDecorator(`grid.${key}`, { initialValue: settings.grid[key] })(
-                  <Slider max={6} step={1} />,
+                  <Slider {...sliderConfig.grid} />,
                 )}
               </FormItem>),
           )}
@@ -86,9 +87,7 @@ class SettingsForm extends Component {
               >
                 {getFieldDecorator(`condition.${key}.value`, { initialValue: settings.condition[key].value })(
                   <Slider
-                    min={settings.condition[key].min}
-                    max={settings.condition[key].max}
-                    step={settings.condition[key].step}
+                    {...sliderConfig[key]}
                   />,
                 )}
               </FormItem>),
