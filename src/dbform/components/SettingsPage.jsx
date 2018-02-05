@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { Form, Button, Select, Slider } from 'antd';
+import { Form, Button, Select, Slider, Switch } from 'antd';
 import PropTypes from 'prop-types';
 import { addSettings } from '../core/actions';
 import { merge } from '../../base/functions';
@@ -14,102 +14,92 @@ const itemsConfig = {
   tabSize: ['large', 'default', 'small'],
 };
 
-class SettingsForm extends Component {
-    handleSubmit = (e) => {
-      e.preventDefault();
-      const { setSettings, settings } = this.props;
-      this.props.form.validateFields((err, fieldsValue) => {
-        if (err) {
-          return;
-        }
-        setSettings(merge(settings, fieldsValue));
-      });
-    }
-    render() {
-      const { settings } = this.props;
-      const { getFieldDecorator } = this.props.form;
-      const formItemLayout = {
-        labelCol: {
-          xs: { span: 4 },
-          sm: { span: 4 },
-        },
-        wrapperCol: {
-          xs: { span: 12 },
-          sm: { span: 12 },
-        },
-      };
-      const config = {
-        rules: [{ type: 'string' }],
-      };
-      return (
-        <Form onSubmit={this.handleSubmit}>
-          <h4>Tabs:</h4>
-          <FormItem
-            {...formItemLayout}
-            label="Position"
-          >
-            {getFieldDecorator('tabs.tabPosition', { initialValue: settings.tabs.tabPosition })(
-              <Select>
-                { itemsConfig.tabPosition.map((item, i) => <Option key={item + i} value={item} >{item}</Option>) }
-              </Select>,
+const SettingsPage = ({ setSettings, settings }) => {
+  const handleChange = (key, value) => {
+    const keys = key.split('.');
+    settings[keys] = value;
+    setSettings(settings);
+  };
+  const formItemLayout = {
+    labelCol: {
+      xs: { span: 4 },
+      sm: { span: 4 },
+    },
+    wrapperCol: {
+      xs: { span: 12 },
+      sm: { span: 12 },
+    },
+  };
+  return (
+    <Form>
+      <h4>Tabs:</h4>
+      <FormItem
+        {...formItemLayout}
+        label="Position"
+      >
+        <Select
+          value={settings && settings.tabs.tabPosition}
+          onChange={val => handleChange('tabs.tabPosition', val)}
+        >
+          { itemsConfig.tabPosition.map((item, i) => <Option key={item + i} value={item} >{item}</Option>) }
+        </Select>
+      </FormItem>
+      <FormItem
+        {...formItemLayout}
+        label="Size"
+      >
+        <Select
+          value={settings && settings.tabs.size}
+          onChange={val => handleChange('tabs.size', val)}
+        >
+          { itemsConfig.tabSize.map((item, i) => <Option key={item + i} value={item} >{item}</Option>) }
+        </Select>
+      </FormItem>
+      {/*<h4>Structure list page grid:</h4>*/}
 
-            )}
-          </FormItem>
-          <FormItem
-            {...formItemLayout}
-            label="Size"
-          >
-            {getFieldDecorator('tabs.size', { initialValue: settings.tabs.size })(
-              <Select>
-                { itemsConfig.tabSize.map((item, i) => <Option key={item + i} value={item} >{item}</Option>) }
-              </Select>,
-            )}
-          </FormItem>
-          <h4>List grid:</h4>
+      {/*{Object.keys(settings.grid).map(*/}
+        {/*key =>*/}
+          {/*(<FormItem*/}
+            {/*{...formItemLayout}*/}
+            {/*label={key}*/}
+          {/*>*/}
 
-          {Object.keys(settings.grid).map(
-            key =>
-              (<FormItem
-                {...formItemLayout}
-                label={key}
-              >
-                {getFieldDecorator(`grid.${key}`, { initialValue: settings.grid[key] })(
-                  <Slider {...sliderConfig.grid} />,
-                )}
-              </FormItem>),
-          )}
-          <h4>Conditions:</h4>
-          {Object.keys(settings.condition).map(
-            key =>
-              (<FormItem
-                {...formItemLayout}
-                label={key}
-              >
-                {getFieldDecorator(`condition.${key}.value`, { initialValue: settings.condition[key].value })(
-                  <Slider
-                    {...sliderConfig[key]}
-                  />,
-                )}
-              </FormItem>),
-          )}
-          <FormItem
-            wrapperCol={{
-              xs: { span: 24, offset: 0 },
-              sm: { span: 16, offset: 8 },
-            }}
-          >
-            <Button>Default</Button>
-            <Button type="primary" htmlType="submit">Submit</Button>
-          </FormItem>
-        </Form>
-      );
-    }
-}
+            {/*<Slider*/}
+              {/*{...sliderConfig.grid}*/}
+              {/*value={settings && settings.grid[key]}*/}
+              {/*onAfterChange={val => handleChange(key, val)}*/}
+            {/*/>*/}
 
-const SettingsPage = Form.create()(SettingsForm);
+          {/*</FormItem>),*/}
+      {/*)}*/}
+      {/*<h4>Create page conditions:</h4>*/}
+      {/*{Object.keys(settings.condition).map(*/}
+        {/*key =>*/}
+          {/*(<FormItem*/}
+            {/*{...formItemLayout}*/}
+            {/*label={key}*/}
+          {/*>*/}
+            {/*<Slider*/}
+              {/*{...sliderConfig[key]}*/}
+              {/*value={settings && settings.condition[key]}*/}
+              {/*onAfterChange={val => handleChange(`condition.${key}`, val)}*/}
+            {/*/>*/}
+          {/*</FormItem>),*/}
+      {/*)}*/}
+      {/*<h4>Auto reset after submit in create page</h4>*/}
 
-SettingsPage.propTypes = {
+      {/*<FormItem*/}
+        {/*{...formItemLayout}*/}
+        {/*label="Auto reset"*/}
+      {/*>*/}
 
+        {/*<Switch*/}
+          {/*value={settings && settings.auto_reset}*/}
+          {/*onChange={val => handleChange('auto_reset', val)}*/}
+        {/*/>*/}
+      {/*</FormItem>*/}
+    </Form>
+  );
 };
 
 

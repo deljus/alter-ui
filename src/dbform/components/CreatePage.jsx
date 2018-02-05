@@ -8,6 +8,7 @@ import { clearEditor, exportCml } from '../../base/marvinAPI';
 
 class CreatePage extends Component {
   handleSubmit(e) {
+    const { createStructure, autoreset } = this.props;
     e.preventDefault();
     this.form.validateFields((err, values) => {
       if (!err) {
@@ -20,7 +21,8 @@ class CreatePage extends Component {
             if (cml === MARVIN_EDITOR_IS_EMPTY) {
               throw new Error('Structure is empty');
             }
-            this.props.createStructure(cml, params, values.condition);
+            createStructure(cml, params, values.condition);
+            if (autoreset) this.handlersReset();
           })
           .catch(e => message.error(e.message));
       }
@@ -33,8 +35,7 @@ class CreatePage extends Component {
   }
 
   render() {
-
-      const { condition } = this.props;
+    const { condition } = this.props;
 
     return (
 
@@ -75,6 +76,7 @@ class CreatePage extends Component {
 
 const mapStateToProps = state => ({
   condition: state.settings.condition,
+  autoreset: state.settings.auto_reset,
 });
 
 

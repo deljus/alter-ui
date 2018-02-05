@@ -5,26 +5,6 @@ import sliderConfig from './formItemConfigs';
 
 const FormItem = Form.Item;
 
-class IntegerStep extends Component {
-  render() {
-    const { props } = this.props;
-    return (
-      <Row>
-        <Col span={18}>
-          <Slider {...props} onChange={this.props.onChange1} />
-        </Col>
-        <Col span={6}>
-          <InputNumber
-            {...props}
-            onChange={this.props.onChange1}
-          />
-        </Col>
-      </Row>
-    );
-  }
-}
-
-
 const uuid = 0;
 class DynamicFieldSet extends React.Component {
     state = {
@@ -123,10 +103,7 @@ class DynamicFieldSet extends React.Component {
               initialValue: condition[key].value,
             })(
               <Slider
-                  {...sliderConfig[key]}
-                min={condition[key].min}
-                max={condition[key].max}
-                step={condition[key].step}
+                {...sliderConfig[key]}
               />,
             )}
           </FormItem>),

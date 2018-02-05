@@ -43,7 +43,30 @@ const modal = (state = { visible: false }, action) => {
   }
 };
 
-export const settings = (state = null, action) => {
+const defaultSettings = {
+  tabs: {
+    tabPosition: 'top',
+    size: 'large',
+  },
+  grid: {
+    xs: 1,
+    sm: 2,
+    md: 3,
+    lg: 3,
+    xl: 3,
+  },
+  condition: {
+    temperature: {
+      value: 298,
+    },
+    pressure: {
+      value: 1,
+    },
+  },
+  auto_reset: false,
+};
+
+export const settings = (state = defaultSettings, action) => {
   switch (action.type) {
     case ADD_SETTINGS:
       return { ...action.settings };

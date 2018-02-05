@@ -12,8 +12,9 @@ function* initStructureListPage(action) {
     const responseStructures = yield call(Structures.getAll);
     const structures = yield call(convertCmlToBase64Arr, responseStructures.data);
     yield put(addStructures(structures));
-    const responseSettings = yield call(Settings.getAll);
-    yield put(addSettings(responseSettings.data));
+//    if settings get from server
+//    const responseSettings = yield call(Settings.getAll);
+//    yield put(addSettings(responseSettings.data));
     yield put(succsessRequest());
   } catch (e) {
     yield put(errorRequest(e.message, action));
