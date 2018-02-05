@@ -6,8 +6,6 @@ import DynamicForm from './DynamicForm';
 import { MARVIN_PATH_IFRAME, MARVIN_EDITOR_IS_EMPTY } from '../config';
 import { exportCml, clearEditor, importCml } from '../base/marvinAPI';
 
-import 'antd/lib/message/style/css';
-
 const Modal = styled.div`
   opacity: ${props => (props.isShow ? 1 : 0)};
   position: fixed;
@@ -34,10 +32,6 @@ const Content = styled.div`
 const Body = styled.div`
   position: relative;
   padding: 5px;
-`;
-
-const Iframe = styled.iframe`
-  border: 0;
 `;
 
 

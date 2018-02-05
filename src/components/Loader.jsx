@@ -1,7 +1,7 @@
 import React from 'react';
 import styled, { keyframes } from 'styled-components';
 import PropTypes from 'prop-types';
-import { Spin, Icon } from 'antd';
+import { Spin } from 'antd';
 
 const animation = keyframes`
   0% { transform: rotate(0deg); }
@@ -23,17 +23,6 @@ const LoaderContain = styled.div`
     align-items: center;
     justify-content: center;
     background: rgba(255,255,255,0.4)
-`;
-
-const Wheel = styled.div`
-    width: 150px;
-    height: 150px;
-    margin: 0 auto;
-    border: 10px solid #108ee9;
-    border-radius: 50%;
-    border-left-color: transparent;
-    border-right-color: transparent;
-    animation: ${animation} 800ms infinite linear;
 `;
 
 const Loader = ({ loading }) => loading && (

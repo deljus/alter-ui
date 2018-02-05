@@ -1,8 +1,9 @@
 import React from 'react';
+import { Button as BaseButton, Alert } from 'antd';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import { MARVIN_EDITOR_IS_EMPTY } from '../config';
-import { Button as BaseButton, Alert } from 'antd';
+
 
 const Rigth = styled.div`
   position: absolute;

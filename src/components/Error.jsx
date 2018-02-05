@@ -1,7 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Modal, Button } from 'antd';
-import 'antd/lib/modal/style/css';
 
 const Error = ({ visible, message, cancelBtn, refreshBtn }) => visible && (
   <Modal

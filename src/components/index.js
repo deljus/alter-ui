@@ -6,11 +6,9 @@ import MainLayout from './MainLayout';
 import Loader from './Loader';
 import Error from './Error';
 import Thumbnail from './Thumbnail';
-import ModalIncrease from './ModalIncrease';
 import ResultItem from './ResultItem';
 import NotFoundPage from './NotFoundPage';
 import DBFormModal from './DBFormModal';
-import Whirligig from './Whirligig';
 import ConditionList from './ConditionList';
 
 export {
@@ -22,10 +20,8 @@ export {
   Loader,
   Error,
   Thumbnail,
-  ModalIncrease,
   ResultItem,
   DBFormModal,
-  Whirligig,
   MainLayout,
   ConditionList,
 };
