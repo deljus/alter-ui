@@ -100,7 +100,7 @@ class DynamicFieldSet extends React.Component {
             key={key}
           >
             {getFieldDecorator(`condition.${key}`, {
-              initialValue: condition[key].value,
+              initialValue: condition[key],
             })(
               <Slider
                 {...sliderConfig[key]}

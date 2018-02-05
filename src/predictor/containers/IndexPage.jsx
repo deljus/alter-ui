@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { Button, Upload, Icon, List, Collapse, Card, Popconfirm, Row, Col } from 'antd';
-import { deleteStructure } from '../core/actions';
+import { deleteStructureIndex } from '../core/actions';
 import { modal } from '../../base/actions';
 
 
@@ -59,12 +59,12 @@ const IndexPage = ({ structure, editStructure, deleteStructure, drawStructure, c
 );
 
 const mapStateToProps = state => ({
-  structure: state.structure,
+  structure: state.indexPageStructure,
 });
 
 const mapDispatchToProps = dispatch => ({
   drawStructure: () => dispatch({ type: 'DRAW_STRUCTURE' }),
-  deleteStructure: id => dispatch(deleteStructure(id)),
+  deleteStructure: id => dispatch(deleteStructureIndex(id)),
   editStructure: id => dispatch(modal(true, 'EDIT_STRUCTURE_INDEX', id)),
   createTask: structure => dispatch({ type: 'CREATE_TASK_INDEX', structure }),
 });

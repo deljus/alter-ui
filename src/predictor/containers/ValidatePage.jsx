@@ -3,22 +3,34 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import { Button, Upload, Icon, List, Collapse, Card, Popconfirm, Row, Col, Checkbox } from 'antd';
-import { ConditionList } from '../../components';
+import { ConditionListView } from '../wrapper';
 import { modal, addSelectModel } from '../core/actions';
 import { MODAL, URLS } from '../../config';
 
 
 class ValidatePage extends Component {
-  constructor(props) {
-    super(props);
-  }
-
   componentDidMount() {
     this.props.initPage();
   }
 
   resultClick() {
-    console.log(this.form);
+    let error = false;
+    const params = [];
+    const { structure, resultTask } = this.props;
+
+    this.form.forEach((field) => {
+      field && field.validateFields((err, values) => {
+        if (err) error = true;
+        else params.push(values);
+      });
+    });
+
+    if (error) return;
+
+    const data = structure.map((struct, i) => ({ data: struct.cml, ...params[i] }));
+    console.log(params);
+    console.log(data);
+    // resultTask(data)
   }
 
   render() {
@@ -28,8 +40,11 @@ class ValidatePage extends Component {
       <div>
         <Row style={{ paddingBottom: 38 }}>
           <Col span={8}>
-            <Button icon="left" onClick={() => history.push(URLS.INDEX)}>
-                  Back
+            <Button
+              icon="left"
+              onClick={() => history.push(URLS.INDEX)}
+            >
+              Back
             </Button>
           </Col>
           <Col span={8} offset={8} style={{ textAlign: 'right' }}>
@@ -61,7 +76,7 @@ class ValidatePage extends Component {
                 />
                 </Col>
                 <Col lg={12} sm={24} xs={24}>
-                  <ConditionList
+                  <ConditionListView
                     {...item}
                     ref={(e) => { this.form.push(e); }}
                   />
@@ -78,16 +93,14 @@ class ValidatePage extends Component {
 
 ValidatePage.propTypes = {
   initPage: PropTypes.func.isRequired,
-
 };
 
-
 const mapStateToProps = state => ({
-  structure: state.structure,
+  structure: state.validatePageStructure,
 });
 
 const mapDispatchToProps = dispatch => ({
-  resultTask: () => null,
+  resultTask: data => dispatch({ type: 'CREATE_RESULT_TASK', data }),
   initPage: () => dispatch({ type: 'INIT_VALIDATE_PAGE' }),
   editStructure: () => null,
   deleteStructure: () => null,

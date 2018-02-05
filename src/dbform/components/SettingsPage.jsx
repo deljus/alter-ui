@@ -15,9 +15,10 @@ const itemsConfig = {
 };
 
 const SettingsPage = ({ setSettings, settings }) => {
-  const handleChange = (key, value) => {
-    const keys = key.split('.');
-    settings[keys] = value;
+  const handleChange = (value, key, parent = null) => {
+    if (parent) settings[parent][key] = value;
+    else settings[key] = value;
+
     setSettings(settings);
   };
   const formItemLayout = {
@@ -39,7 +40,7 @@ const SettingsPage = ({ setSettings, settings }) => {
       >
         <Select
           value={settings && settings.tabs.tabPosition}
-          onChange={val => handleChange('tabs.tabPosition', val)}
+          onChange={val => handleChange(val, 'tabPosition', 'tabs')}
         >
           { itemsConfig.tabPosition.map((item, i) => <Option key={item + i} value={item} >{item}</Option>) }
         </Select>
@@ -50,54 +51,54 @@ const SettingsPage = ({ setSettings, settings }) => {
       >
         <Select
           value={settings && settings.tabs.size}
-          onChange={val => handleChange('tabs.size', val)}
+          onChange={val => handleChange(val, 'size', 'tabs')}
         >
           { itemsConfig.tabSize.map((item, i) => <Option key={item + i} value={item} >{item}</Option>) }
         </Select>
       </FormItem>
-      {/*<h4>Structure list page grid:</h4>*/}
+      <h4>Structure list page grid:</h4>
 
-      {/*{Object.keys(settings.grid).map(*/}
-        {/*key =>*/}
-          {/*(<FormItem*/}
-            {/*{...formItemLayout}*/}
-            {/*label={key}*/}
-          {/*>*/}
+      {Object.keys(settings.grid).map(
+        key =>
+          (<FormItem
+            {...formItemLayout}
+            label={key}
+          >
 
-            {/*<Slider*/}
-              {/*{...sliderConfig.grid}*/}
-              {/*value={settings && settings.grid[key]}*/}
-              {/*onAfterChange={val => handleChange(key, val)}*/}
-            {/*/>*/}
+            <Slider
+              {...sliderConfig.grid}
+              value={settings && settings.grid[key]}
+              onChange={val => handleChange(val, key, 'grid')}
+            />
 
-          {/*</FormItem>),*/}
-      {/*)}*/}
-      {/*<h4>Create page conditions:</h4>*/}
-      {/*{Object.keys(settings.condition).map(*/}
-        {/*key =>*/}
-          {/*(<FormItem*/}
-            {/*{...formItemLayout}*/}
-            {/*label={key}*/}
-          {/*>*/}
-            {/*<Slider*/}
-              {/*{...sliderConfig[key]}*/}
-              {/*value={settings && settings.condition[key]}*/}
-              {/*onAfterChange={val => handleChange(`condition.${key}`, val)}*/}
-            {/*/>*/}
-          {/*</FormItem>),*/}
-      {/*)}*/}
-      {/*<h4>Auto reset after submit in create page</h4>*/}
+          </FormItem>),
+      )}
+      <h4>Create page conditions:</h4>
+      {Object.keys(settings.condition).map(
+        key =>
+          (<FormItem
+            {...formItemLayout}
+            label={key}
+          >
+            <Slider
+              {...sliderConfig[key]}
+              value={settings && settings.condition[key]}
+              onChange={val => handleChange(val, key, 'condition')}
+            />
+          </FormItem>),
+      )}
+      <h4>Auto reset after submit in create page</h4>
 
-      {/*<FormItem*/}
-        {/*{...formItemLayout}*/}
-        {/*label="Auto reset"*/}
-      {/*>*/}
+      <FormItem
+          {...formItemLayout}
+        label="Auto reset"
+      >
 
-        {/*<Switch*/}
-          {/*value={settings && settings.auto_reset}*/}
-          {/*onChange={val => handleChange('auto_reset', val)}*/}
-        {/*/>*/}
-      {/*</FormItem>*/}
+        <Switch
+          value={settings && settings.auto_reset}
+          onChange={val => handleChange(val, 'auto_reset')}
+        />
+      </FormItem>
     </Form>
   );
 };

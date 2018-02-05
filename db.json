@@ -367,6 +367,20 @@
         "pressure": 2.1
       },
       "id": 47
+    },
+    {
+      "data": "<cml><MDocument><MChemicalStruct><molecule molID=\"m1\"><atomArray><atom id=\"a1\" elementType=\"C\" x2=\"-2.9792599999992513\" y2=\"-0.834906678987414\"/><atom id=\"a2\" elementType=\"C\" x2=\"-4.312806655997546\" y2=\"-1.604906672827413\"/><atom id=\"a3\" elementType=\"C\" x2=\"-4.312806655997546\" y2=\"-3.145093327172587\"/><atom id=\"a4\" elementType=\"C\" x2=\"-2.9792599999992513\" y2=\"-3.915093321012587\"/><atom id=\"a5\" elementType=\"C\" x2=\"-1.6455266773357868\" y2=\"-3.145093327172587\"/><atom id=\"a6\" elementType=\"C\" x2=\"-1.6455266773357868\" y2=\"-1.604906672827413\"/></atomArray><bondArray><bond atomRefs2=\"a1 a2\" order=\"2\" id=\"b1\"/><bond atomRefs2=\"a2 a3\" order=\"1\" id=\"b2\"/><bond atomRefs2=\"a3 a4\" order=\"2\" id=\"b3\"/><bond atomRefs2=\"a4 a5\" order=\"1\" id=\"b4\"/><bond atomRefs2=\"a5 a6\" order=\"2\" id=\"b5\"/><bond atomRefs2=\"a6 a1\" order=\"1\" id=\"b6\"/></bondArray></molecule></MChemicalStruct></MDocument></cml>",
+      "params": [
+        {
+          "key": "vbv b",
+          "value": "v v v "
+        }
+      ],
+      "condition": {
+        "temperature": 298,
+        "pressure": 1
+      },
+      "id": 48
     }
   ]
 }

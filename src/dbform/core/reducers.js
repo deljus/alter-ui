@@ -56,12 +56,8 @@ const defaultSettings = {
     xl: 3,
   },
   condition: {
-    temperature: {
-      value: 298,
-    },
-    pressure: {
-      value: 1,
-    },
+    temperature: 298,
+    pressure: 1,
   },
   auto_reset: false,
 };

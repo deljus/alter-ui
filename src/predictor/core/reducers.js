@@ -1,44 +1,20 @@
 import { combineReducers } from 'redux';
-import { HISTORY, RESULT, STRUCTURE, TRIGGER, REQUEST } from './constants';
+import * as CONST from './constants';
 import { request, modal } from '../../base/reducers';
 
-const histories = (state = [], action) => {
+const indexPageStructure = (state = [], action) => {
   switch (action.type) {
-    case HISTORY.ADD:
-      state.push(action.arr);
-      return state;
-    default:
-      return state;
-  }
-};
-
-const results = (state = null, action) => {
-  switch (action.type) {
-    case RESULT.ADD:
-      return action.arr;
-
-    default:
-      return state;
-  }
-};
-
-let i = 0;
-
-const structure = (state = [], action) => {
-  switch (action.type) {
-    case STRUCTURE.ADD_STRUCTURE:
+    case CONST.ADD_STRUCTURE_INDEX:
       return [
         {
-          id: i++,
+          id: state.reduce((maxId, task) => Math.max(task.id, maxId), -1) + 1,
           ...action.arr,
         },
         ...state,
       ];
-    case STRUCTURE.ADD_STRUCTURES:
-      return action.arr;
-    case STRUCTURE.DELETE_STRUCTURE:
+    case CONST.DELETE_STRUCTURE_INDEX:
       return state.filter(structure => structure.id !== action.id);
-    case STRUCTURE.EDIT_STRUCTURE:
+    case CONST.EDIT_STRUCTURE_INDEX:
       return state.map(structure =>
         (structure.id === action.arr.id ?
           { ...action.arr } :
@@ -49,11 +25,66 @@ const structure = (state = [], action) => {
   }
 };
 
+const validatePageStructure = (state = [], action) => {
+  switch (action.type) {
+    case CONST.ADD_STRUCTURES_VALIDATE:
+      return action.arr.map((s, i) => ({ id: i, ...s }));
+    case CONST.ADD_TEMPERATURE_VALIDATE:
+      return state.map(structure =>
+        (structure.id === action.id ?
+          { ...structure, temperature: action.temperature } :
+          structure),
+      );
+    case CONST.ADD_PRESSURE_VALIDATE:
+      return state.map(structure =>
+        (structure.id === action.id ?
+          { ...structure, pressure: action.pressure } :
+          structure),
+      );
+
+    case CONST.ADD_MODELS_VALIDATE:
+      return state.map(structure =>
+        (structure.id === action.id ?
+          { ...structure, models: action.models.map(model => ({ model })) } :
+          structure),
+      );
+
+    case CONST.ADD_ADDITIVES_VALIDATE:
+        return state.map(structure =>
+            (structure.id === action.id ?
+                { ...structure, additives: action.additives } :
+                structure),
+        );
+
+    default:
+      return state;
+  }
+};
+
+const allAdditives = (state = [], action) => {
+  switch (action.type) {
+    case CONST.ADD_ALL_ADDITIVES:
+      return action.additives;
+    default:
+      return state;
+  }
+};
+
+const allModels = (state = [], action) => {
+  switch (action.type) {
+    case CONST.ADD_ALL_MODELS:
+      return action.models;
+    default:
+      return state;
+  }
+};
+
 
 export default combineReducers({
   modal,
   request,
-  structure,
-  results,
-  histories,
+  indexPageStructure,
+  validatePageStructure,
+  allAdditives,
+  allModels,
 });

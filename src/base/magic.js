@@ -1,16 +1,24 @@
 class Serialize {
-  static modelsOfTypes(type, models, magic) {
-    if (type === magic.StructureType.MOLECULE) {
-      return models.filter(o => o.type === magic.ModelType.MOLECULE_SEARCHING);
-    } else if (type === magic.StructureType.REACTION) {
-      return models.filter(o => o.type === magic.ModelType.REACTION_SEARCHING);
+  static modelsOfTypes(structureType, models, magic, taskType) {
+    if (taskType === magic.TaskType.SEARCHING) {
+      if (structureType === magic.StructureType.MOLECULE) {
+        return models.filter(o => o.type === magic.ModelType.MOLECULE_SEARCHING);
+      } else if (structureType === magic.StructureType.REACTION) {
+        return models.filter(o => o.type === magic.ModelType.REACTION_SEARCHING);
+      }
+    } else if (taskType === magic.TaskType.MODELING) {
+      if (structureType === magic.StructureType.MOLECULE) {
+        return models.filter(o => o.type === magic.ModelType.MOLECULE_MODELING);
+      } else if (structureType === magic.StructureType.REACTION) {
+        return models.filter(o => o.type === magic.ModelType.REACTION_MODELING);
+      }
     }
     return [];
   }
 
   static models(task, models, magic) {
     return task.structures.map((structure) => {
-      const modelSorted = this.modelsOfTypes(structure.type, models, magic);
+      const modelSorted = this.modelsOfTypes(structure.type, models, magic, task.type);
       return {
         ...structure,
         cml: structure.data,
