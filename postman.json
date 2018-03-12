@@ -1,0 +1,371 @@
+{
+	"info": {
+		"name": "Postman Barebones",
+		"_postman_id": "019cf297-992e-4728-b26b-7cf8bc0120da",
+		"description": "",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "create",
+			"request": {
+				"method": "post",
+				"header": [],
+				"body": {},
+				"url": {
+					"raw": "https://cimm.kpfu.ru/api/task/create/:_type",
+					"protocol": "https",
+					"host": [
+						"cimm",
+						"kpfu",
+						"ru"
+					],
+					"path": [
+						"api",
+						"task",
+						"create",
+						":_type"
+					]
+				},
+				"description": "Create new task\n\nParameters:\n\n_type: Task type ID: 0 - MODELING, 1 - SEARCHING, 2 - POPULATE \n\n"
+			},
+			"response": []
+		},
+		{
+			"name": "upload",
+			"request": {
+				"method": "post",
+				"header": [],
+				"body": {},
+				"url": {
+					"raw": "https://cimm.kpfu.ru/api/task/upload",
+					"protocol": "https",
+					"host": [
+						"cimm",
+						"kpfu",
+						"ru"
+					],
+					"path": [
+						"api",
+						"task",
+						"upload"
+					]
+				},
+				"description": "Structures file upload"
+			},
+			"response": []
+		},
+		{
+			"name": "prepared",
+			"request": {
+				"method": "get",
+				"header": [],
+				"body": {},
+				"url": {
+					"raw": "https://cimm.kpfu.ru/api/task/prepare/:task?page=",
+					"protocol": "https",
+					"host": [
+						"cimm",
+						"kpfu",
+						"ru"
+					],
+					"path": [
+						"api",
+						"task",
+						"prepare",
+						":task"
+					],
+					"query": [
+						{
+							"key": "page",
+							"value": ""
+						}
+					]
+				},
+				"description": "Task with validated structure and conditions data\n\nParameters:\n\ntask: Task ID \n\n"
+			},
+			"response": []
+		},
+		{
+			"name": "prepare",
+			"request": {
+				"method": "post",
+				"header": [],
+				"body": {},
+				"url": {
+					"raw": "https://cimm.kpfu.ru/api/task/prepare/:task",
+					"protocol": "https",
+					"host": [
+						"cimm",
+						"kpfu",
+						"ru"
+					],
+					"path": [
+						"api",
+						"task",
+						"prepare",
+						":task"
+					]
+				},
+				"description": "Revalidate task structures and conditions\n\nParameters:\n\ntask: Task ID \n\n"
+			},
+			"response": []
+		},
+		{
+			"name": "modeled",
+			"request": {
+				"method": "get",
+				"header": [],
+				"body": {},
+				"url": {
+					"raw": "https://cimm.kpfu.ru/api/task/model/:task?page=",
+					"protocol": "https",
+					"host": [
+						"cimm",
+						"kpfu",
+						"ru"
+					],
+					"path": [
+						"api",
+						"task",
+						"model",
+						":task"
+					],
+					"query": [
+						{
+							"key": "page",
+							"value": ""
+						}
+					]
+				},
+				"description": "Task with results of structures with conditions modeling\n\nParameters:\n\ntask: Task ID \n\n"
+			},
+			"response": []
+		},
+		{
+			"name": "modeling",
+			"request": {
+				"method": "post",
+				"header": [],
+				"body": {},
+				"url": {
+					"raw": "https://cimm.kpfu.ru/api/task/model/:task",
+					"protocol": "https",
+					"host": [
+						"cimm",
+						"kpfu",
+						"ru"
+					],
+					"path": [
+						"api",
+						"task",
+						"model",
+						":task"
+					]
+				},
+				"description": "Modeling task structures and conditions\n\nParameters:\n\ntask: Task ID \n\n"
+			},
+			"response": []
+		},
+		{
+			"name": "delete",
+			"request": {
+				"method": "delete",
+				"header": [],
+				"body": {},
+				"url": {
+					"raw": "https://cimm.kpfu.ru/api/task/results/:task",
+					"protocol": "https",
+					"host": [
+						"cimm",
+						"kpfu",
+						"ru"
+					],
+					"path": [
+						"api",
+						"task",
+						"results",
+						":task"
+					]
+				},
+				"description": "Delete task from db\n\nParameters:\n\ntask: Task ID \n\n"
+			},
+			"response": []
+		},
+		{
+			"name": "saved",
+			"request": {
+				"method": "get",
+				"header": [],
+				"body": {},
+				"url": {
+					"raw": "https://cimm.kpfu.ru/api/task/results/:task?page=",
+					"protocol": "https",
+					"host": [
+						"cimm",
+						"kpfu",
+						"ru"
+					],
+					"path": [
+						"api",
+						"task",
+						"results",
+						":task"
+					],
+					"query": [
+						{
+							"key": "page",
+							"value": ""
+						}
+					]
+				},
+				"description": "Task with modeling results of structures with conditions\n\nParameters:\n\ntask: Task ID \n\n"
+			},
+			"response": []
+		},
+		{
+			"name": "save",
+			"request": {
+				"method": "post",
+				"header": [],
+				"body": {},
+				"url": {
+					"raw": "https://cimm.kpfu.ru/api/task/results/:task",
+					"protocol": "https",
+					"host": [
+						"cimm",
+						"kpfu",
+						"ru"
+					],
+					"path": [
+						"api",
+						"task",
+						"results",
+						":task"
+					]
+				},
+				"description": "Store in database modeled task\n\nParameters:\n\ntask: Task ID \n\n"
+			},
+			"response": []
+		},
+		{
+			"name": "saved_list",
+			"request": {
+				"method": "get",
+				"header": [],
+				"body": {},
+				"url": {
+					"raw": "https://cimm.kpfu.ru/api/task/results",
+					"protocol": "https",
+					"host": [
+						"cimm",
+						"kpfu",
+						"ru"
+					],
+					"path": [
+						"api",
+						"task",
+						"results"
+					]
+				},
+				"description": "Get current user's saved tasks"
+			},
+			"response": []
+		},
+		{
+			"name": "additives",
+			"request": {
+				"method": "get",
+				"header": [],
+				"body": {},
+				"url": {
+					"raw": "https://cimm.kpfu.ru/api/resources/additives",
+					"protocol": "https",
+					"host": [
+						"cimm",
+						"kpfu",
+						"ru"
+					],
+					"path": [
+						"api",
+						"resources",
+						"additives"
+					]
+				},
+				"description": "Get available additives list"
+			},
+			"response": []
+		},
+		{
+			"name": "modellist",
+			"request": {
+				"method": "get",
+				"header": [],
+				"body": {},
+				"url": {
+					"raw": "https://cimm.kpfu.ru/api/resources/models",
+					"protocol": "https",
+					"host": [
+						"cimm",
+						"kpfu",
+						"ru"
+					],
+					"path": [
+						"api",
+						"resources",
+						"models"
+					]
+				},
+				"description": "Get available models list"
+			},
+			"response": []
+		},
+		{
+			"name": "magic",
+			"request": {
+				"method": "get",
+				"header": [],
+				"body": {},
+				"url": {
+					"raw": "https://cimm.kpfu.ru/api/resources/magic",
+					"protocol": "https",
+					"host": [
+						"cimm",
+						"kpfu",
+						"ru"
+					],
+					"path": [
+						"api",
+						"resources",
+						"magic"
+					]
+				},
+				"description": "Get Magic numbers"
+			},
+			"response": []
+		},
+		{
+			"name": "login",
+			"request": {
+				"method": "post",
+				"header": [],
+				"body": {},
+				"url": {
+					"raw": "https://cimm.kpfu.ru/api/auth",
+					"protocol": "https",
+					"host": [
+						"cimm",
+						"kpfu",
+						"ru"
+					],
+					"path": [
+						"api",
+						"auth"
+					]
+				},
+				"description": "Get auth token"
+			},
+			"response": []
+		}
+	]
+}
