@@ -17,7 +17,7 @@ const uploadProps = {
 
 const IndexPage = ({ structure, editStructure, deleteStructure, drawStructure, createTask }) => (
   <div>
-    <Row style={{ marginBottom: '20px' }}>
+    <Row gutter={24} style={{ marginBottom: '20px' }}>
       <Col span={8}>
         <Upload {...uploadProps}>
           <Button icon="upload">
@@ -25,19 +25,18 @@ const IndexPage = ({ structure, editStructure, deleteStructure, drawStructure, c
           </Button>
         </Upload>
       </Col>
-      <Col span={8} offset={8} style={{ textAlign: 'right' }}>
+      <Col offset={8} style={{ textAlign: 'right' }}>
         <Button type="dashed" onClick={() => drawStructure()} icon="plus" style={{ marginRight: '8px' }}>Add structure</Button>
         <Button type="primary" onClick={() => createTask(structure)} icon="right" disabled={!structure.length}>Validate</Button>
       </Col>
     </Row>
     <div>
       <List
-        grid={{ gutter: 16, xs: 1, sm: 2, md: 3, lg: 3, xl: 3 }}
+        grid={{ gutter: 24, xs: 1, sm: 2, md: 3, lg: 3, xl: 3 }}
         dataSource={structure}
         renderItem={item => (
           <List.Item>
             <Card
-              style={{ width: '100%' }}
               cover={<img alt="example" src={item.base64} />}
               actions={
                 [<Icon type="edit" onClick={() => editStructure(item.id)} />,

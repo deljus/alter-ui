@@ -1,10 +1,9 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import styled from 'styled-components';
 import { Button, Upload, Icon, List, Collapse, Card, Popconfirm, Row, Col, Checkbox } from 'antd';
 import { ConditionListView } from '../wrapper';
-import { modal, addSelectModel } from '../core/actions';
+import { modal, addSelectModel, chekedStructure } from '../core/actions';
 import { MODAL, URLS } from '../../config';
 
 
@@ -62,7 +61,7 @@ class ValidatePage extends Component {
                   style={{ width: '100%' }}
                   cover={<img alt="example" src={item.base64} />}
                   actions={
-                    [<Checkbox onChange={checkStructure(item.id)} />,
+                    [<Checkbox cheked={item.check} onChange={() => checkStructure(item.id)} />,
                       <Icon type="edit" onClick={() => editStructure(item.id)} />,
                       <Popconfirm
                         placement="topLeft"
@@ -104,7 +103,7 @@ const mapDispatchToProps = dispatch => ({
   initPage: () => dispatch({ type: 'INIT_VALIDATE_PAGE' }),
   editStructure: () => null,
   deleteStructure: () => null,
-  checkStructure: () => null,
+  checkStructure: id => dispatch(chekedStructure(id)),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(ValidatePage);

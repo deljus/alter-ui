@@ -1,8 +1,8 @@
-import React, { Component } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 import { Form, Select, Slider, InputNumber, Row, Col } from 'antd';
 
-const FormItem = Form.Item;
+
 const Option = Select.Option;
 
 const temperatureConfig = {
@@ -49,28 +49,28 @@ const pressureConfig = {
   step: 0.1,
 };
 
-const additivesConfig = {
-  max: 100,
-  min: 0,
-  marks: {
-    0: {
-      style: {
-        color: '#1890ff',
-      },
-      label: <strong>0%</strong>,
-    },
-    25: '25%',
-    50: '50%',
-    75: '75%',
-    100: {
-      style: {
-        color: '#f50',
-      },
-      label: <strong>100%</strong>,
-    },
-  },
-  step: 0.1,
-};
+// const additivesConfig = {
+//   max: 100,
+//   min: 0,
+//   marks: {
+//     0: {
+//       style: {
+//         color: '#1890ff',
+//       },
+//       label: <strong>0%</strong>,
+//     },
+//     25: '25%',
+//     50: '50%',
+//     75: '75%',
+//     100: {
+//       style: {
+//         color: '#f50',
+//       },
+//       label: <strong>100%</strong>,
+//     },
+//   },
+//   step: 0.1,
+// };
 
 
 const ConditionList = ({ id, allAdditives, changeAdditives, allModels, changeModels, models, temperature, tempChange, pressChange, pressure, additives, structure }) => {

@@ -21,7 +21,7 @@ class ValidatePage extends Component {
     const { structure, openEditModal, changeSelectedModel, history, onRevalidate, onContinue, request } = this.props;
     return !request.loading && !request.error && structure && (
       <div>
-        <Row gutter={10} sm={24} xs={24}>
+        <Row gutter={24} sm={24} xs={24}>
           <Col lg={14}>
             <Thumbnail
               cml={structure.cml}

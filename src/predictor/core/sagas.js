@@ -8,7 +8,7 @@ import { getUrlParams, stringifyUrl } from '../../base/parseUrl';
 import repeatedRequests from '../../base/repeatedRequests';
 import Serialize from '../../base/magic';
 import { message } from 'antd';
-import { convertCmlToBase64, clearEditor, exportCml, importCml, convertCmlToBase64Arr } from '../../base/marvinAPI';
+import { convertCmlToBase64, clearEditor, exportCml, convertCmlToBase64Arr } from '../../base/marvinAPI';
 
 import 'antd/lib/message/style/css';
 
@@ -64,7 +64,7 @@ function* validateTask(action) {
     const magic = yield call(Request.getMagic);
     const structureOfTypes = Serialize.models(task.data, models.data, magic.data);
     const structureAndBase64 = yield call(convertCmlToBase64Arr, task.data.structures);
-    yield put(addStructuresValidate(structureAndBase64));
+    yield put(addStructuresValidate(structureAndBase64.map(s => ({ ...s, check: false }))));
     yield put(addAllAdditives(additives.data));
     yield put(addAllModels(models.data));
     yield put(succsessRequest());

@@ -60,7 +60,7 @@ class StructureListPage extends Component {
             />
           </div>
           <List
-            grid={{ ...gridSettings }}
+            grid={{ ...gridSettings, gutter: 20 }}
             dataSource={structuresSorted.slice((current * pageSize) - pageSize, current * pageSize)}
             renderItem={item => (
               <List.Item

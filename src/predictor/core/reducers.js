@@ -50,11 +50,18 @@ const validatePageStructure = (state = [], action) => {
       );
 
     case CONST.ADD_ADDITIVES_VALIDATE:
-        return state.map(structure =>
-            (structure.id === action.id ?
-                { ...structure, additives: action.additives } :
-                structure),
-        );
+      return state.map(structure =>
+        (structure.id === action.id ?
+          { ...structure, additives: action.additives } :
+          structure),
+      );
+
+    case CONST.CHECK_STRUCTURE:
+      return state.map(structure =>
+        (structure.id === action.id ?
+          { ...structure, check: !state.check } :
+          structure),
+      );
 
     default:
       return state;

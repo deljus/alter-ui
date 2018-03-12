@@ -32,10 +32,12 @@ export const addModelsValidate = (id, models) => ({
 });
 
 export const addAdditivesValidate = (id, additives) => ({
-    type: CONST.ADD_ADDITIVES_VALIDATE, id, additives,
+  type: CONST.ADD_ADDITIVES_VALIDATE, id, additives,
 });
 
-
+export const chekedStructure = (id, check) => ({
+  type: CONST.CHECK_STRUCTURE, id,
+});
 
 // Add all additives
 export const addAllAdditives = additives => ({
