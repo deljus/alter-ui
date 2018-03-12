@@ -1,6 +1,10 @@
+/**
+ * Merges two (or more) objects, giving the last one precedence.
+ * @param {object} target Object precedence
+ * @param {object} source Object
+ * @returns {object}
+ */
 function merge(target, source) {
-  /* Merges two (or more) objects,
-       giving the last one precedence */
 
   if (typeof target !== 'object') {
     target = {};

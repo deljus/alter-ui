@@ -1,4 +1,15 @@
+/**
+ *
+ */
 class Serialize {
+  /**
+   * @static
+   * @param structureType
+   * @param models
+   * @param magic
+   * @param taskType
+   * @return {Array}
+   */
   static modelsOfTypes(structureType, models, magic, taskType) {
     if (taskType === magic.TaskType.SEARCHING) {
       if (structureType === magic.StructureType.MOLECULE) {
@@ -16,6 +27,12 @@ class Serialize {
     return [];
   }
 
+  /**
+   * @static
+   * @param task
+   * @param models
+   * @param magic
+   */
   static models(task, models, magic) {
     return task.structures.map((structure) => {
       const modelSorted = this.modelsOfTypes(structure.type, models, magic, task.type);
