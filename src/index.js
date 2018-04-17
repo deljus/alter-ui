@@ -1,7 +1,9 @@
+import React from 'react';
 import ReactDOM from 'react-dom';
 /* eslint-disable */
-import App from './predictor/App';
+import App from './dbform/App';
+
 ReactDOM.render(
-    App,
-    document.getElementById('root'),
+  App,
+  document.getElementById('root'),
 );

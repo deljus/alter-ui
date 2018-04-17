@@ -5,8 +5,9 @@ import {
   CreatePage,
   StructureListPage,
   SettingsPage,
+  DBFormModalView,
+  ProcessPage,
 } from './components';
-import { DBFormModalView } from './compWraps';
 import { LoaderView, ErrorView } from '../base/wrapper';
 import { MainLayout } from '../components';
 import 'antd/dist/antd.css';
@@ -29,7 +30,7 @@ class Main extends Component {
         <DBFormModalView />
         <ErrorView />
         <Tabs
-          defaultActiveKey="2"
+          defaultActiveKey="3"
           {...tabs}
           tabBarExtraContent={<Select style={{ width: 200 }} >
             <Option value="dscsdc">vsdsdv</Option>
@@ -38,12 +39,16 @@ class Main extends Component {
           <TabPane tab={<span><Icon type="file-add" />Create</span>} key="1">
             <CreatePage />
           </TabPane>
-          <TabPane tab={<span><Icon type="database" />List</span>} key="2">
+          <TabPane tab={<span><Icon type="retweet" />Process</span>} key="2">
+            <ProcessPage />
+          </TabPane>
+          <TabPane tab={<span><Icon type="database" />List</span>} key="3">
             <StructureListPage />
           </TabPane>
-          <TabPane tab={<span><Icon type="setting" />Settings</span>} key="3">
+          <TabPane tab={<span><Icon type="setting" />Settings</span>} key="4">
             <SettingsPage />
           </TabPane>
+
         </Tabs>
       </MainLayout>
     );
