@@ -28,9 +28,11 @@ class StructureListPage extends Component {
     onShowSizeChange(current, pageSize) {
       this.setState({ current, pageSize });
     }
+
     changePage(pageNumber) {
       this.setState({ current: pageNumber });
     }
+
     changeInput(sorted) {
       this.setState({ sorted });
     }
@@ -40,16 +42,16 @@ class StructureListPage extends Component {
       this.props.form.validateFields((err, values) => {
         console.log('Received values of form: ', values);
       });
-    }
+    };
 
     handleReset = () => {
       this.props.form.resetFields();
-    }
+    };
 
     toggle = () => {
       const { expand } = this.state;
       this.setState({ expand: !expand });
-    }
+    };
 
 
     render() {
