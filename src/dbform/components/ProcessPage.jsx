@@ -2,14 +2,14 @@ import React from 'react';
 import { Card, Icon, List } from 'antd';
 import { connect } from 'react-redux';
 
-const ProcessPage = () => {
-  const { settings } = this.props;
+const ProcessPage = ({ settings }) => {
+ // const { settings } = this.props;
   const gridSettings = settings && settings.grid;
 
   return settings && (
     <List
       grid={{ ...gridSettings, gutter: 20 }}
-      dataSource={null}
+      dataSource={[]}
       renderItem={item => (
         <List.Item
           key={item.id}

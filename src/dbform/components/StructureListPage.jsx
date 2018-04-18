@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import { List, Icon, Collapse, Card as BaseCard, Popconfirm, Pagination, Select } from 'antd';
+import { Form, Row, Col, Input, Button, Icon, List, Collapse, Card as BaseCard, Popconfirm, Pagination, Select } from 'antd';
 import styled from 'styled-components';
 import { showModal } from '../core/actions';
 
@@ -13,7 +13,7 @@ const Card = styled(BaseCard)`
 `;
 
 const Panel = Collapse.Panel;
-
+const FormItem = Form.Item;
 const Option = Select.Option;
 
 class StructureListPage extends Component {
@@ -21,7 +21,10 @@ class StructureListPage extends Component {
       current: 1,
       pageSize: 10,
       sorted: 'decrease',
+      expand: false,
     };
+
+
     onShowSizeChange(current, pageSize) {
       this.setState({ current, pageSize });
     }
@@ -31,34 +34,98 @@ class StructureListPage extends Component {
     changeInput(sorted) {
       this.setState({ sorted });
     }
+
+    handleSearch = (e) => {
+      e.preventDefault();
+      this.props.form.validateFields((err, values) => {
+        console.log('Received values of form: ', values);
+      });
+    }
+
+    handleReset = () => {
+      this.props.form.resetFields();
+    }
+
+    toggle = () => {
+      const { expand } = this.state;
+      this.setState({ expand: !expand });
+    }
+
+
     render() {
-      const { structures, editStructure, deleteStructure, settings } = this.props;
-      const { current, pageSize, sorted } = this.state;
+      const { structures, editStructure, deleteStructure, settings, form: { getFieldDecorator } } = this.props;
+      const { current, pageSize, sorted, expand } = this.state;
 
       const structuresSorted = structures.sort((a, b) => (sorted === 'increase' ? a.id - b.id : b.id - a.id));
-
       const gridSettings = settings && settings.grid;
+
       return structures && settings && (
         <div>
-          <div style={{ marginBottom: '20px' }}>
-            <span>Sorting:</span>
-            <Select
-              defaultValue={sorted}
-              style={{ width: 120 }}
-              onChange={this.changeInput.bind(this)}
-            >
-              <Option value="increase">increase</Option>
-              <Option value="decrease">decrease</Option>
-            </Select>
-            <Pagination
-              className="pull-right"
-              showSizeChanger
-              onChange={this.changePage.bind(this)}
-              onShowSizeChange={this.onShowSizeChange.bind(this)}
-              defaultCurrent={current}
-              total={structures.length}
-            />
-          </div>
+          <Form
+            className="ant-advanced-search-form"
+            onSubmit={this.handleSearch}
+          >
+            <Row gutter={24}>
+              <Col span={8} style={{ display: expand ? 'block' : 'none' }}>
+                <FormItem label="Database">
+                  {getFieldDecorator('database', {
+                    rules: [{
+                      required: false,
+                    }],
+                  })(
+                    <Select placeholder="placeholder" />,
+                  )}
+                </FormItem>
+              </Col>
+              <Col span={8} style={{ display: expand ? 'block' : 'none' }}>
+                <FormItem label="Table">
+                  {getFieldDecorator('table', {
+                    rules: [{
+                      required: false,
+                    }],
+                  })(
+                    <Select placeholder="placeholder" />,
+                  )}
+                </FormItem>
+              </Col>
+              <Col span={8} style={{ display: expand ? 'block' : 'none' }}>
+                <FormItem label="Sorting">
+                  {getFieldDecorator('sorting', {
+                    rules: [{
+                      required: false,
+                    }],
+                  })(
+                    <Select>
+                      <Option value="increase">increase</Option>
+                      <Option value="decrease">decrease</Option>
+                    </Select>,
+                  )}
+                </FormItem>
+              </Col>
+              <Col span={24} style={{ textAlign: 'right', display: expand ? 'block' : 'none' }}>
+                <FormItem>
+                  <Button type="primary" htmlType="submit">Search</Button>
+                </FormItem>
+              </Col>
+            </Row>
+            <Row />
+          </Form>
+          <Row style={{ marginBottom: '20px', fontSize: '14px' }}>
+            <Col span={8}>
+              <a style={{ marginLeft: 8 }} onClick={this.toggle}>
+                { this.state.expand ? <span> Hide filters <Icon type="up" /></span> : <span> Show filters <Icon type="down" /></span> }
+              </a>
+            </Col>
+            <Col span={16} style={{ textAlign: 'right' }}>
+              <Pagination
+                showSizeChanger
+                onChange={this.changePage.bind(this)}
+                onShowSizeChange={this.onShowSizeChange.bind(this)}
+                defaultCurrent={current}
+                total={structures.length}
+              />
+            </Col>
+          </Row>
           <List
             grid={{ ...gridSettings, gutter: 20 }}
             dataSource={structuresSorted.slice((current * pageSize) - pageSize, current * pageSize)}
@@ -117,4 +184,4 @@ const mapDispatchToProps = dispatch => ({
   deleteStructure: id => dispatch({ type: 'DELETE_STRUCTURE', id }),
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(StructureListPage);
+export default connect(mapStateToProps, mapDispatchToProps)(Form.create()(StructureListPage));
