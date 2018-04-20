@@ -2,28 +2,19 @@ import axios from 'axios';
 import { API_URLS } from '../../config';
 
 
-class Structures {
-  static getAll() {
-    return axios.get(API_URLS.STRUCTURES);
-  }
+const Structures = {
+  getAll: () => axios.get(API_URLS.STRUCTURES),
+  add: data => axios.post(API_URLS.STRUCTURES, { ...data }),
+  delete: id => axios.delete(`${API_URLS.STRUCTURES}/${id}`),
+  edit: (id, data, params, condition) => axios.put(`${API_URLS.STRUCTURES}/${id}`, { data, params, condition }),
+};
 
-  static add(data) {
-    return axios.post(API_URLS.STRUCTURES, { ...data });
-  }
+const Settings = {
+  getAll: () => axios.get(API_URLS.SETTINGS),
+};
 
-  static delete(id) {
-    return axios.delete(`${API_URLS.STRUCTURES}/${id}`);
-  }
+const Records = {
+  getAllbyUser: (database, table) => axios.get(API_URLS.RECORDS, { database, table }),
+};
 
-  static edit(id, data, params, condition) {
-    return axios.put(`${API_URLS.STRUCTURES}/${id}`, { data, params, condition });
-  }
-}
-
-class Settings {
-  static getAll() {
-    return axios.get(API_URLS.SETTINGS);
-  }
-}
-
-export { Structures, Settings };
+export { Structures, Settings, Records };

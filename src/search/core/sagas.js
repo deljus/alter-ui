@@ -6,7 +6,7 @@ import Request from '../../base/requests';
 import history from '../../base/history';
 import { URLS, MODAL } from '../../config';
 import { getUrlParams, stringifyUrl } from '../../base/parseUrl';
-import repeatedRequests from '../../base/repeatedRequests';
+import { repeatedRequests } from '../../base/sagas';
 import Serialize from '../../base/magic';
 import { convertCmlToBase64, clearEditor, exportCml, importCml, convertCmlToBase64Arr } from '../../base/marvinAPI';
 

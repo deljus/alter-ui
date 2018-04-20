@@ -1,6 +1,7 @@
 import { delay } from 'redux-saga';
-import { call } from 'redux-saga/effects';
+import { call, put } from 'redux-saga/effects';
 import { REPEATED_REQUESTS } from '../config';
+import { startRequest, succsessRequest, errorRequest } from './actions';
 
 function* repeatedRequests(request, data) {
   let error;
@@ -18,4 +19,14 @@ function* repeatedRequests(request, data) {
   throw new Error(error);
 }
 
-export default repeatedRequests;
+function* requestSaga(fn, action) {
+  try {
+    yield put(startRequest());
+    yield call(fn, action);
+    yield put(succsessRequest());
+  } catch (e) {
+    yield put(errorRequest(e.message));
+  }
+}
+
+export { repeatedRequests, requestSaga };
