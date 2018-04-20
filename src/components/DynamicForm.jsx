@@ -1,11 +1,11 @@
-import React, { Component } from 'react';
-import { Form, Input, Icon, Button, Slider, InputNumber, Row, Col } from 'antd';
+import React from 'react';
+import { Form, Input, Icon, Button, Slider, Row, Col } from 'antd';
 import PropTypes from 'prop-types';
 import sliderConfig from './formItemConfigs';
 
 const FormItem = Form.Item;
 
-const uuid = 0;
+
 class DynamicFieldSet extends React.Component {
     state = {
       inputValue: 1,

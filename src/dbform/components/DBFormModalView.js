@@ -1,4 +1,3 @@
-import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { DBFormModal } from '../../components/index';
 import { showModal } from '../core/actions';

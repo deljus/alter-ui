@@ -1,9 +1,7 @@
-import React, { Component } from 'react';
+import React from 'react';
 import { connect } from 'react-redux';
-import { Form, Button, Select, Slider, Switch } from 'antd';
-import PropTypes from 'prop-types';
+import { Form, Select, Slider, Switch } from 'antd';
 import { addSettings } from '../core/actions';
-import { merge } from '../../base/functions';
 import sliderConfig from '../../components/formItemConfigs';
 
 const FormItem = Form.Item;

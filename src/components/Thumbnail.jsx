@@ -30,9 +30,10 @@ const Thumbnail = ({ cml, base64, onClickImage, revalidate }) => (
         onClick={() => onClickImage(cml)}
       />
     </Rigth>
-    <img
+    <image
       style={{ width: '700px' }}
       src={base64}
+      alt="Not found image"
     />
     {revalidate && <Alert message="Your structure has changed, please revalidate the structure" type="info" showIcon />}
   </span>
