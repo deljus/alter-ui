@@ -29,7 +29,13 @@ function merge(target, source) {
   return target;
 }
 
-// You function
+function superMeow(template, params) {
+  for (let key in params) {
+       template = template.replace(:${key}, params[key])
+    }
+  return template;
+}
 
-export { merge };
+
+export { merge, superMeow };
 
