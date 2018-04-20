@@ -5,7 +5,7 @@ import Request from '../../base/requests';
 import history from '../../base/history';
 import { URLS, MODAL } from '../../config';
 import { getUrlParams, stringifyUrl } from '../../base/parseUrl';
-import repeatedRequests from '../../base/repeatedRequests';
+import { repeatedRequests } from '../../base/sagas';
 import Serialize from '../../base/magic';
 import { message } from 'antd';
 import { convertCmlToBase64, clearEditor, exportCml, convertCmlToBase64Arr } from '../../base/marvinAPI';

@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import PropTypes from 'prop-types';
 import { Button, message, Row, Col } from 'antd';
 import { DynamicForm } from '../../components';
 import { MARVIN_PATH_IFRAME, MARVIN_EDITOR_IS_EMPTY } from '../../config';
 import { clearEditor, exportCml } from '../../base/marvinAPI';
+import { SAGA_ADD_STRUCTURE } from '../core/constants';
 
 class CreatePage extends Component {
   handleSubmit(e) {
@@ -81,7 +81,7 @@ const mapStateToProps = state => ({
 
 
 const mapDispatchToProps = dispatch => ({
-  createStructure: (data, params, condition) => dispatch({ type: 'ADD_STRUCTURE_SAGA', data, params, condition }),
+  createStructure: (data, params, condition) => dispatch({ type: SAGA_ADD_STRUCTURE, data, params, condition }),
 });
 
 

@@ -5,7 +5,6 @@
  * @returns {object}
  */
 function merge(target, source) {
-
   if (typeof target !== 'object') {
     target = {};
   }
@@ -30,4 +29,7 @@ function merge(target, source) {
   return target;
 }
 
+// You function
+
 export { merge };
+

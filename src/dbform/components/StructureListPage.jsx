@@ -4,6 +4,7 @@ import PropTypes from 'prop-types';
 import { Form, Row, Col, Input, Button, Icon, List, Collapse, Card as BaseCard, Popconfirm, Pagination, Select } from 'antd';
 import styled from 'styled-components';
 import { showModal } from '../core/actions';
+import { SAGA_DELETE_STRUCTURE } from '../core/constants';
 
 const Card = styled(BaseCard)`
     .ant-card-body {
@@ -183,7 +184,7 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = dispatch => ({
   editStructure: id => dispatch(showModal(true, id)),
-  deleteStructure: id => dispatch({ type: 'DELETE_STRUCTURE', id }),
+  deleteStructure: id => dispatch({ type: SAGA_DELETE_STRUCTURE, id }),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Form.create()(StructureListPage));
