@@ -5,22 +5,22 @@ export const MARVIN_ID = '#marvinjs';
 const BASE_URL = process.env.NODE_ENV === 'production' ? 'http://cimm.kpfu.ru' : 'http://localhost:3001';
 
 const API = {
-  CREATE_TASK_PREDICTOR: '/api/task/create/0',
-  CREATE_TASK_SEARCH: '/api/task/create/1',
+  CREATE_TASK_PREDICTOR: '/api/jobs/task/create/0',
+  CREATE_TASK_SEARCH: '/api/jobs/task/create/1',
   CREATE_STRUCTUSE: '/structures',
-  PREPARE_TASK: '/api/task/prepare/',
-  RESULT: '/api/task/model/',
-  ADDITIVES: '/api/resources/additives',
-  MODELS: '/api/resources/models',
-  UPLOAD_FILE: '/api/task/upload',
-  SAVE_TASK: '/api/task/results/',
-  USER_AUTH: '/api/auth',
-  MAGIC: '/api/resources/magic',
+  PREPARE_TASK: '/api/jobs/task/prepare/',
+  RESULT: '/api/jobs/task/model/',
+  ADDITIVES: '/api/jobs/resources/additives',
+  MODELS: '/api/jobs/resources/models',
+  UPLOAD_FILE: '/api/jobs/task/upload',
+  SAVE_TASK: '/api/jobs/task/results/',
+  USER_AUTH: '/api/jobs/auth',
+  MAGIC: '/api/jobs/resources/magic',
   STRUCTURES: '/structures',
   SETTINGS: '/settings',
-  RECORDS: '/api/:database/:table/records',
-  RECORDS_METADATA: '/api/:database/:table/records/:metadata',
-  CREATE_TASK_DBFORM: '/api/validate/:type',
+  RECORDS: '/api/jobs/:database/:table/records',
+  RECORDS_METADATA: '/api/jobs/:database/:table/records/:metadata',
+  CREATE_TASK_DBFORM: '/api/jobs/validate/:type',
 };
 
 const MODAL = {
