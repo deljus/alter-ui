@@ -2,32 +2,33 @@ export const MARVIN_PATH_IFRAME = '/static/marvinjs/editorws.html';
 export const MARVIN_EDITOR_IS_EMPTY = '<cml><MDocument></MDocument></cml>';
 export const MARVIN_ID = '#marvinjs';
 
-const BASE_URL = process.env.NODE_ENV === 'production' ? 'http://cimm.kpfu.ru/' : 'http://localhost:3001/';
+const BASE_URL = process.env.NODE_ENV === 'production' ? 'http://cimm.kpfu.ru' : 'http://localhost:3001';
 
-export const API_URLS = {
-  CREATE_TASK_PREDICTOR: `${BASE_URL}api/task/create/0`,
-  CREATE_TASK_SEARCH: `${BASE_URL}api/task/create/1`,
-  CREATE_STRUCTURE: `${BASE_URL}structures`,
-  PREPARE_TASK: `${BASE_URL}api/task/prepare/`,
-  RESULT: `${BASE_URL}api/task/model/`,
-  ADDITIVES: `${BASE_URL}api/resources/additives`,
-  MODELS: `${BASE_URL}api/resources/models`,
-  UPLOAD_FILE: `${BASE_URL}api/task/upload`,
-  SAVE_TASK: `${BASE_URL}api/task/results/`,
-  USER_AUTH: `${BASE_URL}api/auth`,
-  MAGIC: `${BASE_URL}api/resources/magic`,
-  STRUCTURES: `${BASE_URL}structures`,
-  SETTINGS: `${BASE_URL}settings`,
-
-
+const API = {
+  CREATE_TASK_PREDICTOR: '/api/task/create/0',
+  CREATE_TASK_SEARCH: '/api/task/create/1',
+  CREATE_STRUCTUSE: '/structures',
+  PREPARE_TASK: '/api/task/prepare/',
+  RESULT: '/api/task/model/',
+  ADDITIVES: '/api/resources/additives',
+  MODELS: '/api/resources/models',
+  UPLOAD_FILE: '/api/task/upload',
+  SAVE_TASK: '/api/task/results/',
+  USER_AUTH: '/api/auth',
+  MAGIC: '/api/resources/magic',
+  STRUCTURES: '/structures',
+  SETTINGS: '/settings',
+  RECORDS: '/api/:database/:table/records',
+  RECORDS_METADATA: '/api/:database/:table/records/:metadata',
+  CREATE_TASK_DBFORM: '/api/validate/:type',
 };
 
-export const MODAL = {
+const MODAL = {
   CREATE_TASK: 'CREATE_TASK_SEARCH',
   EDIT_TASK: 'EDIT_TASK_SEARCH',
 };
 
-export const URLS = {
+const URLS = {
   INDEX: '/',
   VALIDATE: '/validate',
   RESULT: '/result/',
@@ -40,7 +41,21 @@ export const URLS = {
   SETTINGS: '/settings',
 };
 
-export const REPEATED_REQUESTS = {
+const REPEATED_REQUESTS = {
   TIMEOUT: 2000,
   RETRY: 5,
+};
+
+const API_URLS = Object.keys(API)
+  .reduce((acc, key) => {
+    acc[key] = BASE_URL + API[key];
+    return acc;
+  }, {});
+
+export {
+  API_URLS,
+  BASE_URL,
+  MODAL,
+  URLS,
+  REPEATED_REQUESTS,
 };
