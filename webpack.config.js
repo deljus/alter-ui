@@ -1,22 +1,23 @@
 var webpack = require('webpack');
 var path = require('path');
 
-var publicPath = 'http://localhost:4000';
-
 module.exports = {
   entry: {
     search: [
       'babel-polyfill',
       './src/search/index.js',
-      // 'webpack-dev-server/client&http://localhost:3000',
       'webpack/hot/only-dev-server'
     ],
     predictor: [
       'babel-polyfill',
       './src/predictor/index.js',
-      // 'webpack-dev-server/client&http://localhost:3000',
       'webpack/hot/only-dev-server'
     ],
+    dbform: [
+      'babel-polyfill',
+      './src/dbform/index.js',
+      'webpack/hot/only-dev-server'
+    ]
   },
   output: {
     path: path.join(__dirname, "public/dist"),
@@ -27,10 +28,7 @@ module.exports = {
       {
         test: /\.(js|jsx)$/,
         exclude: /node_modules/,
-        loader: "babel",
-        query: {
-          presets: [ "es2017", "react", "react-hmre" ]
-        }
+        loader: "babel-loader"
       },
       {
         test: /\.css$/,
