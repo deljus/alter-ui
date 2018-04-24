@@ -30,12 +30,11 @@ function merge(target, source) {
 }
 
 function superMeow(template, params) {
-  for (let key in params) {
-       template = template.replace(:${key}, params[key])
-    }
+  for (const key in params) {
+    template = template.replace(`:${key}`, params[key]);
+  }
   return template;
 }
-
 
 export { merge, superMeow };
 

@@ -2,7 +2,7 @@ export const MARVIN_PATH_IFRAME = '/static/marvinjs/editorws.html';
 export const MARVIN_EDITOR_IS_EMPTY = '<cml><MDocument></MDocument></cml>';
 export const MARVIN_ID = '#marvinjs';
 
-const BASE_URL = process.env.NODE_ENV === 'production' ? 'http://cimm.kpfu.ru' : 'http://localhost:3001';
+const BASE_URL = process.env.NODE_ENV === 'production' ? 'https://cimm.kpfu.ru' : 'http://localhost:3000';
 
 const API = {
   CREATE_TASK_PREDICTOR: '/api/jobs/task/create/0',
@@ -10,17 +10,16 @@ const API = {
   CREATE_STRUCTUSE: '/structures',
   PREPARE_TASK: '/api/jobs/task/prepare/',
   RESULT: '/api/jobs/task/model/',
-  ADDITIVES: '/api/jobs/resources/additives',
+  ADDITIVES: '/api/jobs/additives',
   MODELS: '/api/jobs/resources/models',
   UPLOAD_FILE: '/api/jobs/task/upload',
   SAVE_TASK: '/api/jobs/task/results/',
   USER_AUTH: '/api/jobs/auth',
-  MAGIC: '/api/jobs/resources/magic',
-  STRUCTURES: '/structures',
-  SETTINGS: '/settings',
+  MAGIC: '/api/jobs/magic',
   RECORDS: '/api/jobs/:database/:table/records',
   RECORDS_METADATA: '/api/jobs/:database/:table/records/:metadata',
   CREATE_TASK_DBFORM: '/api/jobs/validate/:type',
+  SERVER_SIDE_SUBSCRIBE: '/api/jobs/subscribe/connect',
 };
 
 const MODAL = {

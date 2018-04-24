@@ -30,7 +30,7 @@ const Thumbnail = ({ cml, base64, onClickImage, revalidate }) => (
         onClick={() => onClickImage(cml)}
       />
     </Rigth>
-    <image
+    <img
       style={{ width: '700px' }}
       src={base64}
       alt="Not found image"

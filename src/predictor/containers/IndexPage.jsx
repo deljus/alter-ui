@@ -21,7 +21,8 @@ const IndexPage = ({ structure, editStructure, deleteStructure, drawStructure, c
       <Col span={8}>
         <Upload {...uploadProps}>
           <Button icon="upload">
-                Upload file
+                Upload filebgsrbsrgb
+            wefwefwef
           </Button>
         </Upload>
       </Col>

@@ -21,6 +21,7 @@ class Serialize {
       if (structureType === magic.StructureType.MOLECULE) {
         return models.filter(o => o.type === magic.ModelType.MOLECULE_MODELING);
       } else if (structureType === magic.StructureType.REACTION) {
+        console.log('hi');
         return models.filter(o => o.type === magic.ModelType.REACTION_MODELING);
       }
     }
