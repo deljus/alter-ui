@@ -41,10 +41,21 @@
     "react-scripts": "^1.0.10",
     "react-test-renderer": "^16.2.0",
     "jsdoc": "^3.5.5",
-    "docdash": "^0.4.0"
+    "docdash": "^0.4.0",
+    "webpack": "^4.6.0",
+    "webpack-dev-server": "^3.1.3",
+    "webpack-cli": "^2.0.15",
+    "babel-loader": "^7.1.4",
+    "babel-preset-latest": "^6.24.1",
+    "babel-register": "^6.11.6",
+    "css-loader": "^0.28.11",
+    "babel-preset-es2017": "^6.24.1",
+    "babel-cli":"^6.26.0",
+    "babel-preset-stage-2": "^6.24.1",
+    "babel-polyfill": "^6.26.0"
   },
   "scripts": {
-    "start-search": "cp src/search/index.js src/index.js && react-scripts start",
+    "start-search": "webpack-dev-server --config ./webpack.config.js --mode development --open",
     "start-dbform": "cp src/dbform/index.js src/index.js && react-scripts start",
     "start-predictor": "cp src/predictor/index.js src/index.js && react-scripts start",
     "tests": "jest",

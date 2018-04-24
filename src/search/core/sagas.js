@@ -1,15 +1,14 @@
-import { takeEvery, put, call } from 'redux-saga/effects';
+import { takeEvery, put, call, fork, take } from 'redux-saga/effects';
 import { message } from 'antd';
 import { addStructure, addHistory, addResult, editStructure } from './actions';
-import { startRequest, succsessRequest, errorRequest, modal} from '../../base/actions';
+import { startRequest, succsessRequest, errorRequest, modal } from '../../base/actions';
 import Request from '../../base/requests';
 import history from '../../base/history';
-import { URLS, MODAL } from '../../config';
+import { URLS, MODAL, API_URLS } from '../../config';
 import { getUrlParams, stringifyUrl } from '../../base/parseUrl';
-import { repeatedRequests } from '../../base/sagas';
+import { repeatedRequests, subSSE } from '../../base/sagas';
 import Serialize from '../../base/magic';
 import { convertCmlToBase64, clearEditor, exportCml, importCml, convertCmlToBase64Arr } from '../../base/marvinAPI';
-
 
 function* createTask(action) {
   try {
@@ -113,7 +112,7 @@ function* editTaskStructure() {
 }
 
 
-export function* sagas() {
+function* sagas() {
   yield takeEvery('CREATE_TASK', createTask);
   yield takeEvery('INIT_VALIDATE_PAGE', validateTask);
   yield takeEvery('CREATE_RESULT_TASK', createResultTask);
@@ -123,4 +122,20 @@ export function* sagas() {
   yield takeEvery('EDIT_STRUCTURE_1', editStructureR);
   yield takeEvery('EDIT_TASK_SEARCH', editTaskStructure);
   yield takeEvery('REVALIDATE_TASK', revalidateTask);
+}
+
+function* sseSagas() {
+  const eventSrc = new EventSource(API_URLS.SERVER_SIDE_SUBSCRIBE);
+  const chan = yield call(subSSE, eventSrc);
+  while (true) {
+    const msg = yield take(chan);
+    console.log(msg);
+  }
+}
+
+export default function* root() {
+  yield [
+    fork(sagas),
+    fork(sseSagas),
+  ];
 }

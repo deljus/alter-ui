@@ -1,4 +1,4 @@
-import { delay } from 'redux-saga';
+import { delay, eventChannel, END } from 'redux-saga';
 import { call, put } from 'redux-saga/effects';
 import { REPEATED_REQUESTS } from '../config';
 import { startRequest, succsessRequest, errorRequest } from './actions';
@@ -29,4 +29,20 @@ function* requestSaga(fn, action) {
   }
 }
 
-export { repeatedRequests, requestSaga };
+function subSSE(eventSrc) {
+  const subs = (emitter) => {
+    eventSrc.onmessage = (msg) => {
+      emitter(msg);
+    };
+    eventSrc.onerror = () => {
+      emitter(END);
+    };
+    return () => {
+      eventSrc.close();
+    };
+  };
+  return eventChannel(subs);
+}
+
+
+export { repeatedRequests, requestSaga, subSSE };
