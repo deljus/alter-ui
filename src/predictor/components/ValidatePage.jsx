@@ -1,42 +1,36 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import { Button, Upload, Icon, List, Collapse, Card, Popconfirm, Row, Col, Checkbox } from 'antd';
-import { ConditionListView } from '../wrapper';
+import { Button, Form, Icon, List, Card, Popconfirm, Row, Col, Checkbox } from 'antd';
 import { modal, addSelectModel, chekedStructure } from '../core/actions';
 import { MODAL, URLS } from '../../config';
-
+import {
+  SAGA_CREATE_RESULT_TASK,
+  SAGA_INIT_VALIDATE_PAGE,
+} from '../core/constants';
+import { ConditionList } from '../../components';
 
 class ValidatePage extends Component {
   componentDidMount() {
     this.props.initPage();
   }
 
-  resultClick() {
-    let error = false;
-    const params = [];
-    const { structure, resultTask } = this.props;
-
-    this.form.forEach((field) => {
-      field && field.validateFields((err, values) => {
-        if (err) error = true;
-        else params.push(values);
-      });
+  handleSubmit(e) {
+    e.preventDefault();
+    this.props.form.validateFields((err, values) => {
+      if (!err) {
+        console.log(values);
+      }
     });
-
-    if (error) return;
-
-    const data = structure.map((struct, i) => ({ data: struct.cml, ...params[i] }));
-    console.log(params);
-    console.log(data);
-    // resultTask(data)
   }
 
   render() {
-    const { resultTask, editStructure, deleteStructure, structure, checkStructure, history } = this.props;
-    this.form = [];
+    const { resultTask, editStructure, deleteStructure, structure, checkStructure, history, form } = this.props;
+
     return (
-      <div>
+      <Form
+        onSubmit={this.handleSubmit.bind(this)}
+      >
         <Row style={{ paddingBottom: 38 }}>
           <Col span={8}>
             <Button
@@ -47,7 +41,13 @@ class ValidatePage extends Component {
             </Button>
           </Col>
           <Col span={8} offset={8} style={{ textAlign: 'right' }}>
-            <Button type="primary" onClick={this.resultClick.bind(this)} icon="right" disabled={!structure.length}>Show result(s)</Button>
+            <Button
+              type="primary"
+              htmlType="submit"
+              icon="right"
+            >
+              Show result(s)
+            </Button>
           </Col>
         </Row>
 
@@ -75,9 +75,10 @@ class ValidatePage extends Component {
                 />
                 </Col>
                 <Col lg={12} sm={24} xs={24}>
-                  <ConditionListView
+                  <ConditionList
+                    formComponent={Form}
+                    form={form}
                     {...item}
-                    ref={(e) => { this.form.push(e); }}
                   />
                 </Col>
               </Row>
@@ -85,7 +86,7 @@ class ValidatePage extends Component {
           )}
         />
 
-      </div>
+      </Form>
     );
   }
 }
@@ -94,16 +95,22 @@ ValidatePage.propTypes = {
   initPage: PropTypes.func.isRequired,
 };
 
+ValidatePage.defaultProps = {
+
+};
+
 const mapStateToProps = state => ({
   structure: state.validatePageStructure,
 });
 
 const mapDispatchToProps = dispatch => ({
-  resultTask: data => dispatch({ type: 'CREATE_RESULT_TASK', data }),
-  initPage: () => dispatch({ type: 'INIT_VALIDATE_PAGE' }),
+  resultTask: data => dispatch({ type: SAGA_CREATE_RESULT_TASK, data }),
+  initPage: () => dispatch({ type: SAGA_INIT_VALIDATE_PAGE }),
   editStructure: () => null,
   deleteStructure: () => null,
   checkStructure: id => dispatch(chekedStructure(id)),
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(ValidatePage);
+const ValidatePageForm = Form.create()(ValidatePage);
+
+export default connect(mapStateToProps, mapDispatchToProps)(ValidatePageForm);

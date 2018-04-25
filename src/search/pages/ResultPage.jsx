@@ -49,7 +49,7 @@ class ResultPage extends Component {
         <ResultWrapped>
           {results && results.map((result, count) =>
             (<ResultItem
-              count={ count }
+              count={count}
               base64={result.base64}
               onClickIcrease={() => showIncreaseModel(result.base64)}
               result={result.models[0].results}
@@ -78,9 +78,9 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = dispatch => ({
-    showIncreaseModel: () => null,
-    onSearchImg: cml => dispatch({ type: 'CREATE_TASK', cml }),
-    initPage: () => dispatch({ type: 'INIT_RESULT_PAGE' }),
+  showIncreaseModel: () => null,
+  onSearchImg: cml => dispatch({ type: 'CREATE_TASK', cml }),
+  initPage: () => dispatch({ type: 'INIT_RESULT_PAGE' }),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(ResultPage);

@@ -6,9 +6,17 @@ import history from '../../base/history';
 import { URLS, MODAL } from '../../config';
 import { getUrlParams, stringifyUrl } from '../../base/parseUrl';
 import { repeatedRequests } from '../../base/sagas';
-import Serialize from '../../base/magic';
+import * as Serialize from '../../base/magic';
 import { message } from 'antd';
 import { convertCmlToBase64, clearEditor, exportCml, convertCmlToBase64Arr } from '../../base/marvinAPI';
+import {
+  SAGA_EDIT_STRUCTURE_INDEX,
+  SAGA_DRAW_STRUCTURE,
+  SAGA_CREATE_TASK_SEARCH,
+  SAGA_CREATE_TASK_INDEX,
+  SAGA_INIT_VALIDATE_PAGE,
+  SAGA_CREATE_RESULT_TASK,
+} from './constants';
 
 import 'antd/lib/message/style/css';
 
@@ -62,36 +70,27 @@ function* validateTask(action) {
     const models = yield call(Request.getModels);
     const additives = yield call(Request.getAdditives);
     const magic = yield call(Request.getMagic);
-    const structureOfTypes = Serialize.models(task.data, models.data, magic.data);
-    const structureAndBase64 = yield call(convertCmlToBase64Arr, task.data.structures);
-    yield put(addStructuresValidate(structureAndBase64.map(s => ({ ...s, check: false }))));
+    const structureAddModel = Serialize.models(task.data, models.data, magic.data);
+    const structureAddAdditives = Serialize.additives(structureAddModel, additives.data, magic.data);
+    const structureAndBase64 = yield call(convertCmlToBase64Arr, structureAddAdditives);
+    yield put(addStructuresValidate(structureAndBase64));
     yield put(addAllAdditives(additives.data));
     yield put(addAllModels(models.data));
     yield put(succsessRequest());
   } catch (e) {
-    yield put(errorRequest(e.message, action));
-  }
-}
-
-function* createResultTask(action) {
-  try {
-    yield put(startRequest());
-
-    yield put(succsessRequest());
-  } catch (e) {
-    yield put(errorRequest(e.message, action));
+    yield put(errorRequest(e.stack, action));
   }
 }
 
 export function* sagas() {
   // yield takeEvery('CREATE_TASK', createTask);
-  yield takeEvery('INIT_VALIDATE_PAGE', validateTask);
-  yield takeEvery('CREATE_RESULT_TASK', createResultTask);
+  yield takeEvery(SAGA_INIT_VALIDATE_PAGE, validateTask);
+  // yield takeEvery(SAGA_CREATE_RESULT_TASK, createResultTask);
   // yield takeEvery('INIT_RESULT_PAGE', resultPage);
-  yield takeEvery('DRAW_STRUCTURE', drawStructure);
+  yield takeEvery(SAGA_DRAW_STRUCTURE, drawStructure);
   yield takeEvery('CREATE_TASK_SEARCH', createStructure);
-  yield takeEvery('EDIT_STRUCTURE_INDEX', editStructureForModal);
-  yield takeEvery('CREATE_TASK_INDEX', createTaskIndex);
+  yield takeEvery(SAGA_EDIT_STRUCTURE_INDEX, editStructureForModal);
+  yield takeEvery(SAGA_CREATE_TASK_INDEX, createTaskIndex);
   // yield takeEvery('EDIT_TASK_SEARCH', editTaskStructure);
   // yield takeEvery('REVALIDATE_TASK', revalidateTask);
 }

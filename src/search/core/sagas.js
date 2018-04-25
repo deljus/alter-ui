@@ -7,7 +7,7 @@ import history from '../../base/history';
 import { URLS, MODAL, API_URLS } from '../../config';
 import { getUrlParams, stringifyUrl } from '../../base/parseUrl';
 import { repeatedRequests, subSSE } from '../../base/sagas';
-import Serialize from '../../base/magic';
+import * as Serialize from '../../base/magic';
 import { convertCmlToBase64, clearEditor, exportCml, importCml, convertCmlToBase64Arr } from '../../base/marvinAPI';
 
 function* createTask(action) {

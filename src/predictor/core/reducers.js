@@ -25,6 +25,49 @@ const indexPageStructure = (state = [], action) => {
   }
 };
 
+const validatePageStructure = (state = [], action) => {
+  switch (action.type) {
+    case CONST.ADD_STRUCTURES_VALIDATE:
+      return action.arr.map((s, i) => ({ id: i, ...s }));
+    case CONST.ADD_TEMPERATURE_VALIDATE:
+      return state.map(structure =>
+        (structure.id === action.id ?
+          { ...structure, temperature: action.temperature } :
+          structure),
+      );
+    case CONST.ADD_PRESSURE_VALIDATE:
+      return state.map(structure =>
+        (structure.id === action.id ?
+          { ...structure, pressure: action.pressure } :
+          structure),
+      );
+
+    case CONST.ADD_MODELS_VALIDATE:
+      return state.map(structure =>
+        (structure.id === action.id ?
+          { ...structure, models: action.models.map(model => ({ model })) } :
+          structure),
+      );
+
+    case CONST.ADD_ADDITIVES_VALIDATE:
+      return state.map(structure =>
+        (structure.id === action.id ?
+          { ...structure, additives: action.additives } :
+          structure),
+      );
+
+    case CONST.CHECK_STRUCTURE:
+      return state.map(structure =>
+        (structure.id === action.id ?
+          { ...structure, check: !state.check } :
+          structure),
+      );
+
+    default:
+      return state;
+  }
+};
+
 const allAdditives = (state = [], action) => {
   switch (action.type) {
     case CONST.ADD_ALL_ADDITIVES:
@@ -48,6 +91,7 @@ export default combineReducers({
   modal,
   request,
   indexPageStructure,
+  validatePageStructure,
   allAdditives,
   allModels,
 });

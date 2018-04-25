@@ -1,11 +1,15 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { Button, Upload, Icon, List, Collapse, Card, Popconfirm, Row, Col } from 'antd';
+import { Button, Upload, Icon, List, Card, Popconfirm, Row, Col } from 'antd';
 import { deleteStructureIndex } from '../core/actions';
 import { modal } from '../../base/actions';
+import {
+  SAGA_CREATE_TASK_INDEX,
+  SAGA_DRAW_STRUCTURE,
+  SAGA_EDIT_STRUCTURE_INDEX,
+} from '../core/constants';
 
-
-const Panel = Collapse.Panel;
 
 const uploadProps = {
   name: 'file',
@@ -21,8 +25,7 @@ const IndexPage = ({ structure, editStructure, deleteStructure, drawStructure, c
       <Col span={8}>
         <Upload {...uploadProps}>
           <Button icon="upload">
-                Upload filebgsrbsrgb
-            wefwefwef
+                Upload file
           </Button>
         </Upload>
       </Col>
@@ -58,15 +61,27 @@ const IndexPage = ({ structure, editStructure, deleteStructure, drawStructure, c
   </div>
 );
 
+IndexPage.propTypes = {
+  structure: PropTypes.arrayOf(PropTypes.object),
+  editStructure: PropTypes.func.isRequired,
+  deleteStructure: PropTypes.func.isRequired,
+  drawStructure: PropTypes.func.isRequired,
+  createTask: PropTypes.func.isRequired,
+};
+
+IndexPage.defaultProps = {
+  structure: [],
+};
+
 const mapStateToProps = state => ({
   structure: state.indexPageStructure,
 });
 
 const mapDispatchToProps = dispatch => ({
-  drawStructure: () => dispatch({ type: 'DRAW_STRUCTURE' }),
+  drawStructure: () => dispatch({ type: SAGA_DRAW_STRUCTURE }),
   deleteStructure: id => dispatch(deleteStructureIndex(id)),
-  editStructure: id => dispatch(modal(true, 'EDIT_STRUCTURE_INDEX', id)),
-  createTask: structure => dispatch({ type: 'CREATE_TASK_INDEX', structure }),
+  editStructure: id => dispatch(modal(true, SAGA_EDIT_STRUCTURE_INDEX, id)),
+  createTask: structure => dispatch({ type: SAGA_CREATE_TASK_INDEX, structure }),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(IndexPage);

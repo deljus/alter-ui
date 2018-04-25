@@ -1,7 +1,6 @@
-import React from 'react';
+import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { Form, Select, Slider, InputNumber, Row, Col } from 'antd';
-
 
 const Option = Select.Option;
 
@@ -49,92 +48,118 @@ const pressureConfig = {
   step: 0.1,
 };
 
-const ConditionList = ({ id, allAdditives, changeAdditives, allModels, changeModels, models, temperature, tempChange, pressChange, pressure, additives, structure }) => {
 
-  const setDefaultAmount = (additives) => {
-    if (additives.length) {
-      const persent = +(100 / additives.length).toFixed(1);
-      const lastPersent = +(persent + (100 - (additives.length * persent))).toFixed(1);
-      this.setState({ selectedAdditives: additives.map((id, i) =>
-        (i < additives.length - 1 ? { id, value: persent } : { id, value: lastPersent })),
-      });
-    }
-  };
+class ConditionList extends Component {
 
-  return (
-    <Row gutter={10}>
-      <Col span={24}>
-            Models:
-      </Col>
-      <Col span={24}>
-        <Select
-          mode="multiple"
-          placeholder="Please select a models"
-          style={{ width: '100%' }}
-          onBlur={models => changeModels(id, models)}
-        >
-          {allModels.map((item, i) => <Option key={item.name + i} value={item.model}>{item.name}</Option>)}
-        </Select>
-      </Col>
-      <Col span={19}>
-            Temperature (K):
-      </Col>
-      <Col span={5} style={{ textAlign: 'right' }}>
-        <InputNumber
-          value={temperature}
-          onChange={t => tempChange(id, t)}
-          {...temperatureConfig}
-        />
-      </Col>
-      <Col span={24}>
-        <Slider
-          value={temperature}
-          onChange={t => tempChange(id, t)}
-          {...temperatureConfig}
-        />
-      </Col>
-      <Col span={19}>
-            Pressure (atm):
-      </Col>
-      <Col span={5} style={{ textAlign: 'right' }}>
-        <InputNumber
-          value={pressure}
-          onChange={p => pressChange(id, p)}
-          {...pressureConfig}
-        />
-      </Col>
-      <Col span={24}>
-        <Slider
-          value={pressure}
-          onChange={p => pressChange(id, p)}
-          {...pressureConfig}
-        />
-      </Col>
-      <Col span={24}>
-            Additives:
-      </Col>
-      <Col span={24}>
-        <Select
-          mode="multiple"
-          placeholder="Please select a models"
-          style={{ width: '100%', paddingBottom: 20 }}
-          onBlur={additives => setDefaultAmount(additives)}
-        >
-          {allAdditives.map((item, i) => <Option key={item.name + i} value={item.additive}>{item.name}</Option>)}
-        </Select>
-      </Col>
-    </Row>
-  );
-};
+  handleSolventChange(){
+
+  }
+
+  render() {
+    const { id, solvents, catalysts, models, temperature, pressure, formComponent } = this.props;
+    const formItemLayout = {
+      style: { lineHeight: '10px' },
+    };
+
+    const FormItem = formComponent.Item;
+    const { getFieldDecorator } = this.props.form;
+
+    return (
+      <div>
+        <FormItem>
+          <h4>Model: </h4>
+          {getFieldDecorator(`model-${id}`, {
+            rules: [{ required: true, message: 'Please select model!' }],
+          })(
+            <Select placeholder="Please select a country">
+              { models.map((item, i) => <Option key={item.name + i} value={item.model}>{ item.name }</Option>) }
+            </Select>,
+          )}
+        </FormItem>
+        <FormItem>
+          <h4>Temperature (K): </h4>
+          <Row gutter={10}>
+            <Col span={19}>
+              {getFieldDecorator(`temperature-${id}`, {
+                initialValue: temperature,
+              })(
+                <Slider
+                  {...temperatureConfig}
+                />,
+              )}
+            </Col>
+            <Col span={5} style={{ textAlign: 'right' }} >
+              {getFieldDecorator(`temperature-${id}`, {
+                initialValue: temperature,
+              })(
+                <InputNumber
+                  {...temperatureConfig}
+                />,
+              )}
+            </Col>
+          </Row>
+        </FormItem>
+        <FormItem>
+          <h4>Pressure (atm): </h4>
+          <Row gutter={10}>
+            <Col span={19}>
+              {getFieldDecorator(`pressure-${id}`, {
+                initialValue: pressure,
+              })(
+                <Slider
+                  {...pressureConfig}
+                />,
+              )}
+            </Col>
+            <Col span={5} style={{ textAlign: 'right' }}>
+              {getFieldDecorator(`pressure-${id}`, {
+                initialValue: pressure,
+              })(
+                <InputNumber
+                  {...pressureConfig}
+                />,
+              )}
+            </Col>
+          </Row>
+        </FormItem>
+        { solvents && !!solvents.length && <FormItem>
+          <h4>Solvents: </h4>
+          {getFieldDecorator(`solvents-${id}`,
+            { onChange: this.handleSolventChange })(
+            <Select
+              mode="multiple"
+              style={{ width: '100%' }}
+              placeholder="Please select"
+            >
+              { solvents.map((item, i) => <Option key={item.additive + i} value={item.additive}>{ item.name }</Option>) }
+            </Select>,
+          )}
+        </FormItem>}
+        { catalysts && !!catalysts.length && <FormItem>
+          <h4>Catalysts: </h4>
+          {getFieldDecorator(`catalysts-${id}`)(
+            <Select
+              mode="multiple"
+              style={{ width: '100%' }}
+              placeholder="Please select"
+            >
+              { catalysts.map((item, i) => <Option key={item.additive + i} value={item.additive}>{ item.name }</Option>) }
+            </Select>,
+          )}
+        </FormItem>}
+      </div>
+    );
+  }
+}
 
 ConditionList.propTypes = {
   selectModel: PropTypes.number,
   models: PropTypes.array,
-  additives: PropTypes.array,
+  catalysts: PropTypes.array,
+  solvents: PropTypes.array,
   temperature: PropTypes.number,
   pressure: PropTypes.number,
-  allAdditives: PropTypes.array,
-  addModels: PropTypes.array,
+  id: PropTypes.number,
 };
 
 ConditionList.defaultProps = {
@@ -142,10 +167,9 @@ ConditionList.defaultProps = {
   models: [],
   temperature: 298,
   pressure: 1,
-  additives: [],
-  allAdditives: [],
-  addModels: [],
+  catalysts: [],
+  solvents: [],
 };
 
 
-export default Form.create()(ConditionList);
+export default ConditionList;
