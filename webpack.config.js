@@ -17,6 +17,11 @@ module.exports = {
       'babel-polyfill',
       './src/dbform/index.js',
       'webpack/hot/only-dev-server'
+    ],
+    auth: [
+      'babel-polyfill',
+      './src/auth/index.js',
+      'webpack/hot/only-dev-server'
     ]
   },
   output: {
