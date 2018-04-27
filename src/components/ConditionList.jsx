@@ -50,19 +50,18 @@ const pressureConfig = {
 
 
 class ConditionList extends Component {
-
-  handleSolventChange(){
+  handleSolventChange() {
 
   }
 
   render() {
-    const { id, solvents, catalysts, models, temperature, pressure, formComponent } = this.props;
+
+    const { id, solvents, catalysts, models, temperature, pressure, formComponent, form } = this.props;
     const formItemLayout = {
       style: { lineHeight: '10px' },
     };
-
     const FormItem = formComponent.Item;
-    const { getFieldDecorator } = this.props.form;
+    const { getFieldDecorator } = form;
 
     return (
       <div>
@@ -127,12 +126,12 @@ class ConditionList extends Component {
           {getFieldDecorator(`solvents-${id}`,
             { onChange: this.handleSolventChange })(
             <Select
-              mode="multiple"
-              style={{ width: '100%' }}
-              placeholder="Please select"
-            >
-              { solvents.map((item, i) => <Option key={item.additive + i} value={item.additive}>{ item.name }</Option>) }
-            </Select>,
+                mode="multiple"
+                style={{ width: '100%' }}
+                placeholder="Please select"
+              >
+                { solvents.map((item, i) => <Option key={item.additive + i} value={item.additive}>{ item.name }</Option>) }
+              </Select>,
           )}
         </FormItem>}
         { catalysts && !!catalysts.length && <FormItem>
