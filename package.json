@@ -5,7 +5,6 @@
   "dependencies": {
     "react": "^16.2.0",
     "react-dom": "^16.2.0",
-    "react-scripts": "1.0.17",
     "axios": "^0.17.1",
     "antd": "^3.0.3",
     "react-router": "^4.2.0",
@@ -26,6 +25,7 @@
   "devDependencies": {
     "@storybook/react": "^4.0.0-alpha.3",
     "@storybook/addon-actions": "^4.0.0-alpha.3",
+    "@storybook/addon-links": "^4.0.0-alpha.4",
     "babel-core": "^6.26.0",
     "babel-eslint": "^7.2.3",
     "babel-jest": "22.1.0",

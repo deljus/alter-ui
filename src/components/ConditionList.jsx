@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { Form, Select, Slider, InputNumber, Row, Col } from 'antd';
+import { SliderEditor } from '../components';
 
 const Option = Select.Option;
 
@@ -55,7 +56,6 @@ class ConditionList extends Component {
   }
 
   render() {
-
     const { id, solvents, catalysts, models, temperature, pressure, formComponent, form } = this.props;
     const formItemLayout = {
       style: { lineHeight: '10px' },
@@ -75,51 +75,27 @@ class ConditionList extends Component {
             </Select>,
           )}
         </FormItem>
-        <FormItem>
-          <h4>Temperature (K): </h4>
-          <Row gutter={10}>
-            <Col span={19}>
-              {getFieldDecorator(`temperature-${id}`, {
-                initialValue: temperature,
-              })(
-                <Slider
-                  {...temperatureConfig}
-                />,
-              )}
-            </Col>
-            <Col span={5} style={{ textAlign: 'right' }} >
-              {getFieldDecorator(`temperature-${id}`, {
-                initialValue: temperature,
-              })(
-                <InputNumber
-                  {...temperatureConfig}
-                />,
-              )}
-            </Col>
-          </Row>
+        <FormItem
+          label="temperature"
+        >
+          {getFieldDecorator(`temperature-${id}`, {
+            initialValue: temperature,
+          })(
+            <SliderEditor
+              {...temperatureConfig}
+            />,
+          )}
         </FormItem>
-        <FormItem>
-          <h4>Pressure (atm): </h4>
-          <Row gutter={10}>
-            <Col span={19}>
-              {getFieldDecorator(`pressure-${id}`, {
-                initialValue: pressure,
-              })(
-                <Slider
-                  {...pressureConfig}
-                />,
-              )}
-            </Col>
-            <Col span={5} style={{ textAlign: 'right' }}>
-              {getFieldDecorator(`pressure-${id}`, {
-                initialValue: pressure,
-              })(
-                <InputNumber
-                  {...pressureConfig}
-                />,
-              )}
-            </Col>
-          </Row>
+        <FormItem
+          label="Pressure (atm): "
+        >
+          {getFieldDecorator(`pressure-${id}`, {
+            initialValue: pressure,
+          })(
+            <SliderEditor
+              {...pressureConfig}
+            />,
+          )}
         </FormItem>
         { solvents && !!solvents.length && <FormItem>
           <h4>Solvents: </h4>

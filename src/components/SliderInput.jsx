@@ -1,43 +1,18 @@
 import React from 'react';
-import PropTypes from 'prop-types';
-import { Slider, Button, Popover, Row, Col, Input } from 'antd';
+import { Slider, InputNumber, Row, Col } from 'antd';
 
-const SliderEditor = (props) => {
-  const { slider, input, popover } = props;
-  return (
-    <Row gutter={24}>
-      <Col span={20}>
-        <Slider {...slider} />
-      </Col>
-      <Col span={4}>
-        <Popover
-          trigger="click"
-          content={
-            <div>
-              <Input {...input} />
-              <Button
-                onClick={() => null}
-              >
-              Ok
-              </Button>
-            </div>}
-          {...popover}
-        >
-          <Button
-            type="primary"
-            ghost
-            icon="edit"
-          />
-        </Popover>
-      </Col>
-    </Row>
-  );
-};
-
-SliderEditor.propTypes = {
-  slider: PropTypes.object,
-  input: PropTypes.object,
-  popover: PropTypes.object,
-};
+const SliderEditor = props => (
+  <Row>
+    <Col span={12}>
+      <Slider {...props} />
+    </Col>
+    <Col span={4}>
+      <InputNumber
+        {...props}
+        style={{ marginLeft: 16 }}
+      />
+    </Col>
+  </Row>
+);
 
 export default SliderEditor;
