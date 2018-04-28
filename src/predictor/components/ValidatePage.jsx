@@ -9,6 +9,8 @@ import {
   SAGA_INIT_VALIDATE_PAGE,
 } from '../core/constants';
 import { ConditionList } from '../../components';
+import { getValidateStructure } from '../core/selectors';
+
 
 class ValidatePage extends Component {
   componentDidMount() {
@@ -100,7 +102,7 @@ ValidatePage.defaultProps = {
 };
 
 const mapStateToProps = state => ({
-  structure: state.validatePageStructure,
+  structure: getValidateStructure(state),
 });
 
 const mapDispatchToProps = dispatch => ({

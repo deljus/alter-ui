@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import { Button, Upload, Icon, List, Card, Popconfirm, Row, Col } from 'antd';
 import { deleteStructureIndex } from '../core/actions';
 import { modal } from '../../base/actions';
+import { getIndexPageStructure } from '../core/selectors';
 import {
   SAGA_CREATE_TASK_INDEX,
   SAGA_DRAW_STRUCTURE,
@@ -74,7 +75,7 @@ IndexPage.defaultProps = {
 };
 
 const mapStateToProps = state => ({
-  structure: state.indexPageStructure,
+  structure: getIndexPageStructure(state),
 });
 
 const mapDispatchToProps = dispatch => ({

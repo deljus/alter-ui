@@ -68,30 +68,10 @@ const validatePageStructure = (state = [], action) => {
   }
 };
 
-const allAdditives = (state = [], action) => {
-  switch (action.type) {
-    case CONST.ADD_ALL_ADDITIVES:
-      return action.additives;
-    default:
-      return state;
-  }
-};
-
-const allModels = (state = [], action) => {
-  switch (action.type) {
-    case CONST.ADD_ALL_MODELS:
-      return action.models;
-    default:
-      return state;
-  }
-};
-
 
 export default combineReducers({
   modal,
   request,
   indexPageStructure,
   validatePageStructure,
-  allAdditives,
-  allModels,
 });

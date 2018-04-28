@@ -1,9 +1,9 @@
 import React from 'react';
 import { storiesOf } from '@storybook/react';
 import { Form, Row, Col, Button } from 'antd';
-import { Loader, Error, ConditionList } from '../src/components';
+import { Loader, Error, ConditionList, SliderEditor } from '../src/components';
 import { models, selectModel, solvents, catalysts } from './variables';
-import { action } from '@storybook/addon-actions'
+import { action } from '@storybook/addon-actions';
 import 'antd/dist/antd.min.css';
 
 
@@ -80,3 +80,10 @@ storiesOf('ConditionList', module).add('ConditionList', () => {
       </Row>));
     return <ConditionLists />;
   });
+storiesOf('Edit sliders', module)
+  .add('default', () => (
+    <Row>
+      <Col span={6} offset={9}>
+        <SliderEditor />
+      </Col>
+    </Row>));

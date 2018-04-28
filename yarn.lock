@@ -35,6 +35,22 @@
   version "0.7.0"
   resolved "https://registry.yarnpkg.com/@sindresorhus/is/-/is-0.7.0.tgz#9a06f4f137ee84d7df0460c1fdb1135ffa6c50fd"
 
+"@storybook/addon-actions@^4.0.0-alpha.3":
+  version "4.0.0-alpha.3"
+  resolved "https://registry.yarnpkg.com/@storybook/addon-actions/-/addon-actions-4.0.0-alpha.3.tgz#dd9439d24197abfe2d89042d087391c0cb7c0150"
+  dependencies:
+    "@storybook/addons" "4.0.0-alpha.3"
+    "@storybook/components" "4.0.0-alpha.3"
+    babel-runtime "^6.26.0"
+    deep-equal "^1.0.1"
+    glamor "^2.20.40"
+    glamorous "^4.12.3"
+    global "^4.3.2"
+    make-error "^1.3.4"
+    prop-types "^15.6.1"
+    react-inspector "^2.3.0"
+    uuid "^3.2.1"
+
 "@storybook/addons@4.0.0-alpha.3":
   version "4.0.0-alpha.3"
   resolved "https://registry.yarnpkg.com/@storybook/addons/-/addons-4.0.0-alpha.3.tgz#8cf2f75b8775ae8802eb9a1e4939c25c90522a50"
@@ -5803,6 +5819,10 @@ is-directory@^0.3.1:
   version "0.3.1"
   resolved "https://registry.yarnpkg.com/is-directory/-/is-directory-0.3.1.tgz#61339b6f2475fc772fd9c9d83f5c8575dc154ae1"
 
+is-dom@^1.0.9:
+  version "1.0.9"
+  resolved "https://registry.yarnpkg.com/is-dom/-/is-dom-1.0.9.tgz#483832d52972073de12b9fe3f60320870da8370d"
+
 is-dotfile@^1.0.0:
   version "1.0.3"
   resolved "https://registry.yarnpkg.com/is-dotfile/-/is-dotfile-1.0.3.tgz#a6a2f32ffd2dfb04f5ca25ecd0f6b83cf798a1e1"
@@ -7298,6 +7318,10 @@ make-dir@^1.1.0:
   resolved "https://registry.yarnpkg.com/make-dir/-/make-dir-1.2.0.tgz#6d6a49eead4aae296c53bbf3a1a008bd6c89469b"
   dependencies:
     pify "^3.0.0"
+
+make-error@^1.3.4:
+  version "1.3.4"
+  resolved "https://registry.yarnpkg.com/make-error/-/make-error-1.3.4.tgz#19978ed575f9e9545d2ff8c13e33b5d18a67d535"
 
 makeerror@1.0.x:
   version "1.0.11"
@@ -9455,6 +9479,13 @@ react-icons@^2.2.7:
   dependencies:
     react-icon-base "2.1.0"
 
+react-inspector@^2.3.0:
+  version "2.3.0"
+  resolved "https://registry.yarnpkg.com/react-inspector/-/react-inspector-2.3.0.tgz#fc9c1d38ab687fc0d190dcaf133ae40158968fc8"
+  dependencies:
+    babel-runtime "^6.26.0"
+    is-dom "^1.0.9"
+
 react-lazy-load@^3.0.12:
   version "3.0.13"
   resolved "https://registry.yarnpkg.com/react-lazy-load/-/react-lazy-load-3.0.13.tgz#3b0a92d336d43d3f0d73cbe6f35b17050b08b824"
@@ -10119,6 +10150,10 @@ requizzle@~0.2.1:
   resolved "https://registry.yarnpkg.com/requizzle/-/requizzle-0.2.1.tgz#6943c3530c4d9a7e46f1cddd51c158fc670cdbde"
   dependencies:
     underscore "~1.6.0"
+
+reselect@^3.0.1:
+  version "3.0.1"
+  resolved "https://registry.yarnpkg.com/reselect/-/reselect-3.0.1.tgz#efdaa98ea7451324d092b2b2163a6a1d7a9a2147"
 
 resolve-cwd@^2.0.0:
   version "2.0.0"
@@ -11583,7 +11618,7 @@ uuid@^3.0.0, uuid@^3.1.0:
   version "3.1.0"
   resolved "https://registry.yarnpkg.com/uuid/-/uuid-3.1.0.tgz#3dd3d3e790abc24d7b0d3a034ffababe28ebbc04"
 
-uuid@^3.0.1:
+uuid@^3.0.1, uuid@^3.2.1:
   version "3.2.1"
   resolved "https://registry.yarnpkg.com/uuid/-/uuid-3.2.1.tgz#12c528bb9d58d0b9265d9a2f6f0fe8be17ff1f14"
 

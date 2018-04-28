@@ -10,6 +10,7 @@ import ResultItem from './ResultItem';
 import NotFoundPage from './NotFoundPage';
 import DBFormModal from './DBFormModal';
 import ConditionList from './ConditionList';
+import SliderEditor from './SliderInput';
 
 export {
   DynamicForm,
@@ -24,4 +25,5 @@ export {
   DBFormModal,
   MainLayout,
   ConditionList,
+  SliderEditor,
 };

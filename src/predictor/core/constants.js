@@ -17,6 +17,8 @@ export const ADD_ALL_ADDITIVES = 'ADD_ALL_ADDITIVES';
 // all models
 export const ADD_ALL_MODELS = 'ADD_ALL_MODELS';
 
+export const ADD_MAGIC = 'ADD_MAGIC';
+
 // sagas
 export const SAGA_INIT_VALIDATE_PAGE = 'SAGA_INIT_VALIDATE_PAGE';
 export const SAGA_CREATE_TASK_INDEX = 'SAGA_CREATE_TASK_INDEX';
