@@ -13,42 +13,55 @@ class SlidersSelect extends Component {
     this.handleSlide = this.handleSlide.bind(this);
   }
 
+  componentDidMount() {
+    const { defaultValue, value } = this.props;
+    this.setState({ selected: defaultValue || value });
+  }
+
   handleBlur(val) {
     const { data } = this.props;
     this.setState({ selected: [] });
     if (val.length) {
       const persent = +(100 / val.length).toFixed(1);
       const lastPersent = +(persent + (100 - (val.length * persent))).toFixed(1);
-      this.setState({ selected: val.map((dt, id) => {
-        const name = data.filter(n => n.additive === dt)[0].name;
+      const selected = val.map((dt, id) => {
+        const filterData = data.filter(n => n.additive === dt)[0];
 
         if (id < data.length - 1) {
-          return { value: persent, additive: dt, name };
+          return { amount: persent, ...filterData };
         }
-        return { value: lastPersent, additive: dt, name };
-      }),
+        return { amount: lastPersent, ...filterData };
       });
+      this.setState({ selected });
+      this.triggeredChange(selected);
     }
   }
 
-  handleSlide(value, item) {
+  handleSlide(amount, item) {
     const { selected } = this.state;
-    const sum = selected.reduce((last, it) => last + it.value, 0);
-    console.log(sum);
-    if (sum <= 100) {
-      this.props.onChange({ ...this.state, selected: { ...item, value } });
-      this.setState({ selected: selected.map((sel) => {
+    const { sumEqual } = this.props;
+
+    const sum = selected.reduce((last, it) => last + it.amount, 0);
+    if (!sumEqual || sum <= sumEqual) {
+      const select = selected.map((sel) => {
         if (sel.additive === item.additive) {
-          return { ...item, value };
+          return { ...item, amount };
         }
         return sel;
-      }),
       });
+
+      this.setState({ selected: select });
+      this.triggeredChange(select);
     }
+  }
+
+  triggeredChange(data) {
+    const { onChange } = this.props;
+    onChange(data);
   }
 
   render() {
-    const { data, onChange } = this.props;
+    const { data, defaultValue } = this.props;
     const { selected } = this.state;
 
     return (
@@ -58,12 +71,13 @@ class SlidersSelect extends Component {
           style={{ width: '100%' }}
           placeholder="Please select"
           onBlur={this.handleBlur}
+          defaultValue={defaultValue && defaultValue.map(value => value.additive)}
         >
           {data.map((item, i) => <Option key={item.additive + i} value={item.additive}>{item.name}</Option>)}
         </Select>
         { selected.map((item, i) => (
-          <div><h1>{ item.name }</h1>
-            <SliderInput value={item.value} onChange={e => this.handleSlide(e, item)} />
+          <div>{ item.name }
+            <SliderInput key={i} value={item.amount} onChange={e => this.handleSlide(e, item)} />
           </div>
         ))}
       </div>
@@ -73,11 +87,14 @@ class SlidersSelect extends Component {
 
 SlidersSelect.propTypes = {
   data: PropTypes.array,
-  onChange: PropTypes.func.isRequired,
+  defaultValue: PropTypes.array,
+  sumEqual: PropTypes.number,
 };
 
 SlidersSelect.defaultProps = {
   data: [],
+  defaultValue: [],
+  sumEqual: null,
 };
 
 

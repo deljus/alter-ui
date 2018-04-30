@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { Form, Select, Slider, InputNumber, Row, Col } from 'antd';
-import { SliderEditor } from '../components';
+import { SliderEditor, SlidersSelect } from '../components';
 
 const Option = Select.Option;
 
@@ -51,10 +51,6 @@ const pressureConfig = {
 
 
 class ConditionList extends Component {
-  handleSolventChange() {
-
-  }
-
   render() {
     const { id, solvents, catalysts, models, temperature, pressure, formComponent, form } = this.props;
     const formItemLayout = {
@@ -67,10 +63,16 @@ class ConditionList extends Component {
       <div>
         <FormItem>
           <h4>Model: </h4>
-          {getFieldDecorator(`model-${id}`, {
-            rules: [{ required: true, message: 'Please select model!' }],
+          {getFieldDecorator(`models-${id}`, {
+            rules: [{
+              required: true,
+              message: 'Please select model!'
+            }],
           })(
-            <Select placeholder="Please select a country">
+            <Select
+              mode="multiple"
+              placeholder="Please select a model"
+            >
               { models.map((item, i) => <Option key={item.name + i} value={item.model}>{ item.name }</Option>) }
             </Select>,
           )}
@@ -97,29 +99,16 @@ class ConditionList extends Component {
             />,
           )}
         </FormItem>
-        { solvents && !!solvents.length && <FormItem>
-          <h4>Solvents: </h4>
-          {getFieldDecorator(`solvents-${id}`,
-            { onChange: this.handleSolventChange })(
-            <Select
-                mode="multiple"
-                style={{ width: '100%' }}
-                placeholder="Please select"
-              >
-                { solvents.map((item, i) => <Option key={item.additive + i} value={item.additive}>{ item.name }</Option>) }
-              </Select>,
+        { solvents && !!solvents.length && <FormItem label="Solvents">
+
+          {getFieldDecorator(`additives-${id}`)(
+            <SlidersSelect data={solvents} sumEqual={100} />,
           )}
         </FormItem>}
-        { catalysts && !!catalysts.length && <FormItem>
-          <h4>Catalysts: </h4>
-          {getFieldDecorator(`catalysts-${id}`)(
-            <Select
-              mode="multiple"
-              style={{ width: '100%' }}
-              placeholder="Please select"
-            >
-              { catalysts.map((item, i) => <Option key={item.additive + i} value={item.additive}>{ item.name }</Option>) }
-            </Select>,
+        { catalysts && !!catalysts.length && <FormItem label="Solvents">
+
+          {getFieldDecorator(`additives-1${id}`)(
+            <SlidersSelect data={catalysts} />,
           )}
         </FormItem>}
       </div>

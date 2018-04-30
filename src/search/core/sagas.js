@@ -2,7 +2,7 @@ import { takeEvery, put, call, fork, take } from 'redux-saga/effects';
 import { message } from 'antd';
 import { addStructure, addHistory, addResult, editStructure } from './actions';
 import { startRequest, succsessRequest, errorRequest, modal } from '../../base/actions';
-import Request from '../../base/requests';
+import * as Request from '../../base/requests';
 import history from '../../base/history';
 import { URLS, MODAL, API_URLS } from '../../config';
 import { getUrlParams, stringifyUrl } from '../../base/parseUrl';

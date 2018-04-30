@@ -5,11 +5,11 @@ export const MARVIN_ID = '#marvinjs';
 const BASE_URL = process.env.NODE_ENV === 'production' ? 'https://cimm.kpfu.ru' : 'http://localhost:3000';
 
 const API = {
-  CREATE_TASK_PREDICTOR: '/api/jobs/task/create/0',
-  CREATE_TASK_SEARCH: '/api/jobs/task/create/1',
+  CREATE_TASK_PREDICTOR: '/api/jobs/create/0',
+  CREATE_TASK_SEARCH: '/api/jobs/create/1',
   CREATE_STRUCTUSE: '/structures',
-  PREPARE_TASK: '/api/jobs/task/prepare/',
-  RESULT: '/api/jobs/task/model/',
+  PREPARE_TASK: '/api/jobs/prepare/',
+  RESULT: '/api/jobs/process/',
   ADDITIVES: '/api/jobs/additives',
   MODELS: '/api/jobs/resources/models',
   UPLOAD_FILE: '/api/jobs/task/upload',

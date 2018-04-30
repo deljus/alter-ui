@@ -3,13 +3,16 @@ import { Slider, InputNumber, Row, Col } from 'antd';
 
 const SliderEditor = props => (
   <Row>
-    <Col span={12}>
+    <Col span={18}>
       <Slider {...props} />
     </Col>
-    <Col span={4}>
+    <Col
+      span={6}
+      style={{ textAlign: 'right' }}
+    >
       <InputNumber
         {...props}
-        style={{ marginLeft: 16 }}
+        style={{ width: '60px' }}
       />
     </Col>
   </Row>

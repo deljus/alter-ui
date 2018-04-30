@@ -22,13 +22,39 @@ storiesOf('SlidersSelect', module)
       </Col>
     </Row>
   ))
+  .add('set default value', () => (
+    <Row>
+      <Col span={6} offset={9}>
+        <SlidersSelect
+          defaultValue={[
+            { value: 25, additive: 6, name: 'Alyminium oxide' },
+            { value: 50, additive: 5, name: 'Co3+' },
+          ]}
+          data={catalysts}
+        />
+      </Col>
+    </Row>
+  ))
+  .add('set sumEqual', () => (
+    <Row>
+      <Col span={6} offset={9}>
+        <SlidersSelect
+          defaultValue={[
+            { value: 25, additive: 6, name: 'Alyminium oxide' },
+            { value: 50, additive: 5, name: 'Co3+' },
+          ]}
+          data={catalysts}
+          sumEqual={100}
+        />
+      </Col>
+    </Row>
+  ))
   .add('use to form', () => {
     const SlidersSelectForm = Form.create()(({ form }) => {
       const handleSubmit = (e) => {
-
         e.preventDefault();
         form.validateFields((err, values) => {
-          if (err) {
+          if (!err) {
             console.log(values);
           }
         });
@@ -43,13 +69,8 @@ storiesOf('SlidersSelect', module)
             <FormItem
               label="Model"
             >
-              {getFieldDecorator('catalyst.test', {
-                rules: [{
-                  type: 'number',
-                  message: 'Please select model!',
-                }],
-              })(
-                <SlidersSelect onChange={v => console.log(v)} data={catalysts} />,
+              {getFieldDecorator('catalyst')(
+                <SlidersSelect data={catalysts} />,
               )}
             </FormItem>
             <Button htmlType="submit">Submit</Button>

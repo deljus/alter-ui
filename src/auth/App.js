@@ -9,7 +9,7 @@ import 'antd/dist/antd.css';
 const FormItem = Form.Item;
 
 class NormalLoginForm extends React.Component {
-  handleSubmit = (e) => {
+  handleSubmit(e){
     e.preventDefault();
     this.props.form.validateFields((err, values) => {
       if (!err) {
@@ -29,7 +29,7 @@ class NormalLoginForm extends React.Component {
       <MainLayout>
         <Row>
           <Col span={6} offset={9}>
-            <Form onSubmit={this.handleSubmit} className="login-form">
+            <Form onSubmit={this.handleSubmit.bind(this)} className="login-form">
               <FormItem>
                 {getFieldDecorator('email', {
                   rules: [{ required: true, message: 'Please input your email!' }],
