@@ -36,4 +36,5 @@ function urlConverter(template, params) {
   return template;
 }
 
+
 export { merge, urlConverter };

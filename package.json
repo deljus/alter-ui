@@ -5,7 +5,6 @@
   "dependencies": {
     "react": "^16.2.0",
     "react-dom": "^16.2.0",
-    "react-scripts": "1.0.17",
     "axios": "^0.17.1",
     "antd": "^3.0.3",
     "react-router": "^4.2.0",
@@ -20,10 +19,13 @@
     "query-string": "^5.0.1",
     "prop-types": "^15.6.0",
     "recharts": "^1.0.0-beta.9",
-    "redux-form": "^7.3.0"
+    "redux-form": "^7.3.0",
+    "reselect": "^3.0.1"
   },
   "devDependencies": {
-    "@storybook/react": "^3.3.15",
+    "@storybook/react": "^4.0.0-alpha.3",
+    "@storybook/addon-actions": "^4.0.0-alpha.3",
+    "@storybook/addon-links": "^4.0.0-alpha.4",
     "babel-core": "^6.26.0",
     "babel-eslint": "^7.2.3",
     "babel-jest": "22.1.0",
@@ -55,16 +57,13 @@
     "babel-preset-stage-2": "^6.24.1",
     "babel-polyfill": "^6.26.0",
     "react-hot-loader": "next",
-    "babel-preset-react-hmre": "^1.1.1"
+    "babel-preset-react-hmre": "^1.1.1",
+    "babel-preset-env": "^1.6.1"
   },
   "scripts": {
     "start": "webpack-dev-server --config ./webpack.config.js --mode development",
     "tests": "jest",
-    "start-json-server": "json-server --watch db.json --port 3001",
     "storybook": "start-storybook -p 9001 -c .storybook",
-    "generate-docs": "jsdoc src/* -c jsdoc.json",
-    "build": "react-scripts build",
-    "build:clean": "mv build/static/js/*.js ../MWUI/static/js/predictor.js && mv build/static/css/*.css ../MWUI/static/css/predictor.css && rm -r build/static",
-    "eject": "react-scripts eject"
+    "generate-docs": "jsdoc src/* -c jsdoc.json"
   }
 }

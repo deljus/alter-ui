@@ -25,19 +25,19 @@ const indexPageStructure = (state = [], action) => {
   }
 };
 
-const allAdditives = (state = [], action) => {
+const validatePageStructure = (state = [], action) => {
   switch (action.type) {
-    case CONST.ADD_ALL_ADDITIVES:
-      return action.additives;
+    case CONST.ADD_STRUCTURES_VALIDATE:
+      return action.arr;
     default:
       return state;
   }
 };
 
-const allModels = (state = [], action) => {
+const resultPageStructure = (state = [], action) => {
   switch (action.type) {
-    case CONST.ADD_ALL_MODELS:
-      return action.models;
+    case CONST.ADD_STRUCTURE_RESULT:
+      return action.arr.map((s, i) => ({ id: i, ...s }));
     default:
       return state;
   }
@@ -48,6 +48,6 @@ export default combineReducers({
   modal,
   request,
   indexPageStructure,
-  allAdditives,
-  allModels,
+  validatePageStructure,
+  resultPageStructure,
 });

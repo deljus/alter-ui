@@ -18,13 +18,14 @@ const FormItem = Form.Item;
 const Option = Select.Option;
 
 class StructureListPage extends Component {
-    state = {
+  constructor(props) {
+    super(props);
+    this.state = {
       current: 1,
       pageSize: 10,
       sorted: 'decrease',
       expand: false,
     };
-
 
     onShowSizeChange(current, pageSize) {
       this.setState({ current, pageSize });
@@ -129,55 +130,83 @@ class StructureListPage extends Component {
                 { this.state.expand ? <span> Hide filters <Icon type="up" /></span> : <span> Show filters <Icon type="down" /></span> }
               </a>
             </Col>
-            <Col span={16} style={{ textAlign: 'right' }}>
-              <Pagination
-                showSizeChanger
-                onChange={this.changePage.bind(this)}
-                onShowSizeChange={this.onShowSizeChange.bind(this)}
-                defaultCurrent={current}
-                total={structures.length}
-              />
+            <Col span={8} style={{ display: expand ? 'block' : 'none' }}>
+              <FormItem label="Sorting">
+                {getFieldDecorator('sorting', {
+                  rules: [{
+                    required: false,
+                  }],
+                })(
+                  <Select>
+                    <Option value="increase">increase</Option>
+                    <Option value="decrease">decrease</Option>
+                  </Select>,
+                )}
+              </FormItem>
+            </Col>
+            <Col span={24} style={{ textAlign: 'right', display: expand ? 'block' : 'none' }}>
+              <FormItem>
+                <Button type="primary" htmlType="submit">Search</Button>
+              </FormItem>
             </Col>
           </Row>
-          <List
-            grid={{ ...gridSettings, gutter: 20 }}
-            dataSource={structuresSorted.slice((current * pageSize) - pageSize, current * pageSize)}
-            renderItem={item => (
-              <List.Item
-                key={item.id}
+          <Row />
+        </Form>
+        <Row style={{ marginBottom: '20px', fontSize: '14px' }}>
+          <Col span={8}>
+            <a style={{ marginLeft: 8 }} onClick={this.toggle}>
+              { this.state.expand ? <span> Hide filters <Icon type="up" /></span> : <span> Show filters <Icon type="down" /></span> }
+            </a>
+          </Col>
+          <Col span={16} style={{ textAlign: 'right' }}>
+            <Pagination
+              showSizeChanger
+              onChange={this.changePage.bind(this)}
+              onShowSizeChange={this.onShowSizeChange.bind(this)}
+              defaultCurrent={current}
+              total={structures.length}
+            />
+          </Col>
+        </Row>
+        <List
+          grid={{ ...gridSettings, gutter: 20 }}
+          dataSource={structuresSorted.slice((current * pageSize) - pageSize, current * pageSize)}
+          renderItem={item => (
+            <List.Item
+              key={item.id}
+            >
+              <Card
+                style={{ width: '100%' }}
+                cover={<img alt="example" src={item.base64} />}
+                actions={
+                  [<Icon type="edit" onClick={() => editStructure(item.id)} />,
+                    <Popconfirm
+                      placement="topLeft"
+                      title="Are you sure delete this structure?"
+                      onConfirm={() => deleteStructure(item.id)}
+                      okText="Yes"
+                      cancelText="No"
+                    >
+                      <Icon type="delete" />
+                    </Popconfirm>]}
               >
-                <Card
-                  style={{ width: '100%' }}
-                  cover={<img alt="example" src={item.base64} />}
-                  actions={
-                    [<Icon type="edit" onClick={() => editStructure(item.id)} />,
-                      <Popconfirm
-                        placement="topLeft"
-                        title="Are you sure delete this structure?"
-                        onConfirm={() => deleteStructure(item.id)}
-                        okText="Yes"
-                        cancelText="No"
-                      >
-                        <Icon type="delete" />
-                      </Popconfirm>]}
-                >
-                  <div style={{ lineHeight: 2, paddingLeft: 40 }} >Temperature: { item.condition && item.condition.temperature } K</div>
-                  <div style={{ lineHeight: 2, paddingLeft: 40 }} >Pressure: { item.condition && item.condition.pressure } atm</div>
-                  <Collapse bordered={false} style={{ height: 50, padding: 0, margin: 0 }}>
-                    <Panel header="Parameters" key="1" style={{ position: 'absolute', width: '100%', background: 'white', zIndex: 1, border: '1px solid gray' }}>
-                      <div>
-                        {item.params && item.params.map((param, i) => <div key={i}>{param.key} : {param.value}</div>)}
-                      </div>
-                    </Panel>
-                  </Collapse>
-                </Card>
-              </List.Item>
-            )}
-          />
-        </div>
+                <div style={{ lineHeight: 2, paddingLeft: 40 }} >Temperature: { item.condition && item.condition.temperature } K</div>
+                <div style={{ lineHeight: 2, paddingLeft: 40 }} >Pressure: { item.condition && item.condition.pressure } atm</div>
+                <Collapse bordered={false} style={{ height: 50, padding: 0, margin: 0 }}>
+                  <Panel header="Parameters" key="1" style={{ position: 'absolute', width: '100%', background: 'white', zIndex: 1, border: '1px solid gray' }}>
+                    <div>
+                      {item.params && item.params.map((param, i) => <div key={i}>{param.key} : {param.value}</div>)}
+                    </div>
+                  </Panel>
+                </Collapse>
+              </Card>
+            </List.Item>
+          )}
+        />
+      </div>
 
-      );
-    }
+    );
+  }
 }
 
 StructureListPage.propTypes = {

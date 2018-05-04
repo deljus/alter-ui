@@ -19,32 +19,6 @@ export const addStructuresValidate = arr => ({
   type: CONST.ADD_STRUCTURES_VALIDATE, arr,
 });
 
-export const addTemperatureValidate = (id, temperature) => ({
-  type: CONST.ADD_TEMPERATURE_VALIDATE, id, temperature,
-});
-
-export const addPressureValidate = (id, pressure) => ({
-  type: CONST.ADD_PRESSURE_VALIDATE, id, pressure,
-});
-
-export const addModelsValidate = (id, models) => ({
-  type: CONST.ADD_MODELS_VALIDATE, id, models,
-});
-
-export const addAdditivesValidate = (id, additives) => ({
-  type: CONST.ADD_ADDITIVES_VALIDATE, id, additives,
-});
-
-export const chekedStructure = (id, check) => ({
-  type: CONST.CHECK_STRUCTURE, id,
-});
-
-// Add all additives
-export const addAllAdditives = additives => ({
-  type: CONST.ADD_ALL_ADDITIVES, additives,
-});
-
-// Add all models
-export const addAllModels = models => ({
-  type: CONST.ADD_ALL_MODELS, models,
+export const addStructuresResult = arr => ({
+  type: CONST.ADD_STRUCTURE_RESULT, arr,
 });

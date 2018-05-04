@@ -25,7 +25,7 @@ function* requestSaga(fn, action) {
     yield call(fn, action);
     yield put(succsessRequest());
   } catch (e) {
-    yield put(errorRequest(e.message));
+    yield put(errorRequest(e.message, action));
   }
 }
 

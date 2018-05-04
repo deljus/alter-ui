@@ -2,12 +2,12 @@ import { takeEvery, put, call, fork, take } from 'redux-saga/effects';
 import { message } from 'antd';
 import { addStructure, addHistory, addResult, editStructure } from './actions';
 import { startRequest, succsessRequest, errorRequest, modal } from '../../base/actions';
-import Request from '../../base/requests';
+import * as Request from '../../base/requests';
 import history from '../../base/history';
 import { URLS, MODAL, API_URLS } from '../../config';
 import { getUrlParams, stringifyUrl } from '../../base/parseUrl';
 import { repeatedRequests, subSSE } from '../../base/sagas';
-import Serialize from '../../base/magic';
+import * as Serialize from '../../base/magic';
 import { convertCmlToBase64, clearEditor, exportCml, importCml, convertCmlToBase64Arr } from '../../base/marvinAPI';
 
 function* createTask(action) {

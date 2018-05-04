@@ -1,11 +1,18 @@
 import React from 'react';
-import { SearchInputView } from '../compWrapper';
+import { connect } from 'react-redux';
+import { SearchInput } from '../../components';
+import { URLS } from '../../config';
 
-const IndexPage = () => (
-  <div>
-    <SearchInputView />
-  </div>
-);
+const mapStateToProps = () => ({
+  buttonURL: [
+    { name: 'Index page', url: URLS.INDEX },
+    { name: 'Info', url: URLS.INFO },
+    { name: 'Hisrory', url: URLS.HISTORY }],
+});
 
+const mapDispatchToProps = dispatch => ({
+  drawStructure: () => dispatch({ type: 'DRAW_STRUCTURE' }),
+  onSearchFormSubmit: cml => dispatch({ type: 'CREATE_TASK', cml }),
+});
 
-export default IndexPage;
+export default connect(mapStateToProps, mapDispatchToProps)(SearchInput);
