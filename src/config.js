@@ -16,10 +16,11 @@ const API = {
   SAVE_TASK: '/api/jobs/task/results/',
   USER_AUTH: '/api/jobs/auth',
   MAGIC: '/api/jobs/magic',
-  RECORDS: '/api/jobs/:database/:table/records',
+  RECORDS: '/api/db/db/:database/:table/records',
   RECORDS_METADATA: '/api/jobs/:database/:table/records/:metadata',
   CREATE_TASK_DBFORM: '/api/jobs/validate/:type',
   SERVER_SIDE_SUBSCRIBE: '/api/jobs/subscribe/connect',
+  DB_FIELDS: '/api/db/db',
 };
 
 const MODAL = {

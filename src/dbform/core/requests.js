@@ -1,5 +1,6 @@
 import axios from 'axios';
 import { API_URLS } from '../../config';
+import { urlConverter } from '../../base/functions';
 
 
 const Structures = {
@@ -11,10 +12,11 @@ const Structures = {
 
 const Settings = {
   getAll: () => axios.get(API_URLS.SETTINGS),
+  getDBFields: () => axios.get(API_URLS.DB_FIELDS),
 };
 
 const Records = {
-  getAllbyUser: (database, table) => axios.get(API_URLS.RECORDS, { database, table }),
+  getAllbyUser: (database, table) => axios.get(urlConverter(API_URLS.RECORDS, { database, table })),
 };
 
 export { Structures, Settings, Records };
