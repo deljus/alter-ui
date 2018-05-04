@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import { Form, Row, Col, Button, Icon, List, Collapse, Card as BaseCard, Popconfirm, Pagination, Select } from 'antd';
 import styled from 'styled-components';
 import { showModal } from '../core/actions';
-import { SAGA_DELETE_STRUCTURE } from '../core/constants';
+import { SAGA_DELETE_STRUCTURE, SAGA_GET_RECORDS, SAGA_INIT_STRUCTURE_LIST_PAGE } from '../core/constants';
 
 const Card = styled(BaseCard)`
     .ant-card-body {
@@ -40,8 +40,10 @@ class StructureListPage extends Component {
 
     handleSearch = (e) => {
       e.preventDefault();
-      this.props.form.validateFields((err, values) => {
-        console.log('Received values of form: ', values);
+      const { form, getStructure } = this.props;
+      form.validateFields((err, values) => {
+        const { sorting, database, table } = values;
+        getStructure(database, table);
       });
     };
 
@@ -54,10 +56,14 @@ class StructureListPage extends Component {
       this.setState({ expand: !expand });
     };
 
+    componentDidMount = () => {
+      console.log('!!');
+    };
 
     render() {
       const { structures, editStructure, deleteStructure, settings, form: { getFieldDecorator } } = this.props;
       const { current, pageSize, sorted, expand } = this.state;
+
 
       const structuresSorted = structures.sort((a, b) => (sorted === 'increase' ? a.id - b.id : b.id - a.id));
       const gridSettings = settings && settings.grid;
@@ -72,22 +78,26 @@ class StructureListPage extends Component {
               <Col span={8} style={{ display: expand ? 'block' : 'none' }}>
                 <FormItem label="Database">
                   {getFieldDecorator('database', {
-                    rules: [{
-                      required: false,
-                    }],
+                    initialValue: settings.dbfields[0],
                   })(
-                    <Select placeholder="placeholder" />,
+                    <Select placeholder="choose..">
+                      { settings.dbfields.map((field, i) =>
+                        <Option key={i} value={field}>{field}</Option>,
+                      )}
+                    </Select>,
                   )}
                 </FormItem>
               </Col>
               <Col span={8} style={{ display: expand ? 'block' : 'none' }}>
                 <FormItem label="Table">
                   {getFieldDecorator('table', {
-                    rules: [{
-                      required: false,
-                    }],
+                    initialValue: settings.tableFields[1],
                   })(
-                    <Select placeholder="placeholder" />,
+                    <Select placeholder="choose..">
+                      { settings.tableFields.map((field, i) =>
+                        <Option key={i} value={field}>{field}</Option>,
+                      )}
+                    </Select>,
                   )}
                 </FormItem>
               </Col>
@@ -174,6 +184,7 @@ StructureListPage.propTypes = {
   editStructure: PropTypes.func.isRequired,
   deleteStructure: PropTypes.func.isRequired,
   structures: PropTypes.array,
+  getStructure: PropTypes.func.isRequired,
 };
 
 
@@ -183,8 +194,10 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = dispatch => ({
+  getStructure: (database, table) => dispatch({ type: SAGA_GET_RECORDS, database, table }),
   editStructure: id => dispatch(showModal(true, id)),
   deleteStructure: id => dispatch({ type: SAGA_DELETE_STRUCTURE, id }),
+  initPage: () => dispatch({ type: SAGA_INIT_STRUCTURE_LIST_PAGE }),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Form.create()(StructureListPage));

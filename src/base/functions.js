@@ -29,12 +29,11 @@ function merge(target, source) {
   return target;
 }
 
-function superMeow(template, params) {
+function urlConverter(template, params) {
   for (const key in params) {
     template = template.replace(`:${key}`, params[key]);
   }
   return template;
 }
 
-export { merge, superMeow };
-
+export { merge, urlConverter };

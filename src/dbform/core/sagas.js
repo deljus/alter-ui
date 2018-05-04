@@ -1,22 +1,29 @@
 import { takeEvery, call, put } from 'redux-saga/effects';
 import { message } from 'antd';
-import { Structures } from './requests';
-import { addStructures, deleteStructure, addStructure, editStructure, showModal } from './actions';
+import { Structures, Records, Settings } from './requests';
+import { addStructures, deleteStructure, addStructure, editStructure, showModal, addDBFields } from './actions';
 import { requestSaga } from '../../base/sagas';
 import { convertCmlToBase64, convertCmlToBase64Arr } from '../../base/marvinAPI';
 import {
   SAGA_INIT_STRUCTURE_LIST_PAGE,
   SAGA_EDIT_STRUCTURE,
   SAGA_DELETE_STRUCTURE,
-  SAGA_ADD_STRUCTURE
+  SAGA_ADD_STRUCTURE,
+  SAGA_GET_RECORDS,
 } from './constants';
 
 
 function* initStructureListPage() {
-  const responseStructures = yield call(Structures.getAll);
-  const structures = yield call(convertCmlToBase64Arr, responseStructures.data);
+  const fields = yield call(Settings.getDBFields);
+  yield put(addDBFields(fields.data));
+}
+
+function* getRecords(action) {
+  const data = yield call(Records.getAllbyUser, action.database, action.table);
+  const structures = yield call(convertCmlToBase64Arr, data.data);
   yield put(addStructures(structures));
 }
+
 
 function* addNewStructure(action) {
   const { data, params, condition } = action;
@@ -46,4 +53,5 @@ export function* sagas() {
   yield takeEvery(SAGA_ADD_STRUCTURE, requestSaga, addNewStructure);
   yield takeEvery(SAGA_DELETE_STRUCTURE, requestSaga, deleteStructureInList);
   yield takeEvery(SAGA_EDIT_STRUCTURE, requestSaga, modalDiscard);
+  yield takeEvery(SAGA_GET_RECORDS, requestSaga, getRecords);
 }
