@@ -27,108 +27,85 @@ class StructureListPage extends Component {
       expand: false,
     };
 
-    onShowSizeChange(current, pageSize) {
-      this.setState({ current, pageSize });
-    }
+    this.toggle = this.toggle.bind(this);
+    this.handleSearch = this.handleSearch.bind(this);
+    this.onShowSizeChange = this.onShowSizeChange.bind(this);
+  }
 
-    changePage(pageNumber) {
-      this.setState({ current: pageNumber });
-    }
+  componentDidMount() {
+    console.log('!!');
+  }
 
-    changeInput(sorted) {
-      this.setState({ sorted });
-    }
+  onShowSizeChange(current, pageSize) {
+    this.setState({ current, pageSize });
+  }
 
-    handleSearch = (e) => {
-      e.preventDefault();
-      const { form, getStructure } = this.props;
-      form.validateFields((err, values) => {
-        const { sorting, database, table } = values;
-        getStructure(database, table);
-      });
-    };
+  changePage(pageNumber) {
+    this.setState({ current: pageNumber });
+  }
 
-    handleReset = () => {
-      this.props.form.resetFields();
-    };
+  changeInput(sorted) {
+    this.setState({ sorted });
+  }
 
-    toggle = () => {
-      const { expand } = this.state;
-      this.setState({ expand: !expand });
-    };
+  handleSearch(e) {
+    e.preventDefault();
+    const { form, getStructure } = this.props;
+    form.validateFields((err, values) => {
+      const { sorting, database, table } = values;
+      getStructure(database, table);
+    });
+  }
 
-    componentDidMount = () => {
-      console.log('!!');
-    };
+  handleReset() {
+    this.props.form.resetFields();
+  }
 
-    render() {
-      const { structures, editStructure, deleteStructure, settings, form: { getFieldDecorator } } = this.props;
-      const { current, pageSize, sorted, expand } = this.state;
+  toggle() {
+    const { expand } = this.state;
+    this.setState({ expand: !expand });
+  }
+
+  render() {
+    const { structures, editStructure, deleteStructure, settings, form: { getFieldDecorator } } = this.props;
+    const { current, pageSize, sorted, expand } = this.state;
 
 
-      const structuresSorted = structures.sort((a, b) => (sorted === 'increase' ? a.id - b.id : b.id - a.id));
-      const gridSettings = settings && settings.grid;
+    const structuresSorted = structures.sort((a, b) => (sorted === 'increase' ? a.id - b.id : b.id - a.id));
+    const gridSettings = settings && settings.grid;
 
-      return structures && settings && (
-        <div>
-          <Form
-            className="ant-advanced-search-form"
-            onSubmit={this.handleSearch}
-          >
-            <Row gutter={24}>
-              <Col span={8} style={{ display: expand ? 'block' : 'none' }}>
-                <FormItem label="Database">
-                  {getFieldDecorator('database', {
-                    initialValue: settings.dbfields[0],
-                  })(
-                    <Select placeholder="choose..">
-                      { settings.dbfields.map((field, i) =>
-                        <Option key={i} value={field}>{field}</Option>,
-                      )}
-                    </Select>,
-                  )}
-                </FormItem>
-              </Col>
-              <Col span={8} style={{ display: expand ? 'block' : 'none' }}>
-                <FormItem label="Table">
-                  {getFieldDecorator('table', {
-                    initialValue: settings.tableFields[1],
-                  })(
-                    <Select placeholder="choose..">
-                      { settings.tableFields.map((field, i) =>
-                        <Option key={i} value={field}>{field}</Option>,
-                      )}
-                    </Select>,
-                  )}
-                </FormItem>
-              </Col>
-              <Col span={8} style={{ display: expand ? 'block' : 'none' }}>
-                <FormItem label="Sorting">
-                  {getFieldDecorator('sorting', {
-                    rules: [{
-                      required: false,
-                    }],
-                  })(
-                    <Select>
-                      <Option value="increase">increase</Option>
-                      <Option value="decrease">decrease</Option>
-                    </Select>,
-                  )}
-                </FormItem>
-              </Col>
-              <Col span={24} style={{ textAlign: 'right', display: expand ? 'block' : 'none' }}>
-                <FormItem>
-                  <Button type="primary" htmlType="submit">Search</Button>
-                </FormItem>
-              </Col>
-            </Row>
-            <Row />
-          </Form>
-          <Row style={{ marginBottom: '20px', fontSize: '14px' }}>
-            <Col span={8}>
-              <a style={{ marginLeft: 8 }} onClick={this.toggle}>
-                { this.state.expand ? <span> Hide filters <Icon type="up" /></span> : <span> Show filters <Icon type="down" /></span> }
-              </a>
+    return structures && settings && (
+      <div>
+        <Form
+          className="ant-advanced-search-form"
+          onSubmit={this.handleSearch}
+        >
+          <Row gutter={24}>
+            <Col span={8} style={{ display: expand ? 'block' : 'none' }}>
+              <FormItem label="Database">
+                {getFieldDecorator('database', {
+                  initialValue: settings.dbfields[0],
+                })(
+                  <Select placeholder="choose..">
+                    {settings.dbfields.map((field, i) =>
+                      <Option key={i} value={field}>{field}</Option>,
+                    )}
+                  </Select>,
+                )}
+              </FormItem>
+            </Col>
+            <Col span={8} style={{ display: expand ? 'block' : 'none' }}>
+              <FormItem label="Table">
+                {getFieldDecorator('table', {
+                  initialValue: settings.tableFields[1],
+                })(
+                  <Select placeholder="choose..">
+                    {settings.tableFields.map((field, i) =>
+                      <Option key={i} value={field}>{field}</Option>,
+                    )}
+                  </Select>,
+                )}
+              </FormItem>
             </Col>
             <Col span={8} style={{ display: expand ? 'block' : 'none' }}>
               <FormItem label="Sorting">
@@ -155,14 +132,15 @@ class StructureListPage extends Component {
         <Row style={{ marginBottom: '20px', fontSize: '14px' }}>
           <Col span={8}>
             <a style={{ marginLeft: 8 }} onClick={this.toggle}>
-              { this.state.expand ? <span> Hide filters <Icon type="up" /></span> : <span> Show filters <Icon type="down" /></span> }
+              {this.state.expand ? <span> Hide filters <Icon type="up" /></span> :
+                <span> Show filters <Icon type="down" /></span>}
             </a>
           </Col>
           <Col span={16} style={{ textAlign: 'right' }}>
             <Pagination
               showSizeChanger
-              onChange={this.changePage.bind(this)}
-              onShowSizeChange={this.onShowSizeChange.bind(this)}
+              onChange={this.changePage}
+              onShowSizeChange={this.onShowSizeChange}
               defaultCurrent={current}
               total={structures.length}
             />
@@ -190,10 +168,24 @@ class StructureListPage extends Component {
                       <Icon type="delete" />
                     </Popconfirm>]}
               >
-                <div style={{ lineHeight: 2, paddingLeft: 40 }} >Temperature: { item.condition && item.condition.temperature } K</div>
-                <div style={{ lineHeight: 2, paddingLeft: 40 }} >Pressure: { item.condition && item.condition.pressure } atm</div>
+                <div style={{ lineHeight: 2, paddingLeft: 40 }}>
+                  Temperature: {item.condition && item.condition.temperature} K
+                </div>
+                <div style={{ lineHeight: 2, paddingLeft: 40 }}>Pressure: {item.condition && item.condition.pressure}
+                  atm
+                </div>
                 <Collapse bordered={false} style={{ height: 50, padding: 0, margin: 0 }}>
-                  <Panel header="Parameters" key="1" style={{ position: 'absolute', width: '100%', background: 'white', zIndex: 1, border: '1px solid gray' }}>
+                  <Panel
+                    header="Parameters"
+                    key="1"
+                    style={{
+                      position: 'absolute',
+                      width: '100%',
+                      background: 'white',
+                      zIndex: 1,
+                      border: '1px solid gray',
+                    }}
+                  >
                     <div>
                       {item.params && item.params.map((param, i) => <div key={i}>{param.key} : {param.value}</div>)}
                     </div>

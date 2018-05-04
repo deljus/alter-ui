@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { Pagination, BackTop } from 'antd';
 import { ResultItem, ModalIncrease } from '../../components';
-import { SearchInputView } from '../compWrapper';
+import SearchInputView from './IndexPage';
 
 const Wrapper = styled.div`
     padding-bottom: 20px;
