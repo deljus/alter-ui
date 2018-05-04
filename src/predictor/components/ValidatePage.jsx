@@ -18,7 +18,10 @@ class ValidatePage extends Component {
     super(props);
     this.state = {
       revalidate: true,
+      checked: {},
     };
+    this.handleSubmit = this.handleSubmit.bind(this);
+    this.checkStructure = this.checkStructure.bind(this);
   }
 
   componentDidMount() {
@@ -37,7 +40,7 @@ class ValidatePage extends Component {
             .reduce((acc, key) => {
               const elem = key.split('-');
               if (elem[0] === 'models') {
-                acc[elem[0]] = values[key].map(v => ({ model: v }));
+                acc[elem[0]] = values[key].map(model => ({ model }));
               } else {
                 acc[elem[0]] = values[key];
               }
@@ -48,6 +51,11 @@ class ValidatePage extends Component {
         createResult(models);
       }
     });
+  }
+
+  checkStructure(id) {
+    const { checked } = this.state;
+    this.setState({ checked: { ...id, checked } });
   }
 
   render() {
@@ -64,7 +72,7 @@ class ValidatePage extends Component {
 
     return (
       <Form
-        onSubmit={this.handleSubmit.bind(this)}
+        onSubmit={this.handleSubmit}
       >
         <Row style={{ paddingBottom: 38 }}>
           <Col span={8}>
@@ -101,22 +109,22 @@ class ValidatePage extends Component {
           renderItem={item => (
             <List.Item>
               <Row gutter={20}>
-                <Col lg={12} sm={24} xs={24}><Card
-                  style={{ width: '100%' }}
-                  cover={<img alt="example" src={item.base64} />}
-                  actions={
-                    [<Checkbox cheked={item.check} onChange={() => checkStructure(item.id)} />,
-                      <Icon type="edit" onClick={() => editStructure(item.id)} />,
-                      <Popconfirm
-                        placement="topLeft"
-                        title="Are you sure delete this structure?"
-                        onConfirm={() => deleteStructure(item.id)}
-                        okText="Yes"
-                        cancelText="No"
-                      >
-                        <Icon type="delete" />
-                      </Popconfirm>]}
-                />
+                <Col lg={12} sm={24} xs={24}>
+                  <Card
+                    style={{ width: '100%' }}
+                    cover={<img alt="no image" src={item.base64} />}
+                    actions={
+                      [ <Icon type="edit" onClick={() => editStructure(item.id)} />,
+                        <Popconfirm
+                          placement="topLeft"
+                          title="Are you sure delete this structure?"
+                          onConfirm={() => deleteStructure(item.id)}
+                          okText="Yes"
+                          cancelText="No"
+                        >
+                          <Icon type="delete" />
+                        </Popconfirm>]}
+                  />
                 </Col>
                 <Col lg={12} sm={24} xs={24}>
                   <ConditionList
@@ -126,6 +134,7 @@ class ValidatePage extends Component {
                   />
                 </Col>
               </Row>
+              <hr/>
             </List.Item>
           )}
         />

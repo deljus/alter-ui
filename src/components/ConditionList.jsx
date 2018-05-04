@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { Form, Select, Slider, InputNumber, Row, Col } from 'antd';
+import { Form, Select, Slider, InputNumber, Row, Col, Button } from 'antd';
 import { SliderEditor, SlidersSelect } from '../components';
 
 const Option = Select.Option;
@@ -61,8 +61,12 @@ class ConditionList extends Component {
 
     return (
       <div>
-        <FormItem>
-          <h4>Model: </h4>
+        <div style={{ textAlign: 'right', position: 'absolute'}}>
+          <Button shape="circle" icon="link"/>
+        </div>
+        <FormItem
+          label="Models:"
+        >
           {getFieldDecorator(`models-${id}`, {
             rules: [{
               required: true,
@@ -78,7 +82,7 @@ class ConditionList extends Component {
           )}
         </FormItem>
         <FormItem
-          label="temperature"
+          label="Temperature:"
         >
           {getFieldDecorator(`temperature-${id}`, {
             initialValue: temperature,

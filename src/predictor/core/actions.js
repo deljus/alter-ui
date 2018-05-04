@@ -19,6 +19,6 @@ export const addStructuresValidate = arr => ({
   type: CONST.ADD_STRUCTURES_VALIDATE, arr,
 });
 
-export const chekedStructure = (id, check) => ({
-  type: CONST.CHECK_STRUCTURE, id,
+export const addStructuresResult = arr => ({
+  type: CONST.ADD_STRUCTURE_RESULT, arr,
 });

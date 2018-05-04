@@ -1,5 +1,10 @@
 import { takeEvery, put, call } from 'redux-saga/effects';
-import { addStructureIndex, addStructuresValidate, editStructureIndex } from './actions';
+import {
+  addStructureIndex,
+  addStructuresValidate,
+  editStructureIndex,
+  addStructuresResult,
+} from './actions';
 import { modal } from '../../base/actions';
 import * as Request from '../../base/requests';
 import history from '../../base/history';
@@ -8,7 +13,12 @@ import { getUrlParams, stringifyUrl } from '../../base/parseUrl';
 import { repeatedRequests, requestSaga } from '../../base/sagas';
 import * as Serialize from '../../base/magic';
 import { message } from 'antd';
-import { convertCmlToBase64, clearEditor, exportCml, convertCmlToBase64Arr } from '../../base/marvinAPI';
+import {
+  convertCmlToBase64,
+  clearEditor,
+  exportCml,
+  convertCmlToBase64Arr,
+} from '../../base/marvinAPI';
 import {
   SAGA_EDIT_STRUCTURE_INDEX,
   SAGA_DRAW_STRUCTURE,
@@ -83,9 +93,11 @@ function* createResultTask(action) {
   }
 }
 
-function* resultTask_s() {
+function* resultPageInit() {
   const urlParams = yield getUrlParams();
-  const task = yield call(repeatedRequests, Request.getResultTask, urlParams.task);
+  const responce = yield call(repeatedRequests, Request.getResultTask, urlParams.task);
+  const results = yield call(convertCmlToBase64Arr, responce.data.structures);
+  yield put(addStructuresResult(results));
 }
 
 function* revalidateStructure() {
@@ -94,7 +106,7 @@ function* revalidateStructure() {
 
 export function* sagas() {
   yield takeEvery(SAGA_INIT_VALIDATE_PAGE, requestSaga, validateTask);
-  yield takeEvery(SAGA_INIT_RESULT_PAGE, requestSaga, resultTask_s);
+  yield takeEvery(SAGA_INIT_RESULT_PAGE, requestSaga, resultPageInit);
   yield takeEvery(SAGA_DRAW_STRUCTURE, drawStructure);
   yield takeEvery(SAGA_CREATE_RESULT_TASK, requestSaga, createResultTask);
   yield takeEvery('CREATE_TASK_SEARCH', createStructure);
