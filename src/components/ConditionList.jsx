@@ -17,37 +17,19 @@ const ConditionList = ({
   pressure,
   formComponent,
   form,
-  translationSwith,
-  translation,
   type,
 }) => {
   function fieldName(name) {
-    if (translation) {
-      return `${name}-${type}-translation`;
-    }
     return `${name}-${type}-${id}`;
   }
 
   const FormItem = formComponent.Item;
   const { getFieldDecorator } = form;
 
-  const border = translation ? `1px dashed ${borderColor[type]}` : 'none';
-
   return (
     <div
       style={{ padding: '20px', border }}
     >
-      <Row>
-        <Col span="16">
-            Translation:
-        </Col>
-        <Col
-          span="8"
-          style={{ textAlign: 'right' }}
-        >
-          <Switch onChange={check => translationSwith(check, type, id)} />
-        </Col>
-      </Row>
       <FormItem
         label="Models:"
       >
@@ -113,8 +95,6 @@ ConditionList.propTypes = {
   temperature: PropTypes.number,
   pressure: PropTypes.number,
   id: PropTypes.number,
-  translation: PropTypes.bool,
-  translationSwith: PropTypes.func.isRequired,
   type: PropTypes.number,
 };
 
@@ -125,7 +105,6 @@ ConditionList.defaultProps = {
   pressure: 1,
   catalysts: [],
   solvents: [],
-  translation: false,
   type: 0,
 };
 

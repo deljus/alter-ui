@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import { Button, Form, Icon, List, Card, Popconfirm, Row, Col, Checkbox } from 'antd';
+import { Button, Form, Icon, List, Card, Popconfirm, Row, Col, Checkbox, Dropdown, Menu } from 'antd';
 import { modal } from '../../base/actions';
 import { MODAL, URLS } from '../../config';
 import {
@@ -11,6 +11,7 @@ import {
 } from '../core/constants';
 import { ConditionList } from '../../components';
 import { getValidateStructure } from '../core/selectors';
+import ConditionListModal from './ConditionListModal';
 
 
 class ValidatePage extends Component {
@@ -18,10 +19,13 @@ class ValidatePage extends Component {
     super(props);
     this.state = {
       revalidate: true,
-      checked: {},
+      checkedIds: [],
+      visibleModal: false,
     };
     this.handleSubmit = this.handleSubmit.bind(this);
     this.checkStructure = this.checkStructure.bind(this);
+    this.handleMenuClick = this.handleMenuClick.bind(this);
+    this.closeModal = this.closeModal.bind(this);
   }
 
   componentDidMount() {
@@ -58,6 +62,23 @@ class ValidatePage extends Component {
     this.setState({ checked: { ...id, checked } });
   }
 
+  handleMenuClick(e) {
+    const { deleteStructure } = this.props;
+    const { checkedIds } = this.state;
+    switch (e.key) {
+      case '1':
+        deleteStructure(checkedIds);
+        break;
+      case '2':
+        this.setState({ visibleModal: true });
+        break;
+    }
+  }
+
+  closeModal(){
+    this.setState({ visibleModal: false });
+  }
+
   render() {
     const {
       resultTask,
@@ -68,78 +89,102 @@ class ValidatePage extends Component {
       history,
       form } = this.props;
 
-    const { revalidate } = this.state;
+    const { revalidate, checkedIds, visibleModal } = this.state;
+
+
+    const menu = (
+      <Menu onClick={this.handleMenuClick}>
+        <Menu.Item key="1">Delete</Menu.Item>
+        <Menu.Divider />
+        <Menu.Item key="2">Edit conditions</Menu.Item>
+      </Menu>
+    );
 
     return (
-      <Form
-        onSubmit={this.handleSubmit}
-      >
-        <Row style={{ paddingBottom: 38 }}>
-          <Col span={8}>
-            <Button
-              icon="left"
-              onClick={() => history.push(URLS.INDEX)}
-            >
-              Back
-            </Button>
-          </Col>
-          <Col span={8} offset={8} style={{ textAlign: 'right' }}>
-            { revalidate ?
-              <Button
-                type="primary"
-                htmlType="submit"
-                icon="right"
-              >
-              Show result(s)
-              </Button> :
-              <Button
-                type="primary"
-                htmlType="submit"
-                icon="right"
-              >
-                Revalidate
-              </Button>
-            }
-          </Col>
-        </Row>
-
-        <List
-          grid={{ gutter: 16, column: 1 }}
-          dataSource={structures}
-          renderItem={item => (
-            <List.Item>
-              <Row gutter={20}>
-                <Col lg={12} sm={24} xs={24}>
-                  <Card
-                    style={{ width: '100%' }}
-                    cover={<img alt="no image" src={item.base64} />}
-                    actions={
-                      [ <Icon type="edit" onClick={() => editStructure(item.id)} />,
-                        <Popconfirm
-                          placement="topLeft"
-                          title="Are you sure delete this structure?"
-                          onConfirm={() => deleteStructure(item.id)}
-                          okText="Yes"
-                          cancelText="No"
-                        >
-                          <Icon type="delete" />
-                        </Popconfirm>]}
-                  />
-                </Col>
-                <Col lg={12} sm={24} xs={24}>
-                  <ConditionList
-                    formComponent={Form}
-                    form={form}
-                    {...item}
-                  />
-                </Col>
-              </Row>
-              <hr/>
-            </List.Item>
-          )}
+      <div>
+        <ConditionListModal
+          visible={visibleModal}
+          onOk={}
+          onCancel={this.closeModal}
         />
+        <Form
+          onSubmit={this.handleSubmit}
+        >
+          <Row style={{ paddingBottom: 38 }}>
+            <Col span={8}>
+              <Button
+                icon="left"
+                onClick={() => history.push(URLS.INDEX)}
+              >
+              Back
+              </Button>
+            </Col>
+            <Col span={8} offset={8} style={{ textAlign: 'right' }}>
+              <Dropdown
+                overlay={menu}
+                disable={!checkedIds.length}
+              >
+                <Button>
+                Actions <Icon type="down" />
+                </Button>
+              </Dropdown>
+              { revalidate ?
+                <Button
+                  type="primary"
+                  htmlType="submit"
+                  icon="right"
+                >
+              Show result(s)
+                </Button> :
+                <Button
+                  type="primary"
+                  htmlType="submit"
+                  icon="right"
+                >
+                Revalidate
+                </Button>
+              }
+            </Col>
+          </Row>
 
-      </Form>
+          <List
+            grid={{ gutter: 16, column: 1 }}
+            dataSource={structures}
+            renderItem={item => (
+              <List.Item>
+                <Row gutter={20}>
+                  <Col lg={12} sm={24} xs={24}>
+                    <Card
+                      style={{ width: '100%' }}
+                      cover={<img alt="no image" src={item.base64} />}
+                      actions={
+                        [<Icon type="edit" onClick={() => editStructure(item.id)} />,
+                          <Popconfirm
+                            placement="topLeft"
+                            title="Are you sure delete this structure?"
+                            onConfirm={() => deleteStructure(item.id)}
+                            okText="Yes"
+                            cancelText="No"
+                          >
+                            <Icon type="delete" />
+                          </Popconfirm>]}
+                    />
+                  </Col>
+                  <Col lg={12} sm={24} xs={24}>
+                    <ConditionList
+                      formComponent={Form}
+                      form={form}
+                      {...item}
+                    />
+                  </Col>
+                </Row>
+                <hr />
+              </List.Item>
+            )}
+          />
+
+        </Form>
+      </div>
     );
   }
 }
