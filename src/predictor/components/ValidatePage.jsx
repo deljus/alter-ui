@@ -1,13 +1,14 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import { Button, Form, Icon, List, Card, Popconfirm, Row, Col, Checkbox, Dropdown, Menu } from 'antd';
+import { Button, Form, Icon, List, Card, Popconfirm, Row, Col, Checkbox, Dropdown, Menu, Modal } from 'antd';
 import { modal } from '../../base/actions';
 import { MODAL, URLS } from '../../config';
 import {
   SAGA_CREATE_RESULT_TASK,
   SAGA_INIT_VALIDATE_PAGE,
   SAGA_EDIT_STRUCTURE_VALIDATE,
+  SAGA_DELETE_STRUCRURES_VALIDATE_PAGE,
 } from '../core/constants';
 import { ConditionList } from '../../components';
 import { getValidateStructure } from '../core/selectors';
@@ -27,6 +28,7 @@ class ValidatePage extends Component {
     this.handleMenuClick = this.handleMenuClick.bind(this);
     this.closeModal = this.closeModal.bind(this);
     this.setStructureFields = this.setStructureFields.bind(this);
+    this.showDeleteConfirm = this.showDeleteConfirm.bind(this);
   }
 
   componentDidMount() {
@@ -69,11 +71,14 @@ class ValidatePage extends Component {
   }
 
   handleMenuClick(e) {
-    const { deleteStructure } = this.props;
     const { checkedIds } = this.state;
+    const { deleteStructure } = this.props;
     switch (e.key) {
       case '1':
-        deleteStructure(checkedIds);
+        const deleteIds = checkedIds.map(item => item.id);
+        this.showDeleteConfirm(() => {
+          deleteStructure(deleteIds);
+        });
         break;
       case '2':
         this.setState({ visibleModal: true });
@@ -89,8 +94,18 @@ class ValidatePage extends Component {
     const { typeModel, ...fields } = values;
     const { checkedIds } = this.state;
 
-    //checkedIds.forEach()
+    // checkedIds.forEach()
+  }
 
+  showDeleteConfirm(deleteFn) {
+    Modal.confirm({
+      title: 'Are you sure delete this task?',
+      content: 'Some descriptions',
+      okText: 'Yes',
+      okType: 'danger',
+      cancelText: 'No',
+      onOk: () => deleteFn(),
+    });
   }
 
   render() {
@@ -173,12 +188,17 @@ class ValidatePage extends Component {
                       style={{ width: '100%' }}
                       cover={<img alt="no image" src={item.base64} />}
                       actions={
-                        [<Checkbox onChange={e => this.checkStructure(e, item.structure, item.type)} />,
-                          <Icon type="edit" onClick={() => editStructure(item.id)} />,
-                          <Popconfirm
+                        [<Checkbox
+                          onChange={e => this.checkStructure(e, item.structure, item.type)}
+                        />,
+                        <Icon
+                            type="edit"
+                            onClick={() => editStructure(item.id)}
+                          />,
+                        <Popconfirm
                             placement="topLeft"
                             title="Are you sure delete this structure?"
-                            onConfirm={() => deleteStructure(item.id)}
+                            onConfirm={() => deleteStructure([item.id])}
                             okText="Yes"
                             cancelText="No"
                           >
@@ -221,7 +241,7 @@ const mapDispatchToProps = dispatch => ({
   createResult: data => dispatch({ type: SAGA_CREATE_RESULT_TASK, data }),
   initPage: () => dispatch({ type: SAGA_INIT_VALIDATE_PAGE }),
   editStructure: id => dispatch(modal(true, SAGA_EDIT_STRUCTURE_VALIDATE, id)),
-  deleteStructure: id => null,
+  deleteStructure: structures => dispatch({ type: SAGA_DELETE_STRUCRURES_VALIDATE_PAGE, structures }),
   checkStructure: id => null,
 });
 

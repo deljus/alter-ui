@@ -29,6 +29,8 @@ const validatePageStructure = (state = [], action) => {
   switch (action.type) {
     case CONST.ADD_STRUCTURES_VALIDATE:
       return action.arr;
+    case CONST.DELETE_STRUCTURES_VALIDATE:
+      return state.filter(struct => struct.structure !== action.structure);
     default:
       return state;
   }

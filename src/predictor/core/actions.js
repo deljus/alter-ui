@@ -32,3 +32,7 @@ export const addAllAdditives = additives => ({
 export const addAllModels = models => ({
   type: CONST.ADD_ALL_MODELS, models,
 });
+
+export const deleteStructuresValidate = structures => ({
+  type: CONST.DELETE_STRUCTURES_VALIDATE, structures,
+})

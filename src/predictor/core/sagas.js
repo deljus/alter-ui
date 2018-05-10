@@ -6,6 +6,7 @@ import {
   addStructuresResult,
   addAllModels,
   addAllAdditives,
+  deleteStructuresValidate
 } from './actions';
 import { modal } from '../../base/actions';
 import * as Request from '../../base/requests';
@@ -29,6 +30,7 @@ import {
   SAGA_CREATE_RESULT_TASK,
   SAGA_INIT_RESULT_PAGE,
   SAGA_EDIT_STRUCTURE_VALIDATE,
+  SAGA_DELETE_STRUCRURES_VALIDATE_PAGE,
 } from './constants';
 
 import 'antd/lib/message/style/css';
@@ -109,6 +111,14 @@ function* revalidateStructure() {
 
 }
 
+function* deleteStructures(action) {
+  const urlParams = yield getUrlParams();
+  const structuresToDelete = action.structures.map(structure => ({ structure, todelete: true }));
+  const response = yield call(Request.deleteStructure, urlParams.task, structuresToDelete);
+  yield call(history.push, stringifyUrl(URLS.VALIDATE, { task: response.data.task }));
+  yield call(validateTask);
+}
+
 export function* sagas() {
   yield takeEvery(SAGA_INIT_VALIDATE_PAGE, requestSaga, validateTask);
   yield takeEvery(SAGA_INIT_RESULT_PAGE, requestSaga, resultPageInit);
@@ -118,4 +128,5 @@ export function* sagas() {
   yield takeEvery(SAGA_EDIT_STRUCTURE_INDEX, editStructureForModal);
   yield takeEvery(SAGA_CREATE_TASK_INDEX, createTaskIndex);
   yield takeEvery(SAGA_EDIT_STRUCTURE_VALIDATE, revalidateStructure);
+  yield takeEvery(SAGA_DELETE_STRUCRURES_VALIDATE_PAGE, requestSaga, deleteStructures);
 }
