@@ -16,7 +16,8 @@ const SettingsPage = ({ setSettings, settings }) => {
   const handleChange = (value, key, parent = null) => {
     if (parent) settings[parent][key] = value;
     else settings[key] = value;
-
+    const serialObj = JSON.stringify(settings);
+    localStorage.setItem('settings', serialObj);
     setSettings(settings);
   };
   const formItemLayout = {
@@ -88,7 +89,7 @@ const SettingsPage = ({ setSettings, settings }) => {
       <h4>Auto reset after submit in create page</h4>
 
       <FormItem
-          {...formItemLayout}
+        {...formItemLayout}
         label="Auto reset"
       >
 

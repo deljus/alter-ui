@@ -1,4 +1,3 @@
-import { createSelector } from 'reselect';
 
 export const getIndexPageStructure = state => state.indexPageStructure;
 
