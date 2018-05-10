@@ -64,7 +64,15 @@ const defaultSettings = {
   tableFields: ['molecule', 'reaction'],
 };
 
-export const settings = (state = defaultSettings, action) => {
+function getSettings() {
+  let state;
+  const settigsOnStorageJson = localStorage.getItem('settings');
+  if (settigsOnStorageJson === null) state = defaultSettings;
+  else state = JSON.parse(settigsOnStorageJson);
+  return state;
+}
+
+export const settings = (state = getSettings(), action) => {
   switch (action.type) {
     case ADD_SETTINGS:
       return { ...action.settings };
