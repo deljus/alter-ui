@@ -4,6 +4,8 @@ import {
   addStructuresValidate,
   editStructureIndex,
   addStructuresResult,
+  addAllModels,
+  addAllAdditives,
 } from './actions';
 import { modal } from '../../base/actions';
 import * as Request from '../../base/requests';
@@ -81,6 +83,9 @@ function* validateTask() {
   const structureAddAdditives = Serialize.additives(structureAddModel, additives.data, magic.data);
   const structureAndBase64 = yield call(convertCmlToBase64Arr, structureAddAdditives);
   yield put(addStructuresValidate(structureAndBase64));
+  const additivesOfType = Serialize.additivesOfType(additives.data, magic.data);
+  yield put(addAllAdditives(additivesOfType));
+  yield put(addAllModels(models.data));
 }
 
 function* createResultTask(action) {

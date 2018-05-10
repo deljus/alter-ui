@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
-import { Modal, Form } from 'antd';
-import { ConditionList, Select } from '../../components';
+import { connect } from 'react-redux';
+import { Modal, Form, Select } from 'antd';
+import { ConditionList } from '../../components';
+import { getAllModels, getAllAdditives } from '../core/selectors';
 
 const typeStructure = [{
   type: 1,
@@ -13,51 +15,84 @@ const typeStructure = [{
 
 const Option = Select.Option;
 
-const ConditionListModal = ({
-  onOk,
-  onCancel,
-  visible,
-  form,
-}) => {
-  const handleOk = () => {
-    values = form.getFieldsValue();
+const FormItem = Form.Item;
 
-    onOk();
-  };
+class ConditionListModal extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      typeModel: 1,
+    };
+    this.handleOk = this.handleOk.bind(this);
+    this.handleSelectChange = this.handleSelectChange.bind(this);
+  }
 
-  const FormItem = Form.Item;
-  const { getFieldDecorator } = form;
+  handleOk() {
+    const { form, onOk } = this.props;
+    const values = form.getFieldsValue();
+    onOk(values);
+  }
+
+  handleSelectChange(value) {
+    this.setState({ typeModel: value });
+  }
+
+  render() {
+    const {
+      onOk,
+      onCancel,
+      visible,
+      form,
+      allModels,
+      allAdditives,
+    } = this.props;
+
+    const { getFieldDecorator } = form;
+    const { typeModel } = this.state;
+
+    return (
+      <Modal
+        title="Edit conditions"
+        visible={visible}
+        onOk={this.handleOk}
+        onCancel={onCancel}
+        okText="Apply"
+        cancelText="Close"
+      >
+        <Form>
+          <FormItem
+            label="Type structure:"
+          >
+            {getFieldDecorator('typeStructure', {
+              initialValue: typeModel,
+            })(
+              <Select
+                onChange={val => this.handleSelectChange(val)}
+              >
+                {typeStructure.map((item, i) =>
+                  <Option key={item.name + i} value={item.type}>{item.name}</Option>,
+                )}
+              </Select>,
+            )}
+          </FormItem>
+          <ConditionList
+            id="translation"
+            formComponent={Form}
+            form={form}
+            models={allModels.filter(model => model.type === typeModel)}
+            catalysts={allAdditives.solvents}
+            solvents={allAdditives.catalysts}
+          />
+        </Form>
+      </Modal>
+    );
+  }
+}
+
+const mapStateToProps = state => ({
+  allModels: getAllModels(state),
+  allAdditives: getAllAdditives(state),
+});
 
 
-  return (
-    <Modal
-      title="Basic Modal"
-      visible={visible}
-      onOk={handleOk}
-      onCancel={onCancel}
-    >
-      <Form>
-        <FormItem
-          label="Type structure:"
-        >
-          {getFieldDecorator('typeStructure', {
-            initialValue: 1,
-          })(
-            <Select>
-              { typeStructure.map((item, i) =>
-                <Option key={item.name + i} value={item.type}>{ item.name }</Option>,
-              )}
-            </Select>,
-          )}
-        </FormItem>
-        <ConditionList
-          id="translation"
-          formComponent={Form}
-          form={form}
-        />
-      </Form>
-    </Modal>
-  );
-};
-
-export default Form.create()(ConditionListModal);
+export default Form.create()(connect(mapStateToProps)(ConditionListModal));

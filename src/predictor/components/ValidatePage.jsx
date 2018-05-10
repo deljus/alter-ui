@@ -26,6 +26,7 @@ class ValidatePage extends Component {
     this.checkStructure = this.checkStructure.bind(this);
     this.handleMenuClick = this.handleMenuClick.bind(this);
     this.closeModal = this.closeModal.bind(this);
+    this.setStructureFields = this.setStructureFields.bind(this);
   }
 
   componentDidMount() {
@@ -57,9 +58,14 @@ class ValidatePage extends Component {
     });
   }
 
-  checkStructure(id) {
-    const { checked } = this.state;
-    this.setState({ checked: { ...id, checked } });
+  checkStructure(e, id, type) {
+    let { checkedIds } = this.state;
+    if (e.target.checked) {
+      checkedIds.push({ id, type });
+    } else {
+      checkedIds = checkedIds.filter(item => item.id !== id);
+    }
+    this.setState({ checkedIds });
   }
 
   handleMenuClick(e) {
@@ -75,8 +81,16 @@ class ValidatePage extends Component {
     }
   }
 
-  closeModal(){
+  closeModal() {
     this.setState({ visibleModal: false });
+  }
+
+  setStructureFields(values) {
+    const { typeModel, ...fields } = values;
+    const { checkedIds } = this.state;
+
+    //checkedIds.forEach()
+
   }
 
   render() {
@@ -91,6 +105,7 @@ class ValidatePage extends Component {
 
     const { revalidate, checkedIds, visibleModal } = this.state;
 
+    console.log(checkedIds);
 
     const menu = (
       <Menu onClick={this.handleMenuClick}>
@@ -104,7 +119,7 @@ class ValidatePage extends Component {
       <div>
         <ConditionListModal
           visible={visibleModal}
-          onOk={}
+          onOk={this.setStructureFields}
           onCancel={this.closeModal}
         />
         <Form
@@ -122,9 +137,9 @@ class ValidatePage extends Component {
             <Col span={8} offset={8} style={{ textAlign: 'right' }}>
               <Dropdown
                 overlay={menu}
-                disable={!checkedIds.length}
+                disabled={!checkedIds.length}
               >
-                <Button>
+                <Button style={{ marginRight: '10px' }} >
                 Actions <Icon type="down" />
                 </Button>
               </Dropdown>
@@ -158,7 +173,8 @@ class ValidatePage extends Component {
                       style={{ width: '100%' }}
                       cover={<img alt="no image" src={item.base64} />}
                       actions={
-                        [<Icon type="edit" onClick={() => editStructure(item.id)} />,
+                        [<Checkbox onChange={e => this.checkStructure(e, item.structure, item.type)} />,
+                          <Icon type="edit" onClick={() => editStructure(item.id)} />,
                           <Popconfirm
                             placement="topLeft"
                             title="Are you sure delete this structure?"

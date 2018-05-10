@@ -4,8 +4,6 @@ import { Form, Select, Slider, InputNumber, Row, Col, Button, Switch } from 'ant
 import { SliderEditor, SlidersSelect } from '../components';
 import sliderConfig from './formItemConfigs';
 
-const borderColor = ['#ffffff', '#24a5ff', '#ec6b4b'];
-
 const Option = Select.Option;
 
 const ConditionList = ({
@@ -27,9 +25,7 @@ const ConditionList = ({
   const { getFieldDecorator } = form;
 
   return (
-    <div
-      style={{ padding: '20px', border }}
-    >
+    <div>
       <FormItem
         label="Models:"
       >

@@ -22,3 +22,13 @@ export const addStructuresValidate = arr => ({
 export const addStructuresResult = arr => ({
   type: CONST.ADD_STRUCTURE_RESULT, arr,
 });
+
+
+export const addAllAdditives = additives => ({
+  type: CONST.ADD_ALL_ADDITIVES, additives,
+});
+
+// Add all models
+export const addAllModels = models => ({
+  type: CONST.ADD_ALL_MODELS, models,
+});

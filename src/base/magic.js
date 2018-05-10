@@ -46,3 +46,8 @@ export const additives = (structures, additives, magic) => structures.map(struct
   catalysts: additives.filter(additive => additive.type === magic.AdditiveType.CATALYST),
 }));
 
+export const additivesOfType = (additives, magic) => ({
+  solvents: additives.filter(additive => additive.type === magic.AdditiveType.SOLVENT),
+  catalysts: additives.filter(additive => additive.type === magic.AdditiveType.CATALYST),
+});
+
