@@ -1,5 +1,10 @@
 var webpack = require('webpack');
 var path = require('path');
+const UglifyJsPlugin = require("uglifyjs-webpack-plugin");
+const MiniCssExtractPlugin = require("mini-css-extract-plugin");
+const OptimizeCSSAssetsPlugin = require("optimize-css-assets-webpack-plugin");
+const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
+
 
 module.exports = {
   entry: {
@@ -36,13 +41,31 @@ module.exports = {
         loader: "babel-loader"
       },
       {
-        test: /\.css$/,
-        use: [ 'style-loader', 'css-loader' ]
+        test: /\.css/,
+        use:  [  'style-loader', MiniCssExtractPlugin.loader, 'css-loader']
       }
     ]
   },
+  optimization: {
+    splitChunks: {
+      chunks: 'all',
+      name: 'common',
+    },
+    minimizer: [
+      new UglifyJsPlugin({
+        cache: true,
+        parallel: true,
+        sourceMap: true
+      }),
+      new OptimizeCSSAssetsPlugin({})
+    ]
+  },
   plugins: [
-    new webpack.HotModuleReplacementPlugin()
+    new webpack.HotModuleReplacementPlugin(),
+    new MiniCssExtractPlugin({
+      filename: '[name].min.css',
+    }),
+    new BundleAnalyzerPlugin()
   ],
   resolve: {
     extensions: ['*', '.js', '.jsx']
