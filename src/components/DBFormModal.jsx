@@ -82,7 +82,6 @@ class DBFormModal extends Component {
   }
 
   render() {
-    const { btnLoading } = this.state;
     const { onCancel, visible, id, structures } = this.props;
 
     visible && this.init(structures, id);

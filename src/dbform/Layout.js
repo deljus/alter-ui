@@ -10,6 +10,9 @@ import {
 } from './components';
 import { LoaderView, ErrorView } from '../base/wrapper';
 import { MainLayout } from '../components';
+import {
+  SAGA_INIT_STRUCTURE_LIST_PAGE
+} from './core/constants';
 import 'antd/dist/antd.css';
 
 const TabPane = Tabs.TabPane;
@@ -60,7 +63,7 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = dispatch => ({
-  initPages: () => dispatch({ type: 'INIT_STRUCTURE_LIST_PAGE' }),
+  initPages: () => dispatch({ type: SAGA_INIT_STRUCTURE_LIST_PAGE }),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Main);

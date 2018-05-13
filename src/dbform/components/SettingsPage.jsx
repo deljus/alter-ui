@@ -1,9 +1,7 @@
-import React, { Component } from 'react';
+import React from 'react';
 import { connect } from 'react-redux';
-import { Form, Button, Select, Slider, Switch } from 'antd';
-import PropTypes from 'prop-types';
+import { Form, Select, Slider, Switch } from 'antd';
 import { addSettings } from '../core/actions';
-import { merge } from '../../base/functions';
 import sliderConfig from '../../components/formItemConfigs';
 
 const FormItem = Form.Item;
@@ -18,7 +16,8 @@ const SettingsPage = ({ setSettings, settings }) => {
   const handleChange = (value, key, parent = null) => {
     if (parent) settings[parent][key] = value;
     else settings[key] = value;
-
+    const serialObj = JSON.stringify(settings);
+    localStorage.setItem('settings', serialObj);
     setSettings(settings);
   };
   const formItemLayout = {
@@ -90,7 +89,7 @@ const SettingsPage = ({ setSettings, settings }) => {
       <h4>Auto reset after submit in create page</h4>
 
       <FormItem
-          {...formItemLayout}
+        {...formItemLayout}
         label="Auto reset"
       >
 

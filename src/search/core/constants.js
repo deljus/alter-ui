@@ -16,3 +16,4 @@ export const RESULT = {
 export const HISTORY = {
   ADD: 'ADD_HISTORY',
 };
+

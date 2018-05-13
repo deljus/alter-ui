@@ -5,7 +5,6 @@
  * @returns {object}
  */
 function merge(target, source) {
-
   if (typeof target !== 'object') {
     target = {};
   }
@@ -30,4 +29,12 @@ function merge(target, source) {
   return target;
 }
 
-export { merge };
+function urlConverter(template, params) {
+  for (const key in params) {
+    template = template.replace(`:${key}`, params[key]);
+  }
+  return template;
+}
+
+
+export { merge, urlConverter };

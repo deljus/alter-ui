@@ -1,7 +1,7 @@
-import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { DBFormModal } from '../../components/index';
 import { showModal } from '../core/actions';
+import { SAGA_EDIT_STRUCTURE } from '../core/constants';
 
 const mapStateToProps = state => ({
   visible: state.modal.visible,
@@ -11,7 +11,7 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = dispatch => ({
-  onOk: (id, data, params, condition) => dispatch({ type: 'MARVIN_MODAL_DISCARD', id, data, params, condition }),
+  onOk: (id, data, params, condition) => dispatch({ type: SAGA_EDIT_STRUCTURE, id, data, params, condition }),
   onCancel: () => dispatch(showModal(false)),
 });
 
