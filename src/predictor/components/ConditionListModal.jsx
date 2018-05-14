@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Modal, Form, Select } from 'antd';
 import { ConditionList } from '../../components';
-import { getAllModels, getAllAdditives } from '../core/selectors';
+import { getModels, getAdditives } from '../core/selectors';
 
 const typeStructure = [{
   type: 1,
@@ -30,7 +30,16 @@ class ConditionListModal extends Component {
   handleOk() {
     const { form, onOk } = this.props;
     const values = form.getFieldsValue();
-    onOk(values);
+    const { typeStructure, ...fields } = values;
+
+    const newFields = Object.keys(fields)
+      .reduce((acc, key) => {
+        const newKey = key.split('-');
+        acc[newKey[0]] = fields[key];
+        return acc;
+      }, {});
+
+    onOk(typeStructure, newFields);
   }
 
   handleSelectChange(value) {
@@ -90,8 +99,8 @@ class ConditionListModal extends Component {
 }
 
 const mapStateToProps = state => ({
-  allModels: getAllModels(state),
-  allAdditives: getAllAdditives(state),
+  allModels: getModels(state),
+  allAdditives: getAdditives(state),
 });
 
 

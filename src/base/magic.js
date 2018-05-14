@@ -30,13 +30,11 @@ const modelsOfTypes = (structureType, models, magic, taskType) => {
    * @param models
    * @param magic
    */
-export const models = (task, models, magic) => task.structures.map((structure) => {
+export const models = (task, models, magic) => task.data.map((structure) => {
   const modelSorted = modelsOfTypes(structure.type, models, magic, task.type);
   return {
     ...structure,
-    cml: structure.data,
     models: modelSorted,
-    selectModel: modelSorted[0].model,
   };
 });
 

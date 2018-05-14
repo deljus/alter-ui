@@ -24,6 +24,8 @@ const ConditionList = ({
   const FormItem = formComponent.Item;
   const { getFieldDecorator } = form;
 
+  console.log(fieldName('model'));
+
   return (
     <div>
       <FormItem
@@ -69,13 +71,13 @@ const ConditionList = ({
       </FormItem>
       { solvents && !!solvents.length && <FormItem label="Solvents">
 
-        {getFieldDecorator(fieldName('additives'))(
+        {getFieldDecorator(fieldName('solvents'))(
           <SlidersSelect data={solvents} sumEqual={100} />,
         )}
       </FormItem>}
       { catalysts && !!catalysts.length && <FormItem label="Solvents">
 
-        {getFieldDecorator(fieldName('additives-1'))(
+        {getFieldDecorator(fieldName('catalysts'))(
           <SlidersSelect data={catalysts} />,
         )}
       </FormItem>}

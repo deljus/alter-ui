@@ -2,22 +2,37 @@ import { combineReducers } from 'redux';
 import * as CONST from './constants';
 import { request, modal } from '../../base/reducers';
 
-const indexPageStructure = (state = [], action) => {
+const indexPageStructures = (state = [], action) => {
   switch (action.type) {
     case CONST.ADD_STRUCTURE_INDEX:
       return [
         {
-          id: state.reduce((maxId, task) => Math.max(task.id, maxId), -1) + 1,
-          ...action.arr,
+          structure: state.reduce((maxId, task) => Math.max(task.structure, maxId), -1) + 1,
+          ...action.obj,
         },
         ...state,
       ];
     case CONST.DELETE_STRUCTURE_INDEX:
-      return state.filter(structure => structure.id !== action.id);
+      return state.filter(item => item.structure !== action.structure);
     case CONST.EDIT_STRUCTURE_INDEX:
+      return state.map(item =>
+        (item.structure === action.structure ?
+          { structure: action.structure, ...action.obj } :
+          item),
+      );
+    default:
+      return state;
+  }
+};
+
+const validatePageStructure = (state = null, action) => {
+  switch (action.type) {
+    case CONST.ADD_STRUCTURES_VALIDATE:
+      return action.arr;
+    case CONST.EDIT_STRUCTURE_VALIDATE:
       return state.map(structure =>
-        (structure.id === action.arr.id ?
-          { ...action.arr } :
+        (structure.structure === action.arr.id ?
+          { ...action.arr, revalidate: true } :
           structure),
       );
     default:
@@ -25,18 +40,7 @@ const indexPageStructure = (state = [], action) => {
   }
 };
 
-const validatePageStructure = (state = [], action) => {
-  switch (action.type) {
-    case CONST.ADD_STRUCTURES_VALIDATE:
-      return action.arr;
-    case CONST.DELETE_STRUCTURES_VALIDATE:
-      return state.filter(struct => struct.structure !== action.structure);
-    default:
-      return state;
-  }
-};
-
-const allAdditives = (state = [], action) => {
+const additives = (state = null, action) => {
   switch (action.type) {
     case CONST.ADD_ALL_ADDITIVES:
       return action.additives;
@@ -45,9 +49,18 @@ const allAdditives = (state = [], action) => {
   }
 };
 
-const allModels = (state = [], action) => {
+const models = (state = null, action) => {
   switch (action.type) {
     case CONST.ADD_ALL_MODELS:
+      return action.models;
+    default:
+      return state;
+  }
+};
+
+const magic = (state = null, action) => {
+  switch (action.type) {
+    case CONST.ADD_MAGIC:
       return action.models;
     default:
       return state;
@@ -67,10 +80,11 @@ const resultPageStructure = (state = [], action) => {
 
 export default combineReducers({
   modal,
-  allModels,
-  allAdditives,
+  models,
+  additives,
+  magic,
   request,
-  indexPageStructure,
+  indexPageStructures,
   validatePageStructure,
   resultPageStructure,
 });

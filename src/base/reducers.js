@@ -41,11 +41,8 @@ const request = (state = requestState, action) => {
 const modal = (state = { visible: false }, action) => {
   switch (action.type) {
     case TRIGGER:
-      return {
-        visible: action.bool,
-        typeAction: action.typeAction,
-        id: action.id,
-      };
+      const { type, ...rest } = action;
+      return rest;
     default:
       return state;
   }

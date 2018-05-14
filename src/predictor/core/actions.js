@@ -1,16 +1,16 @@
 import * as CONST from './constants';
 
 // Index page actions
-export const addStructureIndex = arr => ({
-  type: CONST.ADD_STRUCTURE_INDEX, arr,
+export const addStructureIndex = obj => ({
+  type: CONST.ADD_STRUCTURE_INDEX, obj,
 });
 
-export const deleteStructureIndex = id => ({
-  type: CONST.DELETE_STRUCTURE_INDEX, id,
+export const deleteStructureIndex = structure => ({
+  type: CONST.DELETE_STRUCTURE_INDEX, structure,
 });
 
-export const editStructureIndex = arr => ({
-  type: CONST.EDIT_STRUCTURE_INDEX, arr,
+export const editStructureIndex = (structure, obj) => ({
+  type: CONST.EDIT_STRUCTURE_INDEX, structure, obj,
 });
 
 
@@ -24,15 +24,18 @@ export const addStructuresResult = arr => ({
 });
 
 
-export const addAllAdditives = additives => ({
+export const addAdditives = additives => ({
   type: CONST.ADD_ALL_ADDITIVES, additives,
 });
 
-// Add all models
-export const addAllModels = models => ({
+export const addModels = models => ({
   type: CONST.ADD_ALL_MODELS, models,
 });
 
-export const deleteStructuresValidate = structures => ({
-  type: CONST.DELETE_STRUCTURES_VALIDATE, structures,
-})
+export const addMagic = models => ({
+  type: CONST.ADD_MAGIC, models,
+});
+
+export const editStructureValidate = arr => ({
+  type: CONST.EDIT_STRUCTURE_VALIDATE, arr,
+});

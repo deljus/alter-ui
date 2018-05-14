@@ -2,8 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { Button, Form, Icon, List, Card, Popconfirm, Row, Col, Checkbox, Dropdown, Menu, Modal } from 'antd';
-import { modal } from '../../base/actions';
-import { MODAL, URLS } from '../../config';
+import { URLS } from '../../config';
 import {
   SAGA_CREATE_RESULT_TASK,
   SAGA_INIT_VALIDATE_PAGE,
@@ -11,15 +10,13 @@ import {
   SAGA_DELETE_STRUCRURES_VALIDATE_PAGE,
 } from '../core/constants';
 import { ConditionList } from '../../components';
-import { getValidateStructure } from '../core/selectors';
+import { getStructuresValidatePage, isLoading } from '../core/selectors';
 import ConditionListModal from './ConditionListModal';
-
 
 class ValidatePage extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      revalidate: true,
       checkedIds: [],
       visibleModal: false,
     };
@@ -90,11 +87,22 @@ class ValidatePage extends Component {
     this.setState({ visibleModal: false });
   }
 
-  setStructureFields(values) {
-    const { typeModel, ...fields } = values;
-    const { checkedIds } = this.state;
+  setStructureFields(typeStructure, fields) {
+    let { checkedIds } = this.state;
+    const { form } = this.props;
 
-    // checkedIds.forEach()
+    checkedIds = checkedIds.filter(checkId => checkId.type === typeStructure);
+    let newFields = {};
+    checkedIds.forEach((check) => {
+      const f = Object.keys(fields).reduce((acc, key) => {
+        const newKey = `${key}-${check.type}-${check.id}`;
+        acc[newKey] = fields[key];
+        return acc;
+      }, {});
+      newFields = { ...newFields, ...f };
+    });
+
+    form.setFieldsValue(newFields);
   }
 
   showDeleteConfirm(deleteFn) {
@@ -116,11 +124,11 @@ class ValidatePage extends Component {
       structures,
       checkStructure,
       history,
-      form } = this.props;
+      form,
+      loading,
+    } = this.props;
 
-    const { revalidate, checkedIds, visibleModal } = this.state;
-
-    console.log(checkedIds);
+    const { checkedIds, visibleModal } = this.state;
 
     const menu = (
       <Menu onClick={this.handleMenuClick}>
@@ -130,7 +138,7 @@ class ValidatePage extends Component {
       </Menu>
     );
 
-    return (
+    return !loading && (
       <div>
         <ConditionListModal
           visible={visibleModal}
@@ -158,7 +166,7 @@ class ValidatePage extends Component {
                 Actions <Icon type="down" />
                 </Button>
               </Dropdown>
-              { revalidate ?
+              { !structures.some(s => s.revalidate) ?
                 <Button
                   type="primary"
                   htmlType="submit"
@@ -167,9 +175,9 @@ class ValidatePage extends Component {
               Show result(s)
                 </Button> :
                 <Button
-                  type="primary"
+                  type="danger"
                   htmlType="submit"
-                  icon="right"
+                  icon="reload"
                 >
                 Revalidate
                 </Button>
@@ -185,31 +193,33 @@ class ValidatePage extends Component {
                 <Row gutter={20}>
                   <Col lg={12} sm={24} xs={24}>
                     <Card
-                      style={{ width: '100%' }}
+                      style={{ border: item.revalidate ? '1px solid red' : 'none' }}
                       cover={<img alt="no image" src={item.base64} />}
                       actions={
                         [<Checkbox
                           onChange={e => this.checkStructure(e, item.structure, item.type)}
                         />,
-                        <Icon
-                            type="edit"
-                            onClick={() => editStructure(item.id)}
-                          />,
-                        <Popconfirm
-                            placement="topLeft"
-                            title="Are you sure delete this structure?"
-                            onConfirm={() => deleteStructure([item.id])}
-                            okText="Yes"
-                            cancelText="No"
-                          >
-                            <Icon type="delete" />
-                          </Popconfirm>]}
+                          <Icon
+                          type="edit"
+                          onClick={() => editStructure(item.cml, item.structure)}
+                        />,
+                          <Popconfirm
+                          placement="topLeft"
+                          title="Are you sure delete this structure?"
+                          onConfirm={() => deleteStructure([item.id])}
+                          okText="Yes"
+                          cancelText="No"
+                        >
+                          <Icon type="delete" />
+                        </Popconfirm>,
+                        ]}
                     />
                   </Col>
                   <Col lg={12} sm={24} xs={24}>
                     <ConditionList
                       formComponent={Form}
                       form={form}
+                      id={item.structure}
                       {...item}
                     />
                   </Col>
@@ -234,15 +244,15 @@ ValidatePage.defaultProps = {
 };
 
 const mapStateToProps = state => ({
-  structures: getValidateStructure(state),
+  structures: getStructuresValidatePage(state),
+  loading: isLoading(state),
 });
 
 const mapDispatchToProps = dispatch => ({
   createResult: data => dispatch({ type: SAGA_CREATE_RESULT_TASK, data }),
   initPage: () => dispatch({ type: SAGA_INIT_VALIDATE_PAGE }),
-  editStructure: id => dispatch(modal(true, SAGA_EDIT_STRUCTURE_VALIDATE, id)),
+  editStructure: (cml, structure) => dispatch({ type: SAGA_EDIT_STRUCTURE_VALIDATE, cml, structure }),
   deleteStructure: structures => dispatch({ type: SAGA_DELETE_STRUCRURES_VALIDATE_PAGE, structures }),
-  checkStructure: id => null,
 });
 
 const ValidatePageForm = Form.create()(ValidatePage);
