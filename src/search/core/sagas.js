@@ -1,6 +1,5 @@
-import { takeEvery, put, call, fork, take } from 'redux-saga/effects';
+import { takeEvery, put, call } from 'redux-saga/effects';
 import { addStructure, addHistory, addResult, editStructure } from './actions';
-import { modal } from '../../base/actions';
 import * as Request from '../../base/requests';
 import history from '../../base/history';
 import { URLS, MODAL } from '../../config';
@@ -8,6 +7,11 @@ import { getUrlParams, stringifyUrl } from '../../base/parseUrl';
 import { repeatedRequests, requestSaga, catchErrSaga, requestSagaContinius } from '../../base/sagas';
 import * as Serialize from '../../base/magic';
 import { convertCmlToBase64, clearEditor, exportCml, importCml, convertCmlToBase64Arr } from '../../base/marvinAPI';
+import {
+  modal,
+  addModels,
+  addMagic,
+} from '../../base/actions';
 import {
   SAGA_CREATE_RESULT_TASK,
   SAGA_CREATE_TASK,
@@ -18,6 +22,7 @@ import {
   SAGA_INIT_RESULT_PAGE,
   SAGA_INIT_VALIDATE_PAGE,
   SAGA_REVALIDATE_TASK,
+  SAGA_DRAW_STRUCTURE_CALLBACK,
 } from './constants';
 
 // Index Page
@@ -29,7 +34,13 @@ function* createTask({ data }) {
 
 function* drawStructure() {
   yield call(clearEditor);
-  yield put(modal(true, MODAL.CREATE_TASK));
+  yield put(modal(true, SAGA_DRAW_STRUCTURE_CALLBACK));
+}
+
+function* drawStructureCallback() {
+  const data = yield call(exportCml);
+  yield put(modal(false));
+  yield put({ type: SAGA_CREATE_TASK, data });
 }
 
 // Validate Page
@@ -39,10 +50,10 @@ function* validateTask() {
   const task = yield call(repeatedRequests, Request.getSearchTask, urlParams.task);
   const models = yield call(Request.getModels);
   const magic = yield call(Request.getMagic);
-  const structure = Serialize.models(task.data, models.data, magic.data)[0];
-  const base64 = yield call(convertCmlToBase64, structure.cml);
-  structure.base64 = base64;
-  yield put(addStructure(structure));
+  const structureAndBase64 = yield call(convertCmlToBase64Arr, task.data.structures);
+  yield put(addStructure({ data: structureAndBase64, type: task.data.type }));
+  yield put(addModels(models.data));
+  yield put(addMagic(magic.data));
 }
 
 function* editStructureR(action) {
@@ -93,6 +104,7 @@ export function* sagas() {
   // Index Page
   yield takeEvery(SAGA_CREATE_TASK, requestSagaContinius, createTask);
   yield takeEvery(SAGA_DRAW_STRUCTURE, catchErrSaga, drawStructure);
+  yield takeEvery(SAGA_DRAW_STRUCTURE_CALLBACK, catchErrSaga, drawStructureCallback);
   // Validate Page
   yield takeEvery(SAGA_INIT_VALIDATE_PAGE, requestSaga, validateTask);
   yield takeEvery(SAGA_EDIT_STRUCTURE_1, catchErrSaga, editStructureR);
@@ -100,7 +112,6 @@ export function* sagas() {
   yield takeEvery(SAGA_CREATE_RESULT_TASK, requestSagaContinius, createResultTask);
   // Result Page
   yield takeEvery(SAGA_INIT_RESULT_PAGE, requestSaga, resultPage);
-
 
   yield takeEvery(SAGA_CREATE_TASK_SEARCH, catchErrSaga, createStructure);
   yield takeEvery(SAGA_EDIT_TASK_SEARCH, catchErrSaga, editTaskStructure);

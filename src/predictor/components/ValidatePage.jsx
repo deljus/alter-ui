@@ -39,8 +39,6 @@ class ValidatePage extends Component {
     let { checkedIds } = this.state;
     const { form } = this.props;
 
-    console.log(typeStructure);
-
     checkedIds = checkedIds.filter(checkId => checkId.type === typeStructure);
     let newFields = {};
     checkedIds.forEach((check) => {

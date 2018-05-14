@@ -11,6 +11,7 @@ import {
   SAGA_REVALIDATE_TASK,
   SAGA_CREATE_RESULT_TASK,
 } from '../core/constants';
+import { getStructures, isLoading } from '../core/selectors';
 
 const Option = Select.Option;
 
@@ -24,8 +25,8 @@ class ValidatePage extends Component {
   }
 
   render() {
-    const { structure, openEditModal, changeSelectedModel, history, onRevalidate, onContinue, request } = this.props;
-    return !request.loading && !request.error && structure && (
+    const { structure, openEditModal, changeSelectedModel, history, onRevalidate, onContinue, loading } = this.props;
+    return !loading && structure && (
       <div>
         <Row gutter={24} sm={24} xs={24}>
           <Col lg={14}>
@@ -38,12 +39,12 @@ class ValidatePage extends Component {
           </Col>
           <Col lg={10} sm={24} xs={24}>
             <b>Selected model:</b>
-            <Select defaultValue={structure.selectModel} style={{ width: '100%', paddingBottom: 10 }} onChange={changeSelectedModel}>
-              { structure.models.map(m => <Option key={m.model} value={m.model}>{m.name}</Option>)}
-            </Select>
+            {/*<Select defaultValue={structure.selectModel} style={{ width: '100%', paddingBottom: 10 }} onChange={changeSelectedModel}>*/}
+              {/*{ structure.models.map(m => <Option key={m.model} value={m.model}>{m.name}</Option>)}*/}
+            {/*</Select>*/}
             <b>Description:</b>
             <div>
-              { structure.models.filter(m => m.model === structure.selectModel)[0].description }
+              {/*{ structure.models.filter(m => m.model === structure.selectModel)[0].description }*/}
             </div>
           </Col>
         </Row>
@@ -90,8 +91,8 @@ ValidatePage.propTypes = {
 
 
 const mapStateToProps = state => ({
-  structure: state.structure,
-  request: state.request,
+  structure: getStructures(state),
+  loading: isLoading(state),
 });
 
 const mapDispatchToProps = dispatch => ({
