@@ -69,7 +69,7 @@ const models = (state = null, action) => {
 const magic = (state = null, action) => {
   switch (action.type) {
     case BASE_DATA.ADD_MAGIC:
-      return action.models;
+      return action.magics;
     default:
       return state;
   }

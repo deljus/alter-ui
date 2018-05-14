@@ -123,7 +123,7 @@ function* createResultTask({ data }) {
 
 function* revalidateValidatePage({ data }) {
   const urlParams = yield getUrlParams();
-  const response = yield call(Request.revalidateStructure, data, urlParams.task);
+  const response = yield call(Request.revalidateStructure, urlParams.task, data);
   yield call(history.push, stringifyUrl(URLS.VALIDATE, { task: response.data.task }));
   yield call(catchErrSaga, revalidate);
 }
@@ -150,7 +150,7 @@ export function* sagas() {
   yield takeEvery(SAGA_EDIT_STRUCTURE_VALIDATE_CALLBACK, catchErrSaga, editStructureModalValidateCallback);
   yield takeEvery(SAGA_DELETE_STRUCRURES_VALIDATE_PAGE, requestSaga, deleteStructures);
   yield takeEvery(SAGA_REVALIDATE_VALIDATE_PAGE, requestSaga, revalidateValidatePage);
-  yield takeEvery(SAGA_CREATE_RESULT_TASK, requestSaga, createResultTask);
+  yield takeEvery(SAGA_CREATE_RESULT_TASK, requestSagaContinius, createResultTask);
 
   // Result Page
   yield takeEvery(SAGA_INIT_RESULT_PAGE, requestSaga, resultPageInit);

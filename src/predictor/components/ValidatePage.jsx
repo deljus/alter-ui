@@ -27,45 +27,71 @@ class ValidatePage extends Component {
     this.closeModal = this.closeModal.bind(this);
     this.setStructureFields = this.setStructureFields.bind(this);
     this.showDeleteConfirm = this.showDeleteConfirm.bind(this);
+    this.serialiseFieldsData = this.serialiseFieldsData.bind(this);
+    this.revalidateData = this.revalidateData.bind(this);
   }
 
   componentDidMount() {
     this.props.initPage();
   }
 
+  setStructureFields(typeStructure, fields) {
+    let { checkedIds } = this.state;
+    const { form } = this.props;
+
+    console.log(typeStructure);
+
+    checkedIds = checkedIds.filter(checkId => checkId.type === typeStructure);
+    let newFields = {};
+    checkedIds.forEach((check) => {
+      const f = Object.keys(fields).reduce((acc, key) => {
+        const newKey = `${key}-${check.type}-${check.structure}`;
+        acc[newKey] = fields[key];
+        return acc;
+      }, {});
+      newFields = { ...newFields, ...f };
+    });
+
+    form.setFieldsValue(newFields);
+  }
+
+  serialiseFieldsData(values) {
+    const { structures } = this.props;
+
+    const data = structures.map(s => ({
+      structure: s.structure,
+      ...Object.keys(values)
+        .reduce((acc, key) => {
+          const elem = key.split('-');
+          if (elem[0] === 'models' && values[key]) {
+            acc[elem[0]] = values[key].map(model => ({ model }));
+          } else {
+            acc[elem[0]] = values[key];
+          }
+
+          return acc;
+        }, {}),
+    }));
+    return data;
+  }
+
   handleSubmit(e) {
     e.preventDefault();
-
-    const {
-      form,
-      createResult,
-      structures,
-      revalidatePage,
-    } = this.props;
+    const { form, createResult } = this.props;
 
     form.validateFields((err, values) => {
       if (!err) {
-        const models = structures.map(s => ({
-          structure: s.structure,
-          ...Object.keys(values)
-            .reduce((acc, key) => {
-              const elem = key.split('-');
-              if (elem[0] === 'models') {
-                acc[elem[0]] = values[key].map(model => ({ model }));
-              } else {
-                acc[elem[0]] = values[key];
-              }
-
-              return acc;
-            }, {}),
-        }));
-        if (!structures.some(s => s.revalidate)) {
-          createResult(models);
-        } else {
-          revalidatePage(models);
-        }
+        const data = this.serialiseFieldsData(values);
+        createResult(data);
       }
     });
+  }
+
+  revalidateData() {
+    const { form, revalidatePage } = this.props;
+    const values = form.getFieldsValue();
+    const data = this.serialiseFieldsData(values);
+    revalidatePage(data);
   }
 
   checkStructure(e, structure, type) {
@@ -98,24 +124,6 @@ class ValidatePage extends Component {
     this.setState({ visibleModal: false });
   }
 
-  setStructureFields(typeStructure, fields) {
-    let { checkedIds } = this.state;
-    const { form } = this.props;
-
-    checkedIds = checkedIds.filter(checkId => checkId.type === typeStructure);
-    let newFields = {};
-    checkedIds.forEach((check) => {
-      const f = Object.keys(fields).reduce((acc, key) => {
-        const newKey = `${key}-${check.type}-${check.id}`;
-        acc[newKey] = fields[key];
-        return acc;
-      }, {});
-      newFields = { ...newFields, ...f };
-    });
-
-    form.setFieldsValue(newFields);
-  }
-
   showDeleteConfirm(deleteFn) {
     Modal.confirm({
       title: 'Are you sure delete this task?',
@@ -140,6 +148,8 @@ class ValidatePage extends Component {
     } = this.props;
 
     const { checkedIds, visibleModal } = this.state;
+
+    console.log(checkedIds);
 
     const menu = (
       <Menu onClick={this.handleMenuClick}>
@@ -187,7 +197,7 @@ class ValidatePage extends Component {
                 </Button> :
                 <Button
                   type="danger"
-                  htmlType="submit"
+                  onClick={this.revalidateData}
                   icon="reload"
                 >
                 Revalidate

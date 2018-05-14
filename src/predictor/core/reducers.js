@@ -30,16 +30,17 @@ const validatePageStructure = (state = null, action) => {
     case CONST.ADD_STRUCTURES_VALIDATE:
       return action.arr;
     case CONST.EDIT_STRUCTURE_VALIDATE:
-      return state.map(item =>
-        (item.structure === action.structure ?
+      const data = state.data.map(item =>
+        (item.structure === action.obj.structure ?
           {
-            structure: action.structure,
-            revalidate: true,
-            ...action.obj,
             ...item,
+            ...action.obj,
+            revalidate: true,
           } :
           item),
       );
+      console.log(data);
+      return {  ...state, data };
     default:
       return state;
   }

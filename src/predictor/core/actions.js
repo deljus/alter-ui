@@ -23,7 +23,7 @@ export const addStructuresResult = arr => ({
   type: CONST.ADD_STRUCTURE_RESULT, arr,
 });
 
-export const editStructureValidate = (structure, obj) => ({
-  type: CONST.EDIT_STRUCTURE_VALIDATE, structure, obj,
+export const editStructureValidate = obj => ({
+  type: CONST.EDIT_STRUCTURE_VALIDATE, obj,
 });
 
