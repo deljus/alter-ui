@@ -42,30 +42,12 @@ module.exports = {
       },
       {
         test: /\.css/,
-        use:  [  'style-loader', MiniCssExtractPlugin.loader, 'css-loader']
+        use:  [  'style-loader', 'css-loader']
       }
     ]
   },
-  optimization: {
-    splitChunks: {
-      chunks: 'all',
-      name: 'common',
-    },
-    minimizer: [
-      new UglifyJsPlugin({
-        cache: true,
-        parallel: true,
-        sourceMap: true
-      }),
-      new OptimizeCSSAssetsPlugin({})
-    ]
-  },
   plugins: [
-    new webpack.HotModuleReplacementPlugin(),
-    new MiniCssExtractPlugin({
-      filename: '[name].min.css',
-    }),
-    new BundleAnalyzerPlugin()
+    new webpack.HotModuleReplacementPlugin()
   ],
   resolve: {
     extensions: ['*', '.js', '.jsx']

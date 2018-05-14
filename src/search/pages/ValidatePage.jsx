@@ -5,6 +5,12 @@ import { Select, Button, Row, Col } from 'antd';
 import { Thumbnail } from '../../components';
 import { modal, addSelectModel } from '../core/actions';
 import { MODAL, URLS } from '../../config';
+import {
+  SAGA_INIT_VALIDATE_PAGE,
+  SAGA_EDIT_STRUCTURE_1,
+  SAGA_REVALIDATE_TASK,
+  SAGA_CREATE_RESULT_TASK,
+} from '../core/constants';
 
 const Option = Select.Option;
 
@@ -89,11 +95,11 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = dispatch => ({
-  initPage: () => dispatch({ type: 'INIT_VALIDATE_PAGE' }),
-  openEditModal: cml => dispatch({ type: 'EDIT_STRUCTURE_1', cml }),
+  initPage: () => dispatch({ type: SAGA_INIT_VALIDATE_PAGE }),
+  openEditModal: data => dispatch({ type: SAGA_EDIT_STRUCTURE_1, data }),
   changeSelectedModel: value => dispatch(addSelectModel(value)),
-  onRevalidate: cml => dispatch({ type: 'REVALIDATE_TASK', cml }),
-  onContinue: structure => dispatch({ type: 'CREATE_RESULT_TASK', structure }),
+  onRevalidate: data => dispatch({ type: SAGA_REVALIDATE_TASK, data }),
+  onContinue: structure => dispatch({ type: SAGA_CREATE_RESULT_TASK, structure }),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(ValidatePage);

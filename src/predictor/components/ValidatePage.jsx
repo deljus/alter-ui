@@ -8,6 +8,7 @@ import {
   SAGA_INIT_VALIDATE_PAGE,
   SAGA_EDIT_STRUCTURE_VALIDATE,
   SAGA_DELETE_STRUCRURES_VALIDATE_PAGE,
+  SAGA_REVALIDATE_VALIDATE_PAGE,
 } from '../core/constants';
 import { ConditionList } from '../../components';
 import { getStructuresValidatePage, isLoading } from '../core/selectors';
@@ -34,7 +35,13 @@ class ValidatePage extends Component {
 
   handleSubmit(e) {
     e.preventDefault();
-    const { form, createResult, structures } = this.props;
+
+    const {
+      form,
+      createResult,
+      structures,
+      revalidatePage,
+    } = this.props;
 
     form.validateFields((err, values) => {
       if (!err) {
@@ -52,17 +59,21 @@ class ValidatePage extends Component {
               return acc;
             }, {}),
         }));
-        createResult(models);
+        if (!structures.some(s => s.revalidate)) {
+          createResult(models);
+        } else {
+          revalidatePage(models);
+        }
       }
     });
   }
 
-  checkStructure(e, id, type) {
+  checkStructure(e, structure, type) {
     let { checkedIds } = this.state;
     if (e.target.checked) {
-      checkedIds.push({ id, type });
+      checkedIds.push({ structure, type });
     } else {
-      checkedIds = checkedIds.filter(item => item.id !== id);
+      checkedIds = checkedIds.filter(item => item.structure !== structure);
     }
     this.setState({ checkedIds });
   }
@@ -72,7 +83,7 @@ class ValidatePage extends Component {
     const { deleteStructure } = this.props;
     switch (e.key) {
       case '1':
-        const deleteIds = checkedIds.map(item => item.id);
+        const deleteIds = checkedIds.map(item => item.structure);
         this.showDeleteConfirm(() => {
           deleteStructure(deleteIds);
         });
@@ -201,12 +212,12 @@ class ValidatePage extends Component {
                         />,
                           <Icon
                           type="edit"
-                          onClick={() => editStructure(item.cml, item.structure)}
+                          onClick={() => editStructure(item.data, item.structure)}
                         />,
                           <Popconfirm
                           placement="topLeft"
                           title="Are you sure delete this structure?"
-                          onConfirm={() => deleteStructure([item.id])}
+                          onConfirm={() => deleteStructure([item.structure])}
                           okText="Yes"
                           cancelText="No"
                         >
@@ -250,9 +261,10 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = dispatch => ({
   createResult: data => dispatch({ type: SAGA_CREATE_RESULT_TASK, data }),
+  revalidatePage: data => dispatch({ type: SAGA_REVALIDATE_VALIDATE_PAGE, data }),
   initPage: () => dispatch({ type: SAGA_INIT_VALIDATE_PAGE }),
-  editStructure: (cml, structure) => dispatch({ type: SAGA_EDIT_STRUCTURE_VALIDATE, cml, structure }),
-  deleteStructure: structures => dispatch({ type: SAGA_DELETE_STRUCRURES_VALIDATE_PAGE, structures }),
+  editStructure: (data, structure) => dispatch({ type: SAGA_EDIT_STRUCTURE_VALIDATE, data, structure }),
+  deleteStructure: structuresId => dispatch({ type: SAGA_DELETE_STRUCRURES_VALIDATE_PAGE, structuresId }),
 });
 
 const ValidatePageForm = Form.create()(ValidatePage);

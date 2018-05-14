@@ -1,4 +1,4 @@
-import { REQUEST, TRIGGER } from './constants';
+import { REQUEST, TRIGGER, BASE_DATA } from './constants';
 
 const requestState = {
   loading: false,
@@ -48,4 +48,32 @@ const modal = (state = { visible: false }, action) => {
   }
 };
 
-export { request, modal };
+const additives = (state = null, action) => {
+  switch (action.type) {
+    case BASE_DATA.ADD_ALL_ADDITIVES:
+      return action.additives;
+    default:
+      return state;
+  }
+};
+
+const models = (state = null, action) => {
+  switch (action.type) {
+    case BASE_DATA.ADD_ALL_MODELS:
+      return action.models;
+    default:
+      return state;
+  }
+};
+
+const magic = (state = null, action) => {
+  switch (action.type) {
+    case BASE_DATA.ADD_MAGIC:
+      return action.models;
+    default:
+      return state;
+  }
+};
+
+
+export { request, modal, additives, models, magic };

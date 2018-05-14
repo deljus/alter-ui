@@ -23,19 +23,7 @@ export const addStructuresResult = arr => ({
   type: CONST.ADD_STRUCTURE_RESULT, arr,
 });
 
-
-export const addAdditives = additives => ({
-  type: CONST.ADD_ALL_ADDITIVES, additives,
+export const editStructureValidate = (structure, obj) => ({
+  type: CONST.EDIT_STRUCTURE_VALIDATE, structure, obj,
 });
 
-export const addModels = models => ({
-  type: CONST.ADD_ALL_MODELS, models,
-});
-
-export const addMagic = models => ({
-  type: CONST.ADD_MAGIC, models,
-});
-
-export const editStructureValidate = arr => ({
-  type: CONST.EDIT_STRUCTURE_VALIDATE, arr,
-});

@@ -1,8 +1,9 @@
-import { delay, eventChannel, END } from 'redux-saga';
+import { message } from 'antd';
+import { delay } from 'redux-saga';
 import { call, put } from 'redux-saga/effects';
 import { REPEATED_REQUESTS } from '../config';
 import { startRequest, succsessRequest, errorRequest } from './actions';
-import { message } from 'antd';
+
 
 function* repeatedRequests(request, data) {
   let error;
@@ -30,6 +31,15 @@ function* requestSaga(fn, action) {
   }
 }
 
+function* requestSagaContinius(fn, action) {
+  try {
+    yield put(startRequest());
+    yield call(fn, action);
+  } catch (e) {
+    yield put(errorRequest(e.message, action));
+  }
+}
+
 function* catchErrSaga(fn, action) {
   try {
     yield call(fn, action);
@@ -39,4 +49,4 @@ function* catchErrSaga(fn, action) {
 }
 
 
-export { repeatedRequests, requestSaga, catchErrSaga };
+export { repeatedRequests, requestSaga, catchErrSaga, requestSagaContinius };
