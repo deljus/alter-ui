@@ -15,8 +15,14 @@ const Settings = {
   getDBFields: () => axios.get(API_URLS.DB_FIELDS),
 };
 
-const Records = {
-  getAllbyUser: (database, table) => axios.get(urlConverter(API_URLS.RECORDS, { database, table })),
+const Users = {
+  getUsers: () => axios.get(API_URLS.USERS),
+  whoAmI: () => axios.get(API_URLS.WHOAMI),
 };
 
-export { Structures, Settings, Records };
+const Records = {
+  getAllbyUser: (database, table, user) =>
+    axios.get(urlConverter(API_URLS.RECORDS, { database, table, user })),
+};
+
+export { Structures, Settings, Records, Users };
