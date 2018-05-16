@@ -36,7 +36,12 @@ function urlConverter(template, base, get = null) {
   }
 
   if (get) {
-    template = `${template}?${queryString.stringify(get)}`;
+    const getKey = Object.keys(get).reduce((acc, key) => {
+      if (get[key]) {
+        return get[key];
+      }
+    }, {});
+    template = `${template}?${queryString.stringify(getKey)}`;
   }
 
   return template;

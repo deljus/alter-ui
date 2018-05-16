@@ -1,8 +1,6 @@
-<<<<<<< HEAD
 import { createSelector } from 'reselect';
 import * as Serialize from '../../base/magic';
-=======
->>>>>>> 4a0c19e963e99e62a73bbe4c51d1655a17db859a
+
 
 export const getIndexPageStructure = state => state.indexPageStructures;
 
