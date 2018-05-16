@@ -50,7 +50,7 @@
     "babel-register": "^6.11.6",
     "css-loader": "^0.28.11",
     "babel-preset-es2017": "^6.24.1",
-    "babel-cli":"^6.26.0",
+    "babel-cli": "^6.26.0",
     "babel-preset-stage-2": "^6.24.1",
     "babel-polyfill": "^6.26.0",
     "react-hot-loader": "next",

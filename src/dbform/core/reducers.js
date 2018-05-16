@@ -1,5 +1,5 @@
 import { combineReducers } from 'redux';
-import { ADD_STRUCTURE, ADD_STRUCTURES, EDIT_STRUCTURE, DELETE_STRUCTURE, TRIGGER_MODAL, ADD_SETTINGS, ADD_FIELDS } from './constants';
+import { ADD_STRUCTURE, ADD_STRUCTURES, EDIT_STRUCTURE, DELETE_STRUCTURE, TRIGGER_MODAL, ADD_SETTINGS, ADD_FIELDS, ADD_USERS } from './constants';
 import { request } from '../../base/reducers';
 
 export const structures = (state = [], action) => {
@@ -62,14 +62,25 @@ const defaultSettings = {
   auto_reset: false,
   dbfields: [],
   tableFields: ['molecule', 'reaction'],
+  usersList: [{ user: 1, name: 'Ramil' }],
 };
 
-export const settings = (state = defaultSettings, action) => {
+function getSettings() {
+  let state;
+  const settigsOnStorageJson = localStorage.getItem('settings');
+  if (settigsOnStorageJson === null) state = defaultSettings;
+  else state = JSON.parse(settigsOnStorageJson);
+  return state;
+}
+
+export const settings = (state = getSettings(), action) => {
   switch (action.type) {
     case ADD_SETTINGS:
       return { ...action.settings };
     case ADD_FIELDS:
       return { ...state, dbfields: action.fields };
+    case ADD_USERS:
+      return { ...state, usersList: action.users };
     default:
       return state;
   }

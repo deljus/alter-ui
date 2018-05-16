@@ -1,7 +1,7 @@
 import { takeEvery, call, put } from 'redux-saga/effects';
 import { message } from 'antd';
-import { Structures, Records, Settings } from './requests';
-import { addStructures, deleteStructure, addStructure, editStructure, showModal, addDBFields } from './actions';
+import { Structures, Records, Settings, Users } from './requests';
+import { addStructures, deleteStructure, addStructure, editStructure, showModal, addDBFields, addUsers } from './actions';
 import { requestSaga } from '../../base/sagas';
 import { convertCmlToBase64, convertCmlToBase64Arr } from '../../base/marvinAPI';
 import {
@@ -12,18 +12,21 @@ import {
   SAGA_GET_RECORDS,
 } from './constants';
 
-//
-// function* initStructureListPage() {
-//   //const fields = yield call(Settings.getDBFields);
-//   //yield put(addDBFields(fields.data));
-// }
+function* initStructureListPage() {
+  const fields = yield call(Settings.getDBFields);
+  const users = yield call(Users.getUsers);
+  const me = yield call(Users.whoAmI);
+  yield put(addUsers(users.data.sort((a) => {
+    if (a.user === me.data.user) return true;
+  }).reverse()));
+  yield put(addDBFields(fields.data));
+}
 
 function* getRecords(action) {
-  const data = yield call(Records.getAllbyUser, action.database, action.table);
+  const data = yield call(Records.getAllbyUser, action.database, action.table, action.user);
   const structures = yield call(convertCmlToBase64Arr, data.data);
   yield put(addStructures(structures));
 }
-
 
 function* addNewStructure(action) {
   const { data, params, condition } = action;

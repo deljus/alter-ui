@@ -52,8 +52,8 @@ class StructureListPage extends Component {
     e.preventDefault();
     const { form, getStructure } = this.props;
     form.validateFields((err, values) => {
-      const { sorting, database, table } = values;
-      getStructure(database, table);
+      const { sorting, database, table, user } = values;
+      getStructure(database, table, user);
     });
   }
 
@@ -81,7 +81,7 @@ class StructureListPage extends Component {
           onSubmit={this.handleSearch}
         >
           <Row gutter={24}>
-            <Col span={8} style={{ display: expand ? 'block' : 'none' }}>
+            <Col span={6} style={{ display: expand ? 'block' : 'none' }}>
               <FormItem label="Database">
                 {getFieldDecorator('database', {
                   initialValue: settings.dbfields[0],
@@ -94,7 +94,20 @@ class StructureListPage extends Component {
                 )}
               </FormItem>
             </Col>
-            <Col span={8} style={{ display: expand ? 'block' : 'none' }}>
+            <Col span={6} style={{ display: expand ? 'block' : 'none' }}>
+              <FormItem label="User">
+                {getFieldDecorator('user', {
+                  initialValue: settings.usersList[0].user,
+                })(
+                  <Select placeholder="choose..">
+                    {settings.usersList.map(user =>
+                      <Option key={user.name} value={user.user}>{user.name}</Option>,
+                    )}
+                  </Select>,
+                )}
+              </FormItem>
+            </Col>
+            <Col span={6} style={{ display: expand ? 'block' : 'none' }}>
               <FormItem label="Table">
                 {getFieldDecorator('table', {
                   initialValue: settings.tableFields[1],
@@ -107,12 +120,10 @@ class StructureListPage extends Component {
                 )}
               </FormItem>
             </Col>
-            <Col span={8} style={{ display: expand ? 'block' : 'none' }}>
+            <Col span={6} style={{ display: expand ? 'block' : 'none' }}>
               <FormItem label="Sorting">
                 {getFieldDecorator('sorting', {
-                  rules: [{
-                    required: false,
-                  }],
+                  initialValue: 'increase',
                 })(
                   <Select>
                     <Option value="increase">increase</Option>
@@ -187,7 +198,8 @@ class StructureListPage extends Component {
                     }}
                   >
                     <div>
-                      {item.params && item.params.map((param, i) => <div key={i}>{param.key} : {param.value}</div>)}
+                      {item.params && item.params.map((param, i) =>
+                        <div key={i}>{param.key} : {param.value}</div>)}
                     </div>
                   </Panel>
                 </Collapse>
@@ -215,7 +227,7 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = dispatch => ({
-  getStructure: (database, table) => dispatch({ type: SAGA_GET_RECORDS, database, table }),
+  getStructure: (database, table, user) => dispatch({ type: SAGA_GET_RECORDS, database, table, user }),
   editStructure: id => dispatch(showModal(true, id)),
   deleteStructure: id => dispatch({ type: SAGA_DELETE_STRUCTURE, id }),
   initPage: () => dispatch({ type: SAGA_INIT_STRUCTURE_LIST_PAGE }),
