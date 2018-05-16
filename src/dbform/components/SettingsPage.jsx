@@ -29,6 +29,9 @@ const SettingsPage = ({ setSettings, settings }) => {
       sm: { span: 12 },
     },
   };
+
+  const currentGrid = settings.grid.filter(g => g.key === )
+
   return (
     <Form>
       <h4>Tabs:</h4>
@@ -51,12 +54,14 @@ const SettingsPage = ({ setSettings, settings }) => {
           value={settings && settings.tabs.size}
           onChange={val => handleChange(val, 'size', 'tabs')}
         >
-          { itemsConfig.tabSize.map((item, i) => <Option key={item + i} value={item} >{item}</Option>) }
+          { itemsConfig.tabSize.map((item, i) =>
+            <Option key={item + i} value={item} >{item}</Option>,
+          )}
         </Select>
       </FormItem>
       <h4>Structure list page grid:</h4>
 
-      {Object.keys(settings.grid).map(
+      {Object.keys(currentGrid).map(
         key =>
           (<FormItem
             {...formItemLayout}
@@ -88,7 +93,7 @@ const SettingsPage = ({ setSettings, settings }) => {
       <h4>Auto reset after submit in create page</h4>
 
       <FormItem
-          {...formItemLayout}
+        {...formItemLayout}
         label="Auto reset"
       >
 

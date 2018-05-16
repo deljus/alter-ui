@@ -12,11 +12,11 @@ import {
   SAGA_GET_RECORDS,
 } from './constants';
 
-
-function* initStructureListPage() {
-  const fields = yield call(Settings.getDBFields);
-  yield put(addDBFields(fields.data));
-}
+//
+// function* initStructureListPage() {
+//   //const fields = yield call(Settings.getDBFields);
+//   //yield put(addDBFields(fields.data));
+// }
 
 function* getRecords(action) {
   const data = yield call(Records.getAllbyUser, action.database, action.table);
