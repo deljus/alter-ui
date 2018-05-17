@@ -39,7 +39,6 @@ const validatePageStructure = (state = null, action) => {
           } :
           item),
       );
-      console.log(data);
       return {  ...state, data };
     default:
       return state;

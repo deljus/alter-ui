@@ -24,8 +24,6 @@ const ConditionList = ({
   const FormItem = formComponent.Item;
   const { getFieldDecorator } = form;
 
-  console.log(fieldName('model'));
-
   return (
     <div>
       <FormItem

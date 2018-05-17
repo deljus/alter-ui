@@ -84,10 +84,10 @@ function* revalidate() {
 // Validate Page
 function* initValidatePage() {
   const urlParams = yield getUrlParams();
-  const task = yield call(repeatedRequests, Request.getSearchTask, urlParams.task);
   const models = yield call(Request.getModels);
   const additives = yield call(Request.getAdditives);
   const magic = yield call(Request.getMagic);
+  const task = yield call(repeatedRequests, Request.getSearchTask, urlParams.task);
   const structureAndBase64 = yield call(convertCmlToBase64Arr, task.data.structures);
   yield put(addStructuresValidate({ data: structureAndBase64, type: task.data.type }));
   yield put(addAdditives(additives.data));

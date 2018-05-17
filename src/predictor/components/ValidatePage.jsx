@@ -147,8 +147,6 @@ class ValidatePage extends Component {
 
     const { checkedIds, visibleModal } = this.state;
 
-    console.log(checkedIds);
-
     const menu = (
       <Menu onClick={this.handleMenuClick}>
         <Menu.Item key="1">Delete</Menu.Item>

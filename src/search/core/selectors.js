@@ -16,8 +16,8 @@ export const getStructures = createSelector(
   (models, magic, structures) => {
     if(models && magic && structures) {
       const structureAddModel = Serialize.models(structures, models, magic);
-      return structureAddModel;
+      return structureAddModel[0];
     }
-    return [];
+    return null;
   },
 );

@@ -67,6 +67,8 @@ export const settings = (state = getSettings(), action) => {
   switch (action.type) {
     case ADD_SETTINGS:
       return action.settings;
+    default:
+      return state;
   }
 };
 
