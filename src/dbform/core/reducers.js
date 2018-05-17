@@ -13,6 +13,7 @@ const defaultSettings = {
     md: 3,
     lg: 3,
     xl: 3,
+    xxl: 4,
   },
   condition: {
     temperature: 298,
@@ -66,7 +67,7 @@ function getSettings() {
 export const settings = (state = getSettings(), action) => {
   switch (action.type) {
     case ADD_SETTINGS:
-      return action.settings;
+      return { ...action.settings };
     default:
       return state;
   }
@@ -81,8 +82,19 @@ const users = (state = null, action) => {
   }
 };
 
+const database = (state = null, action) => {
+  switch (action.type) {
+    case ADD_FIELDS:
+      return action.fields;
+    default:
+      return state;
+  }
+};
+
+
 export default combineReducers({
   request,
+  database,
   structures,
   modal,
   magic,
