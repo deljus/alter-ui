@@ -59,24 +59,24 @@ function getWindowSize() {
 }
 
 const gridSize = {
-  xs:	0,
-  sm: 576,
-  md: 768,
-  lg: 992,
-  xl: 1200,
-  xxl: 1600,
+  xs:	[0, 575],
+  sm: [576, 767],
+  md: [768, 991],
+  lg: [992, 1199],
+  xl: [1200, 1599],
+  xxl:[1600, 3000],
 };
 
 function currentGrid() {
   const size = getWindowSize();
 
-  const gridKey = Object.keys(gridSize).reduce((acc, key) => {
-    if (gridSize[key] <= size.x && gridSize[acc] >= size.x) {
-      return key;
+  const gridKey = Object.keys(gridSize).filter(key => {
+    if(gridSize[key][0] <= size.x &&  gridSize[key][1] >= size.x){
+      return true;
     }
-  }, '');
+  });
 
-  return gridKey;
+  return gridKey[0];
 }
 
 export { merge, urlConverter, getWindowSize, currentGrid };

@@ -82,43 +82,43 @@ class StructureListPage extends Component {
         >
           <Row gutter={24}>
             <Col span={6} style={{ display: expand ? 'block' : 'none' }}>
-              <FormItem label="Database">
-                {getFieldDecorator('database', {
-                  initialValue: settings.dbfields[0],
-                })(
-                  <Select placeholder="choose..">
-                    {settings.dbfields.map((field, i) =>
-                      <Option key={i} value={field}>{field}</Option>,
-                    )}
-                  </Select>,
-                )}
-              </FormItem>
+              {/*<FormItem label="Database">*/}
+                {/*{getFieldDecorator('database', {*/}
+                  {/*initialValue: settings.dbfields[0],*/}
+                {/*})(*/}
+                  {/*<Select placeholder="choose..">*/}
+                    {/*{settings.dbfields.map((field, i) =>*/}
+                      {/*<Option key={i} value={field}>{field}</Option>,*/}
+                    {/*)}*/}
+                  {/*</Select>,*/}
+                {/*)}*/}
+              {/*</FormItem>*/}
             </Col>
             <Col span={6} style={{ display: expand ? 'block' : 'none' }}>
-              <FormItem label="User">
-                {getFieldDecorator('user', {
-                  initialValue: settings.usersList[0].user,
-                })(
-                  <Select placeholder="choose..">
-                    {settings.usersList.map(user =>
-                      <Option key={user.name} value={user.user}>{user.name}</Option>,
-                    )}
-                  </Select>,
-                )}
-              </FormItem>
+              {/*<FormItem label="User">*/}
+                {/*{getFieldDecorator('user', {*/}
+                  {/*initialValue: settings.usersList[0].user,*/}
+                {/*})(*/}
+                  {/*<Select placeholder="choose..">*/}
+                    {/*{settings.usersList.map(user =>*/}
+                      {/*<Option key={user.name} value={user.user}>{user.name}</Option>,*/}
+                    {/*)}*/}
+                  {/*</Select>,*/}
+                {/*)}*/}
+              {/*</FormItem>*/}
             </Col>
             <Col span={6} style={{ display: expand ? 'block' : 'none' }}>
-              <FormItem label="Table">
-                {getFieldDecorator('table', {
-                  initialValue: settings.tableFields[1],
-                })(
-                  <Select placeholder="choose..">
-                    {settings.tableFields.map((field, i) =>
-                      <Option key={i} value={field}>{field}</Option>,
-                    )}
-                  </Select>,
-                )}
-              </FormItem>
+              {/*<FormItem label="Table">*/}
+                {/*{getFieldDecorator('table', {*/}
+                  {/*initialValue: settings.tableFields[1],*/}
+                {/*})(*/}
+                  {/*<Select placeholder="choose..">*/}
+                    {/*{settings.tableFields.map((field, i) =>*/}
+                      {/*<Option key={i} value={field}>{field}</Option>,*/}
+                    {/*)}*/}
+                  {/*</Select>,*/}
+                {/*)}*/}
+              {/*</FormItem>*/}
             </Col>
             <Col span={6} style={{ display: expand ? 'block' : 'none' }}>
               <FormItem label="Sorting">

@@ -33,9 +33,11 @@ const SettingsPage = ({ setSettings, settings }) => {
     },
   };
 
-  const currentGrigForWindow = currentGrid();
-  const currentGridItem = settings.grid.filter(g => g.key === currentGrigForWindow);
 
+
+  const currentGrigForWindow = currentGrid();
+  const currentGridItem = settings.grid[currentGrigForWindow];
+  console.log(currentGridItem);
   return (
     <Form>
       <h4>Tabs:</h4>
