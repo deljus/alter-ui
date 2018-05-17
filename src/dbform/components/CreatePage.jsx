@@ -1,16 +1,26 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Button, Row, Col, Form } from 'antd';
-import { DynamicForm } from '../../components';
+import { DBConditionList } from '../hoc';
 import { MARVIN_PATH_IFRAME } from '../../config';
 import { SAGA_ADD_STRUCTURE } from '../core/constants';
 
 class CreatePage extends Component {
   constructor(props){
     super(props);
+    this.handleSubmit = this.handleSubmit.bind(this);
   }
   handleSubmit(e) {
+    e.preventDefault();
 
+    const { form } = this.props;
+
+    form.validateFields((err, values) => {
+      console.log(values);
+      if (!err) {
+
+      }
+    });
   }
 
 
@@ -39,7 +49,7 @@ class CreatePage extends Component {
             />
           </Col>
           <Col md={10}>
-            <DynamicForm
+            <DBConditionList
               form={form}
               formComponent={Form}
             />

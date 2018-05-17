@@ -6,6 +6,7 @@ import styled from 'styled-components';
 import { showModal } from '../core/actions';
 import { getSettings, getUsers, getDatabase } from '../core/selectors';
 import { SAGA_DELETE_STRUCTURE, SAGA_GET_RECORDS, SAGA_INIT_STRUCTURE_LIST_PAGE } from '../core/constants';
+import { DatabaseTableSelect, DatabaseSelect, UsersSelect } from '../hoc';
 
 const Card = styled(BaseCard)`
     .ant-card-body {
@@ -52,7 +53,7 @@ class StructureListPage extends Component {
     const { form, getStructure, settings: { full } } = this.props;
     form.validateFields((err, values) => {
       const { database, table, user } = values;
-      getStructure({database, table, user, full, page:1});
+      getStructure({ database, table, user, full, page: 1 });
     });
   }
 
@@ -66,9 +67,8 @@ class StructureListPage extends Component {
   }
 
   render() {
-    const { structures, editStructure, deleteStructure, settings, form: { getFieldDecorator }, users, database } = this.props;
+    const { structures, editStructure, deleteStructure, settings, form, users, database } = this.props;
     const { expand } = this.state;
-
     const gridSettings = settings && settings.grid;
 
     return structures && settings && (
@@ -79,44 +79,23 @@ class StructureListPage extends Component {
         >
           <Row gutter={24}>
             <Col span={8} style={{ display: expand ? 'block' : 'none' }}>
-              <FormItem label="Database">
-                {getFieldDecorator('database', {
-                  initialValue: database && database[0],
-                })(
-                  <Select placeholder="choose..">
-                    {database && database.map((field, i) =>
-                      <Option key={i} value={field}>{field}</Option>,
-                    )}
-                  </Select>,
-                )}
-              </FormItem>
+              <DatabaseSelect
+                formComponent={Form}
+                form={form}
+              />
             </Col>
             <Col span={8} style={{ display: expand ? 'block' : 'none' }}>
-              <FormItem label="Table">
-                {getFieldDecorator('table', {
-                  initialValue: 'molecule',
-                })(
-                  <Select>
-                    <Option key="0" value="molecule">molecule</Option>
-                    <Option key="1" value="reaction">reaction</Option>
-                  </Select>,
-                )}
-              </FormItem>
+              <DatabaseTableSelect
+                formComponent={Form}
+                form={form}
+              />
             </Col>
             <Col span={8} style={{ display: expand ? 'block' : 'none' }}>
-              <FormItem label="User">
-                {getFieldDecorator('user', {
-                  initialValue: 0,
-                })(
-                  <Select placeholder="choose..">
-                    {users && users.map(user =>
-                      <Option key={user.name} value={user.user}>{user.name}</Option>,
-                    )}
-                  </Select>,
-                )}
-              </FormItem>
+              <UsersSelect
+                formComponent={Form}
+                form={form}
+              />
             </Col>
-
             <Col span={24} style={{ textAlign: 'right', display: expand ? 'block' : 'none' }}>
               <FormItem>
                 <Button type="primary" htmlType="submit">Search</Button>

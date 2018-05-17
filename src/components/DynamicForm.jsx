@@ -9,6 +9,7 @@ class DynamicForm extends React.Component {
     this.state = {
       inputValue: 1,
     };
+    this.add = this.add.bind(this);
   }
   onChange(value) {
     this.setState({
@@ -33,9 +34,8 @@ class DynamicForm extends React.Component {
 
   add() {
     const { form } = this.props;
-
-
     const keys = form.getFieldValue('keys');
+
     const newId = this.getMaxOfArray(keys.map(k => k.id)) + 1;
     const nextKeys = keys.concat({ id: newId, key: '', value: '' });
 
@@ -100,11 +100,12 @@ class DynamicForm extends React.Component {
     ));
 
     return (
-      <FormItem>
+      <div>
+        {formItems}
         <Button type="dashed" onClick={this.add} style={{ width: '100%' }}>
           <Icon type="plus" /> Add field
         </Button>
-      </FormItem>
+      </div>
     );
   }
 }
