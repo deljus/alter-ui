@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import { Form, Select, Slider, Switch } from 'antd';
 import { addSettings } from '../core/actions';
 import sliderConfig from '../../components/formItemConfigs';
+import { currentGrid } from '../../base/functions';
 
 const FormItem = Form.Item;
 const { Option } = Select;
@@ -11,6 +12,7 @@ const itemsConfig = {
   tabPosition: ['top', 'bottom', 'left', 'right'],
   tabSize: ['large', 'default', 'small'],
 };
+
 
 const SettingsPage = ({ setSettings, settings }) => {
   const handleChange = (value, key, parent = null) => {
@@ -30,6 +32,10 @@ const SettingsPage = ({ setSettings, settings }) => {
       sm: { span: 12 },
     },
   };
+
+  const currentGrigForWindow = currentGrid();
+  const currentGridItem = settings.grid.filter(g => g.key === currentGrigForWindow);
+
   return (
     <Form>
       <h4>Tabs:</h4>
@@ -52,12 +58,14 @@ const SettingsPage = ({ setSettings, settings }) => {
           value={settings && settings.tabs.size}
           onChange={val => handleChange(val, 'size', 'tabs')}
         >
-          { itemsConfig.tabSize.map((item, i) => <Option key={item + i} value={item} >{item}</Option>) }
+          { itemsConfig.tabSize.map((item, i) =>
+            <Option key={item + i} value={item} >{item}</Option>,
+          )}
         </Select>
       </FormItem>
       <h4>Structure list page grid:</h4>
 
-      {Object.keys(settings.grid).map(
+      {Object.keys(currentGridItem).map(
         key =>
           (<FormItem
             {...formItemLayout}

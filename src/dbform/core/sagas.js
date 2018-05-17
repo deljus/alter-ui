@@ -12,7 +12,6 @@ import {
   SAGA_GET_RECORDS,
 } from './constants';
 
-
 function* initStructureListPage() {
   const fields = yield call(Settings.getDBFields);
   const users = yield call(Users.getUsers);

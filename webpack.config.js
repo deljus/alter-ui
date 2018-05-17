@@ -1,6 +1,7 @@
 var webpack = require('webpack');
 var path = require('path');
 
+
 module.exports = {
   entry: {
     search: [
@@ -36,8 +37,8 @@ module.exports = {
         loader: "babel-loader"
       },
       {
-        test: /\.css$/,
-        use: [ 'style-loader', 'css-loader' ]
+        test: /\.css/,
+        use:  [  'style-loader', 'css-loader']
       }
     ]
   },
