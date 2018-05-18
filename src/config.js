@@ -16,9 +16,10 @@ const API = {
   SAVE_TASK: '/api/jobs/task/results/',
   USER_AUTH: '/api/jobs/auth',
   MAGIC: '/api/jobs/magic',
+
   RECORDS: '/api/db/db/:database/:table/records',
   RECORDS_METADATA: '/api/jobs/:database/:table/records/:metadata',
-  CREATE_TASK_DBFORM: '/api/jobs/validate/:type',
+  CREATE_TASK_DBFORM: '/api/db/validate',
   SERVER_SIDE_SUBSCRIBE: '/api/jobs/subscribe/connect',
   DB_FIELDS: '/api/db/db',
   USERS: '/api/db/users',

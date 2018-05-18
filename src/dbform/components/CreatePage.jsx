@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Button, Row, Col, Form } from 'antd';
+import { normalizeDBFormData } from '../../base/functions';
 import { DBConditionList } from '../hoc';
 import { MARVIN_PATH_IFRAME } from '../../config';
 import { SAGA_ADD_STRUCTURE } from '../core/constants';
@@ -13,12 +14,12 @@ class CreatePage extends Component {
   handleSubmit(e) {
     e.preventDefault();
 
-    const { form } = this.props;
+    const { form, createStructure } = this.props;
 
     form.validateFields((err, values) => {
-      console.log(values);
       if (!err) {
-
+        const conditions = normalizeDBFormData(values);
+        createStructure(conditions);
       }
     });
   }
@@ -82,7 +83,7 @@ const mapStateToProps = state => ({
 
 
 const mapDispatchToProps = dispatch => ({
-  createStructure: (data, params, condition) => dispatch({ type: SAGA_ADD_STRUCTURE, data, params, condition }),
+  createStructure: (conditions) => dispatch({ type: SAGA_ADD_STRUCTURE, conditions }),
 });
 
 

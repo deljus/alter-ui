@@ -65,14 +65,14 @@ const gridSize = {
   md: [768, 991],
   lg: [992, 1199],
   xl: [1200, 1599],
-  xxl:[1600, 3000],
+  xxl: [1600, 3000],
 };
 
 function currentGrid() {
   const size = getWindowSize();
 
-  const gridKey = Object.keys(gridSize).filter(key => {
-    if(gridSize[key][0] <= size.x &&  gridSize[key][1] >= size.x){
+  const gridKey = Object.keys(gridSize).filter((key) => {
+    if (gridSize[key][0] <= size.x && gridSize[key][1] >= size.x) {
       return true;
     }
   });
@@ -80,4 +80,20 @@ function currentGrid() {
   return gridKey[0];
 }
 
-export { merge, urlConverter, getWindowSize, currentGrid };
+function normalizeDBFormData(values) {
+  const {
+    temperature,
+    pressure,
+  } = values;
+
+  const description = values.keys.map(k => ({
+    key: values[`key-${k.id}`],
+    value: values[`value-${k.id}`],
+  }));
+
+
+
+  return { temperature, pressure, description };
+}
+
+export { merge, urlConverter, getWindowSize, currentGrid, normalizeDBFormData };
