@@ -101,6 +101,12 @@ class DynamicForm extends React.Component {
 
     return (
       <div>
+        <div
+          style={{ marginBottom: '10px', color: 'black' }}
+        >
+          <b>Descriptions:</b>
+        </div>
+
         {formItems}
         <Button type="dashed" onClick={this.add} style={{ width: '100%' }}>
           <Icon type="plus" /> Add field

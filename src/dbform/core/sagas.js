@@ -1,6 +1,8 @@
 import { takeEvery, call, put } from 'redux-saga/effects';
 import { message } from 'antd';
 import { Structures, Records, Settings, Users } from './requests';
+import { getAdditives, getMagic } from '../../base/requests';
+import { addAdditives, addMagic } from '../../base/actions';
 import { addStructures, deleteStructure, addStructure, editStructure, showModal, addDBFields, addUsers } from './actions';
 import { catchErrSaga, requestSaga, requestSagaContinius } from '../../base/sagas';
 import { convertCmlToBase64, convertCmlToBase64Arr, exportCml } from '../../base/marvinAPI';
@@ -17,7 +19,8 @@ function* initStructureListPage({ full }) {
   const fields = yield call(Settings.getDBFields);
   let users = yield call(Users.getUsers);
   const me = yield call(Users.whoAmI);
-
+  const additives = yield call(getAdditives);
+  const magic = yield call(getMagic);
   users = users.data.map((user) => {
     if (user.user === me.data.user) {
       return { ...user, user: 0 };
@@ -26,6 +29,8 @@ function* initStructureListPage({ full }) {
   });
   yield put(addUsers(users));
   yield put(addDBFields(fields.data));
+  yield put(addAdditives(additives.data));
+  yield put(addMagic(magic.data));
   yield call(requestSaga, getRecordsByUser, {
     full,
     user: 0,
@@ -46,9 +51,11 @@ function* getRecords(action) {
   yield put(addStructures(structures));
 }
 
-function* requestAddNewStructure({ data, conditions, database, table }){
+function* requestAddNewStructure({ data, conditions }){
   const response = yield call(Structures.validate, { data, conditions });
-  yield call(Structures.add, response.data.task, database, table);
+  const { database, table } = conditions;
+  const task = response.data.task;
+  yield call(Structures.add, task, database, table);
   yield message.success('Add structure');
 }
 
@@ -57,7 +64,7 @@ function* addNewStructure({ conditions, database, table }) {
   if(data === MARVIN_EDITOR_IS_EMPTY){
     new Error('Structure is empty!');
   }
-  yield call(requestSaga, requestAddNewStructure, { data, conditions, database, table })
+  yield call(requestSaga, requestAddNewStructure, { data, conditions });
 }
 
 function* deleteStructureInList(action) {

@@ -6,7 +6,12 @@ import { urlConverter } from '../../base/functions';
 const Structures = {
   getAll: () => axios.get(API_URLS.STRUCTURES),
   validate: data => axios.post(API_URLS.CREATE_TASK_DBFORM, { ...data }),
-  add: (task, database, table) => axios.post(urlConverter(API_URLS.RECORDS, { database, table }), task),
+  add: (task, database, table) => axios({
+    method: 'post',
+    url: urlConverter(API_URLS.RECORDS, { database, table }),
+    data: { task } },
+    { headers: { 'Content-Type': 'application/x-www-form-urlencoded' } }
+    ),
   delete: id => axios.delete(`${API_URLS.STRUCTURES}/${id}`),
   edit: (id, data, params, condition) => axios.put(`${API_URLS.STRUCTURES}/${id}`, { data, params, condition }),
 };

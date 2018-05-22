@@ -17,7 +17,8 @@
     "history": "^4.7.2",
     "query-string": "^5.0.1",
     "prop-types": "^15.6.0",
-    "reselect": "^3.0.1"
+    "reselect": "^3.0.1",
+    "moment": "^2.22.1"
   },
   "devDependencies": {
     "@storybook/react": "^4.0.0-alpha.3",
@@ -62,12 +63,14 @@
     "optimize-css-assets-webpack-plugin": "^4.0.1",
     "uglifyjs-webpack-plugin": "^1.2.5",
     "webpack-monitor": "^1.0.14",
-    "webpack-bundle-analyzer": "^2.11.2"
+    "webpack-bundle-analyzer": "^2.11.2",
+    "babel-plugin-import": "^1.7.0"
   },
   "scripts": {
-    "start": "webpack-dev-server --config ./webpack.config.js --mode development --hot",
+    "start": "webpack-dev-server --config ./develop.config.js --hot",
     "tests": "jest",
-    "build": "webpack --mode production",
+    "build": "webpack --config ./prod.config.js",
+    "build-start": "webpack-dev-server --open  --contentBase public --port 9000",
     "storybook": "start-storybook -p 9001 -c .storybook",
     "generate-docs": "jsdoc src/* -c jsdoc.json"
   }

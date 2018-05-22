@@ -11,7 +11,7 @@ const API = {
   PREPARE_TASK: '/api/jobs/prepare/',
   RESULT: '/api/jobs/process/',
   ADDITIVES: '/api/jobs/additives',
-  MODELS: '/api/jobs/resources/models',
+  MODELS: '/api/jobs/models',
   UPLOAD_FILE: '/api/jobs/task/upload',
   SAVE_TASK: '/api/jobs/task/results/',
   USER_AUTH: '/api/jobs/auth',

@@ -1,6 +1,6 @@
 import { combineReducers } from 'redux';
 import { ADD_STRUCTURE, ADD_STRUCTURES, EDIT_STRUCTURE, DELETE_STRUCTURE, ADD_SETTINGS, ADD_FIELDS, ADD_USERS } from './constants';
-import { request, modal, magic } from '../../base/reducers';
+import { request, modal, magic, additives } from '../../base/reducers';
 
 const defaultSettings = {
   tabs: {
@@ -98,6 +98,7 @@ export default combineReducers({
   structures,
   modal,
   magic,
+  additives,
   users,
   settings,
 });

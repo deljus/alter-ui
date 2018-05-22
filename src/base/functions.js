@@ -84,6 +84,8 @@ function normalizeDBFormData(values) {
   const {
     temperature,
     pressure,
+    database,
+    table,
   } = values;
 
   const description = values.keys.map(k => ({
@@ -93,7 +95,7 @@ function normalizeDBFormData(values) {
 
 
 
-  return { temperature, pressure, description };
+  return { temperature, pressure, database, table, description };
 }
 
 export { merge, urlConverter, getWindowSize, currentGrid, normalizeDBFormData };

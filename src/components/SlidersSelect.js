@@ -99,7 +99,6 @@ SlidersSelect.propTypes = {
   data: PropTypes.array,
   defaultValue: PropTypes.array,
   sumEqual: PropTypes.number,
-  onChange: PropTypes.func.isRequired,
 };
 
 SlidersSelect.defaultProps = {
